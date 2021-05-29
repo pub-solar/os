@@ -1,0 +1,23 @@
+kind: pipeline
+type: docker
+name: api
+
+steps:
+  - name: "Sync upstream and try PR"
+    image: docker.b12f.io/pub-solar/minimal-git:latest
+    settings:
+      registry: docker.b12f.io
+      repo: docker.b12f.io/pub-solar/minimal-git
+      username:
+        from_secret: docker_username
+      password:
+        from_secret: docker_password
+    environment:
+      GITEA_SSH_KEY:
+        from_secret: gitea_ssh_key
+    commands:
+      - echo $GITEA_SSH_KEY > ~/.ssh/id_rsa
+      - git clone -b core git@git.b12f.io:pub-solar/os
+      - git remote add devos https://github.com/divnix/devos.git
+      - git fetch --all
+      - git rebase devos/core
