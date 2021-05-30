@@ -31,5 +31,9 @@ in
         "transmission.local"
       ];
     };
+
+    fonts.fonts = with pkgs; [
+      futura-otf
+    ];
   };
 }
