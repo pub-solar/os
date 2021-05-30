@@ -1,0 +1,78 @@
+@import "./colorscheme.css";
+
+* {
+    min-height: 0;
+    border: none;
+}
+
+window#waybar {
+    font-family: Hack;
+    font-weight: 500;
+    font-size: 14px;
+    background: rgba(11, 12, 13, 0.90);
+    border-bottom: 1px solid  rgba(0, 0, 2, 0.53);
+    color: @base04;
+}
+
+
+#workspaces button {
+    font-size: 14px;
+    box-shadow: none;
+    text-shadow: none;
+    padding: 0px 3px 0px 3px;
+    color: @base04;
+}
+
+
+#workspaces button.focused {
+    color: #f85e84;
+    color: @base07;
+    /* margin: 2px 0px 2px 0px; */
+}
+
+#workspaces button:hover {
+    background: rgba(255, 255, 255, 0.00);
+    /* margin: 2px 0px 2px 0px; */
+}
+
+#clock, #backlight, #battery, #cpu, #memory, #network, #pulseaudio, #custom-spotify, #tray, #mode {
+    font-size: 14px;
+    margin: 0px 10px 0px 5px;
+}
+
+#pulseaudio {
+    /* border-top: 1px solid transparent; */
+    font-size: 12px;
+    margin-left: 15px;
+}
+
+#battery {
+  font-size: 12px;
+}
+
+#battery.critical {
+     color: @base07;
+}
+#battery.charging {
+    color: @base0B;
+}
+#battery.full {
+    margin: 0px 0px 0px 0px;
+}
+
+
+#network {
+    border-top: 1px solid transparent;
+}
+#network.disconnected {
+    margin: 0px 0px 0px 0px;
+    color: rgba(75, 81, 98, 0);
+}
+
+
+#pulseaudio.muted {
+    margin: 0px 0px 0px 0px;
+    color: rgba(75, 81, 98, 0);
+}
+
+

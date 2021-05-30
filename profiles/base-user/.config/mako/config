@@ -1,0 +1,22 @@
+padding=10
+margin=5,5,0
+default-timeout=5000
+
+## Base16 Burn
+# Author: Benjamin Bädorf
+#
+# You can use these variables anywhere in the mako configuration file.
+
+background-color=#1a181a
+text-color=#e3e1e4
+border-color=#ff5f5f
+
+[urgency=low]
+background-color=#1a181a
+text-color=#e3e1e4
+border-color=#ff5f5f
+
+[urgency=high]
+background-color=#ff5f5f
+text-color=#1a181a
+border-color=#1a181a

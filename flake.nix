@@ -21,9 +21,17 @@
 
       pkgs.url = "path:./pkgs";
       pkgs.inputs.nixpkgs.follows = "nixos";
+
+      # PubSolarOS additions
+
+      nix-dram.url = "github:dramforever/nix-dram";
+
+      # This is a fix so that the neovim-flake dependency of neovim-nightly doesn't shit itself
+      nixpkgs.url = "nixpkgs";
+      neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
     };
 
-  outputs = inputs@{ self, pkgs, digga, nixos, ci-agent, home, nixos-hardware, nur, ... }:
+  outputs = inputs@{ self, pkgs, digga, nixos, ci-agent, home, nixos-hardware, nix-dram, nur, neovim-nightly, ... }:
     digga.lib.mkFlake {
       inherit self inputs;
 
@@ -36,6 +44,8 @@
             ./pkgs/default.nix
             pkgs.overlay # for `srcs`
             nur.overlay
+            nix-dram.overlay
+            neovim-nightly.overlay
           ];
         };
         latest = { };
@@ -72,6 +82,8 @@
         profiles = [ ./profiles ./users ];
         suites = { profiles, users, ... }: with profiles; rec {
           base = [ core users.nixos users.root ];
+          pubsolaros = [ core base-user users.root ];
+          anonymous = [ pubsolaros users.nixos ];
         };
       };
 

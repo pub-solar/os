@@ -1,0 +1,102 @@
+{
+   "layer": "top", // Waybar at top layer
+    // "position": "bottom", // Waybar position (top|bottom|left|right)
+
+   "height": 26, // Waybar height
+   "modules-left": ["sway/workspaces", "sway/mode"],
+   "modules-center": ["mpd"],
+   "modules-right": ["sway/language", "pulseaudio", "network", "idle_inhibitor", "battery", "clock", "tray"],
+   "sway/workspaces": {
+       "disable-scroll": true
+   },
+   "sway/mode": {
+   "tooltip": false,
+       "format": "{}"
+   },
+   "sway/window": {
+   "tooltip": false,
+       "max-length": 96
+   },
+   "sway/language": {
+    "format": "{}",
+    "max-length": 50
+   },
+   "tray": {
+       "icon-size": 21,
+       "spacing": 10
+   },
+   "clock": {
+       "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+       "format-alt": "{:%a %d. %h %H:%M}"
+   },
+   "backlight": {
+        // "device": "acpi_video1",
+        "tooltip": true,
+        "tooltip-format": "Brightness: <big>{percent}%</big>",
+        "format": "<span font='10'>{icon}</span>",
+        "format-icons": ["", ""]
+    },
+   "cpu": {
+       "format": "{}% "
+   },
+   "memory": {
+       "format": "{}% "
+   },
+   "idle_inhibitor": {
+       "format": "<span font='10'>{icon} </span>",
+       "format-icons": {
+           "activated": "",
+           "deactivated": ""
+        }
+    },
+   "battery": {
+       "tooltip": false,
+       "states": {
+           "critical": 25
+       },
+       "full-at": 84,
+       "format": "<span font='10'>{icon}</span> {capacity}%",
+       "format-full": "<span font='10'>{icon}</span>",
+       "format-icons": ["", "", "", "", ""],
+   },
+   "network": {
+       "interval": 3,
+       "tooltip": true,
+       //"interface": "wlp4s0", // (Optional) To force the use of this interface          \uF2E7,
+       "format-wifi": "<span font='10'></span> \uf062 {bandwidthUpBits} | \uf063 {bandwidthDownBits}",
+       "format-ethernet": "<span font='10'></span> \uf062 {bandwidthUpBits} | \uf063 {bandwidthDownBits}",
+       "format-disconnected": "",
+       "tooltip-format-wifi": "{essid} ({signalStrength}%)  {ipaddr}",
+       "tooltip-format-ethernet": "{ifname}  {ipaddr}"
+   },
+   //\ue04f{volume}%
+   "pulseaudio": {
+       "tooltip": false,
+       "format": "{volume}% <span font='10'>{icon}</span>",
+       "format-bluetooth": "{volume}% <span font='10'>{icon}</span>",
+       "format-muted": "",
+       "on-click": "pavucontrol",
+       "format-alt": "{volume}% <span font='10'>{icon}</span>",
+       "format-icons": {
+           "headphones": "",
+           "handsfree": "",
+           "headset": "",
+           "phone": "",
+           "portable": "",
+           "car": "",
+           "default": ["","", ""]
+       }
+   },
+   "mpd": {
+     "format": "{artist} - {title} <span color=\"#999999\">[<span color=\"#ffffff\">{elapsedTime:%M:%S}</span> / {totalTime:%M:%S}]</span>",
+     "format-disconnected": "",
+     "format-stopped": "",
+     "interval": 1,
+     "state-icons": {
+       "paused": "",
+       "playing": ""
+     },
+     "tooltip-format": "MPD (connected)",
+     "tooltip-format-disconnected": "MPD (disconnected)"
+   }
+}

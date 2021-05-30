@@ -4,145 +4,132 @@ in
 {
   imports = [ ../cachix ];
 
-  nix.systemFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+  config = {
+    pub-solar.terminal-life.enable = true;
+    pub-solar.audio.enable = true;
+    pub-solar.crypto.enable = true;
+    pub-solar.devops.enable = true;
+    pub-solar.docker.enable = true;
+    pub-solar.nextcloud.enable = true;
+    pub-solar.office.enable = true;
+    # pub-solar.printing.enable = true; # this is enabled automatically if office is enabled
+    pub-solar.server.enable = true;
+    pub-solar.printing.enable = true;
 
-  environment = {
+    nix.systemFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
 
-    systemPackages = with pkgs; [
-      binutils
-      coreutils
-      curl
-      direnv
-      dnsutils
-      dosfstools
-      fd
-      git
-      gotop
-      gptfdisk
-      iputils
-      jq
-      manix
-      moreutils
-      nix-index
-      nmap
-      ripgrep
-      skim
-      tealdeer
-      usbutils
-      utillinux
-      whois
-    ];
+    environment = {
 
-    shellInit = ''
-      export STARSHIP_CONFIG=${
-        pkgs.writeText "starship.toml"
-        (fileContents ./starship.toml)
-      }
-    '';
+      systemPackages = with pkgs; [
+        # Core unix utility packages
+        coreutils-full
+        progress
+        dnsutils
+        inetutils
+        pciutils
+        usbutils
+        git
+        git-lfs
+        git-bug
+        git-crypt
+        wget
+        openssl
+        openssh
+        curl
+        htop
+        lsof
+        psmisc
+        xdg-utils
+        sysfsutils
+        renameutils
+        nfs-utils
+        moreutils
+        mailutils
+        keyutils
+        input-utils
+        elfutils
+        binutils
+        dateutils
+        diffutils
+        findutils
+        exfat-utils
 
-    shellAliases =
-      let ifSudo = lib.mkIf config.security.sudo.enable;
-      in
-      {
-        # quick cd
-        ".." = "cd ..";
-        "..." = "cd ../..";
-        "...." = "cd ../../..";
-        "....." = "cd ../../../..";
+        # zippit
+        zip
+        unzip
 
-        # git
-        g = "git";
+        # Modern modern utilities
+        p7zip
+        croc
+        jq
 
-        # grep
-        grep = "rg";
-        gi = "grep -i";
+        # Nix specific utilities
+        niv
+        manix
+        nix-index
+        # Build broken, python2.7-PyJWT-2.0.1.drv' failed
+        #nixops
+        psos
 
-        # internet ip
-        myip = "dig +short myip.opendns.com @208.67.222.222 2>&1";
+        # Fun
+        neofetch
+      ];
+    };
 
-        # nix
-        n = "nix";
-        np = "n profile";
-        ni = "np install";
-        nr = "np remove";
-        ns = "n search --no-update-lock-file";
-        nf = "n flake";
-        nepl = "n repl '<nixpkgs>'";
-        srch = "ns nixos";
-        orch = "ns override";
-        nrb = ifSudo "sudo nixos-rebuild";
-        mn = ''
-          manix "" | grep '^# ' | sed 's/^# \(.*\) (.*/\1/;s/ (.*//;s/^# //' | sk --preview="manix '{}'" | xargs manix
-        '';
+    fonts = {
+      fonts = with pkgs; [ powerline-fonts dejavu_fonts ];
 
-        # fix nixos-option
-        nixos-option = "nixos-option -I nixpkgs=${self}/lib/compat";
+      fontconfig.defaultFonts = {
 
-        # sudo
-        s = ifSudo "sudo -E ";
-        si = ifSudo "sudo -i";
-        se = ifSudo "sudoedit";
+        monospace = [ "DejaVu Sans Mono for Powerline" ];
 
-        # top
-        top = "gotop";
-
-        # systemd
-        ctl = "systemctl";
-        stl = ifSudo "s systemctl";
-        utl = "systemctl --user";
-        ut = "systemctl --user start";
-        un = "systemctl --user stop";
-        up = ifSudo "s systemctl start";
-        dn = ifSudo "s systemctl stop";
-        jtl = "journalctl";
+        sansSerif = [ "DejaVu Sans" ];
 
       };
-  };
-
-  fonts = {
-    fonts = with pkgs; [ powerline-fonts dejavu_fonts ];
-
-    fontconfig.defaultFonts = {
-
-      monospace = [ "DejaVu Sans Mono for Powerline" ];
-
-      sansSerif = [ "DejaVu Sans" ];
-
     };
+
+    nix = {
+      package = pkgs.nix-dram;
+
+      autoOptimiseStore = true;
+
+      gc.automatic = true;
+
+      optimise.automatic = true;
+
+      useSandbox = true;
+
+      allowedUsers = [ "@wheel" ];
+
+      trustedUsers = [ "root" "@wheel" ];
+
+      extraOptions = ''
+        min-free = 536870912
+        keep-outputs = true
+        keep-derivations = true
+        fallback = true
+        experimental-features = nix-command flakes
+      '';
+
+      registry.default = {
+        to = {
+          type = "github";
+          owner = "NixOS";
+          repo = "nixpkgs";
+          ref = "nixos-unstable";
+        };
+        from = {
+          type = "indirect";
+          id = "default";
+        };
+      };
+    };
+
+    system.autoUpgrade.enable = true;
+
+    services.earlyoom.enable = true;
+
+    boot.kernelPackages = pkgs.linuxPackages_latest;
+    boot.supportedFilesystems = [ "ntfs" ];
   };
-
-  nix = {
-
-    autoOptimiseStore = true;
-
-    gc.automatic = true;
-
-    optimise.automatic = true;
-
-    useSandbox = true;
-
-    allowedUsers = [ "@wheel" ];
-
-    trustedUsers = [ "root" "@wheel" ];
-
-    extraOptions = ''
-      min-free = 536870912
-      keep-outputs = true
-      keep-derivations = true
-      fallback = true
-    '';
-
-  };
-
-  programs.bash = {
-    promptInit = ''
-      eval "$(${pkgs.starship}/bin/starship init bash)"
-    '';
-    interactiveShellInit = ''
-      eval "$(${pkgs.direnv}/bin/direnv hook bash)"
-    '';
-  };
-
-  services.earlyoom.enable = true;
-
 }

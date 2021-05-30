@@ -1,1 +1,21 @@
-[ ]
+[
+  ./compat
+  ./user
+  ./x-os
+  ./sway
+  ./graphical
+  ./docker
+  ./audio
+  ./email
+  ./crypto
+  ./nextcloud
+  ./gaming
+  ./virtualisation
+  ./social
+  ./devops
+  ./terminal-life
+  ./server
+  ./printing
+  ./office
+  ./uhk
+]

@@ -1,0 +1,26 @@
+" Reset all styles first
+highlight clear
+
+highlight Border	cterm=none	ctermfg=235	ctermbg=0
+
+highlight TopLine	cterm=none	ctermfg=20	ctermbg=18
+highlight TopLineSel	cterm=none	ctermfg=1	ctermbg=18
+
+highlight Win		cterm=none	ctermfg=188	ctermbg=0
+highlight Directory	cterm=bold	ctermfg=4	ctermbg=0
+highlight CurrLine	cterm=none	ctermfg=3	ctermbg=19
+highlight OtherLine	cterm=none	ctermfg=3	ctermbg=19
+highlight Selected	cterm=none	ctermfg=5	ctermbg=19
+
+highlight JobLine	cterm=bold	ctermfg=0	ctermbg=18
+highlight StatusLine	cterm=bold	ctermfg=0	ctermbg=18
+highlight ErrorMsg	cterm=bold	ctermfg=0	ctermbg=18
+highlight WildMenu	cterm=bold	ctermfg=0	ctermbg=18
+highlight CmdLine	cterm=none	ctermfg=20	ctermbg=0
+
+highlight Executable	cterm=bold	ctermfg=2	ctermbg=0
+highlight Link		cterm=none	ctermfg=9	ctermbg=0
+highlight BrokenLink	cterm=none	ctermfg=1	ctermbg=0
+highlight Device	cterm=none	ctermfg=228	ctermbg=0
+highlight Fifo		cterm=none	ctermfg=109	ctermbg=0
+highlight Socket	cterm=none	ctermfg=110	ctermbg=0

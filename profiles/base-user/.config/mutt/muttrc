@@ -1,0 +1,104 @@
+# vim: filetype=muttrc
+
+source $XDG_CONFIG_HOME/mutt/base16.muttrc
+source $XDG_CONFIG_HOME/mutt/accounts.muttrc
+
+set editor = `echo \$EDITOR`
+
+set sidebar_visible = yes
+set sidebar_width = 50
+set sidebar_format = "%B%?F? [%F]?%* %?N?%N/?%S"
+
+set sendmail_wait = 0
+
+set mail_check_stats
+
+set crypt_use_gpgme=yes
+set crypt_autosign=yes
+set crypt_verify_sig=yes
+set crypt_replysign=yes
+set crypt_replyencrypt=yes
+set crypt_replysignencrypted=yes
+set crypt_autoencrypt=yes
+
+set pgp_check_gpg_decrypt_status_fd
+set pgp_use_gpg_agent=yes
+set pgp_self_encrypt=yes
+
+# Store message headers locally to speed things up.
+# If hcache is a folder, Mutt will create sub cache folders for each account which may speeds things up even more.
+set header_cache = $XDG_CACHE_HOME/mutt
+
+# Store messages locally to speed things up, like searching message bodies.
+# Can be the same folder as header_cache.
+# This will cost important disk usage according to your e-mail amount.
+set message_cachedir = $XDG_CACHE_HOME/mutt
+set imap_check_subscribed
+
+# Allow Mutt to open a new IMAP connection automatically.
+unset imap_passive
+
+# Keep the IMAP connection alive by polling intermittently (time in seconds).
+set imap_keepalive = 300
+
+# How often to check for new mail (time in seconds).
+set mail_check = 120
+
+set askcc
+set askbcc
+
+set date_format="!%d.%m.%Y %H:%M"
+set index_format="%4C %Z %D %4c %20.20L %s"
+
+#------------------------------------------------------------
+# Vi Key Bindings
+#------------------------------------------------------------
+
+# Moving around
+bind generic       g   noop
+bind generic       gg  first-entry
+bind generic,index G   last-entry
+bind generic,index i   previous-entry
+bind generic,index k   next-entry
+
+bind pager,index                d   noop
+bind pager,index                dd  delete-message
+
+bind pager i   previous-line
+bind pager k   next-line
+bind pager I   previous-entry
+bind pager K   next-entry
+
+bind pager r    noop
+bind pager rr   reply
+bind pager ra   group-reply
+bind pager rn   group-chat-reply
+bind pager rl   list-reply
+
+# Threads
+bind browser,pager,index        N   search-opposite
+bind pager,index                dT  delete-thread
+bind pager,index                dt  delete-subthread
+bind pager,index                g   noop
+bind pager,index                gt  next-thread
+bind pager,index                gT  previous-thread
+bind index                      za  collapse-thread
+bind index                      zA  collapse-all # Missing :folddisable/foldenable
+
+# Enable URL opening
+macro index,pager \cb "<pipe-message> urlscan<Enter>" "call urlscan to extract URLs out of a message"
+macro attach,compose \cb "<pipe-entry> urlscan<Enter>" "call urlscan to extract URLs out of a message"
+
+# Translate markdown to html
+macro compose \e5 "F pandoc -s -f markdown -t html \ny^T^Utext/html; charset=utf-8\n"
+set wait_key=no
+
+# Save to ~/Downloads by default
+macro attach D "<save-entry><bol>~/Downloads/<eol>" "Save to Downloads"
+
+set mailcap_path 	= $XDG_CONFIG_HOME/mutt/mailcap
+
+# HTML emails
+auto_view text/html                                      # view html automatically
+alternative_order text/plain text/enriched text/html     # save html for last
+

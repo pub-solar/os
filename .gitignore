@@ -3,3 +3,4 @@ up
 hosts/up-*
 .direnv
 doc/index.html
+tags
