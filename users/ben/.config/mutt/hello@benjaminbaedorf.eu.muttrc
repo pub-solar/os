@@ -1,0 +1,21 @@
+# vim: filetype=muttrc
+
+set from = "Benjamin Bädorf <hello@benjaminbaedorf.eu>"
+set sendmail = "msmtp -a hello@benjaminbaedorf.eu"
+set signature = "~/.config/mutt/hello@benjaminbaedorf.eu.signature"
+
+set pgp_default_key="4332E0D02B214D31376C366E4406E80E13CD656C"
+
+set mbox_type   = Maildir
+set folder      = ~/Mail
+set spoolfile   = "+hello\@benjaminbaedorf.eu/INBOX"
+set postponed   = "+hello\@benjaminbaedorf.eu/Drafts"
+set record      = "+hello\@benjaminbaedorf.eu/Sent"
+set trash       = "+hello\@benjaminbaedorf.eu/Trash"
+mbox-hook   = "+hello\@benjaminbaedorf.eu/Archive"
+unmailboxes *
+mailboxes +hello\@benjaminbaedorf.eu/INBOX \
+          +hello\@benjaminbaedorf.eu/Drafts \
+          +hello\@benjaminbaedorf.eu/Sent \
+          +hello\@benjaminbaedorf.eu/Archive \
+          +hello\@benjaminbaedorf.eu/Trash

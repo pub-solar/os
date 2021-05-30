@@ -1,0 +1,49 @@
+[general]
+pythonfile = $XDG_CONFIG_HOME/offlineimap/functions.py
+metadata = $XDG_DATA_HOME/offlineimap
+accounts = BBEU, RWTH
+
+[Account BBEU]
+localrepository = LocalBBEU
+remoterepository = RemoteBBEU
+
+[Repository LocalBBEU]
+type = Maildir
+localfolders = ~/Mail/hello@benjaminbaedorf.eu
+
+[Repository RemoteBBEU]
+type = IMAP
+remotehost = mail.hosting.de
+remoteuser = hello@benjaminbaedorf.eu
+remotepasseval = get_secret("service", "smtp", "host", "mail.hosting.de", "user", "hello@benjaminbaedorf.eu")
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+
+[Account RWTH]
+localrepository = LocalRWTH
+remoterepository = RemoteRWTH
+
+[Repository LocalRWTH]
+type = Maildir
+localfolders = ~/Mail/benjamin.baedorf@rwth-aachen.de
+
+[Repository RemoteRWTH]
+type = IMAP
+remotehost = mail.rwth-aachen.de
+remoteuser = bb564306@rwth-aachen.de
+remotepasseval = get_secret("service", "smtp", "host", "mail.rwth-aachen.de", "user", "bb564306@rwth-aachen.de")
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+
+[Account OPGmail]
+localrepository = LocalOPGmail
+remoterepository = RemoteOPGmail
+
+[Repository LocalOPGmail]
+type = Maildir
+localfolders = ~/Mail/b.baedorf@openproject.com
+
+[Repository RemoteOPGmail]
+type = IMAP
+remotehost = imap.gmail.com
+remoteuser = b.baedorf@openproject.com
+remotepasseval = get_secret("service", "smtp", "host", "smtp.gmail.com", "user", "b.baedorf@openproject.com")
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt

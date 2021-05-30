@@ -1,0 +1,31 @@
+account hello@benjaminbaedorf.eu
+  host mail.hosting.de
+  port 587
+  protocol smtp
+  auth on
+  from hello@benjaminbaedorf.eu
+  user hello@benjaminbaedorf.eu
+  tls on
+  tls_trust_file /etc/ssl/certs/ca-certificates.crt
+
+account benjamin.baedorf@rwth-aachen.de
+  host mail.rwth-aachen.de
+  port 587
+  protocol smtp
+  auth on
+  from benjamin.baedorf@rwth-aachen.de
+  user bb564306@rwth-aachen.de
+  tls on
+  tls_trust_file /etc/ssl/certs/ca-certificates.crt
+
+account b.baedorf@openproject.com
+  host smtp.mailbox.org
+  port 465
+  protocol smtp
+  auth on
+  from b.baedorf@openproject.com
+  user b.baedorf@openproject.com
+  tls on
+  tls_trust_file /etc/ssl/certs/ca-certificates.crt
+
+account default : hello@benjaminbaedorf.eu
