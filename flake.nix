@@ -29,10 +29,25 @@
       # This is a fix so that the neovim-flake dependency of neovim-nightly doesn't shit itself
       nixpkgs.url = "nixpkgs";
       neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
+
+      # b12f additions
+      b12f-nix-fonts.url = "git+https://git.b12f.io/b12f/nix-fonts?ref=main";
     };
 
-  outputs = inputs@{ self, pkgs, digga, nixos, ci-agent, home, nixos-hardware, nix-dram, nur, neovim-nightly, ... }:
-    digga.lib.mkFlake {
+  outputs =
+    inputs@{ self
+    , pkgs
+    , digga
+    , nixos
+    , ci-agent
+    , home
+    , nixos-hardware
+    , nix-dram
+    , nur
+    , neovim-nightly
+    , b12f-nix-fonts
+    , ...
+    }: digga.lib.mkFlake {
       inherit self inputs;
 
       channelsConfig = { allowUnfree = true; };
@@ -46,6 +61,7 @@
             nur.overlay
             nix-dram.overlay
             neovim-nightly.overlay
+            b12f-nix-fonts.overlay
           ];
         };
         latest = { };
@@ -105,7 +121,6 @@
       defaultTemplate = self.templates.flk;
       templates.flk.path = ./.;
       templates.flk.description = "flk template";
-
     }
   ;
 }

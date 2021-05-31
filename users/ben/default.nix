@@ -32,8 +32,6 @@ in
       ];
     };
 
-    fonts.fonts = with pkgs; [
-      futura-otf
-    ];
+    fonts.fonts = lib.attrValues pkgs.b12f.fonts;
   };
 }
