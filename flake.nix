@@ -31,7 +31,7 @@
       neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
 
       # b12f additions
-      b12f-nix-fonts.url = "git+https://git.b12f.io/b12f/nix-fonts?ref=main";
+      b12f-nix-fonts.url = "git+ssh://git@git.b12f.io/b12f/nix-fonts.git?ref=main";
     };
 
   outputs =
@@ -102,6 +102,7 @@
           anonymous = [ pubsolaros users.nixos ];
           b12f = [ pubsolaros users.ben ];
           biolimo = [ b12f graphical ];
+          chocolatebar = [ b12f graphical virtualisation ];
         };
       };
 

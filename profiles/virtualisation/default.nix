@@ -2,5 +2,5 @@
 let inherit (lib) fileContents;
 in
 {
-  pub-solar.gaming.enable = true;
+  pub-solar.virtualisation.enable = true;
 }
