@@ -3,4 +3,12 @@ up
 hosts/up-*
 .direnv
 doc/index.html
+<<<<<<< HEAD
 tags
+=======
+
+# Result of flk commands
+vm
+iso
+doi
+>>>>>>> devos/core

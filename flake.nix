@@ -5,7 +5,7 @@
     {
       nixos.url = "nixpkgs/nixos-unstable";
       latest.url = "nixpkgs";
-      digga.url = "github:divnix/digga";
+      digga.url = "github:divnix/digga/master";
 
       ci-agent = {
         url = "github:hercules-ci/hercules-ci-agent";
@@ -17,6 +17,8 @@
       home.inputs.nixpkgs.follows = "nixos";
       naersk.url = "github:nmattia/naersk";
       naersk.inputs.nixpkgs.follows = "latest";
+      agenix.url = "github:ryantm/agenix";
+      agenix.inputs.nixpkgs.follows = "latest";
       nixos-hardware.url = "github:nixos/nixos-hardware";
 
       pkgs.url = "path:./pkgs";
@@ -35,15 +37,17 @@
     };
 
   outputs =
-    inputs@{ self
+    inputs@{
+    self
     , pkgs
     , digga
     , nixos
     , ci-agent
     , home
     , nixos-hardware
-    , nix-dram
     , nur
+    , agenix
+    , nix-dram
     , neovim-nightly
     , b12f-nix-fonts
     , ...
@@ -59,6 +63,7 @@
             ./pkgs/default.nix
             pkgs.overlay # for `srcs`
             nur.overlay
+            agenix.overlay
             nix-dram.overlay
             neovim-nightly.overlay
             b12f-nix-fonts.overlay
@@ -86,6 +91,7 @@
             { _module.args.ourLib = self.lib; }
             ci-agent.nixosModules.agent-profile
             home.nixosModules.home-manager
+            agenix.nixosModules.age
             ./modules/customBuilds.nix
           ];
         };
@@ -95,24 +101,34 @@
           /* set host specific properties here */
           NixOS = { };
         };
-        profiles = [ ./profiles ./users ];
-        suites = { profiles, users, ... }: with profiles; rec {
-          base = [ core users.nixos users.root ];
-          pubsolaros = [ core base-user users.root ];
-          anonymous = [ pubsolaros users.nixos ];
-          b12f = [ pubsolaros users.ben ];
-          biolimo = [ b12f graphical ];
-          chocolatebar = [ b12f graphical virtualisation ];
+        importables = rec {
+          profiles = digga.lib.importers.rakeLeaves ./profiles // {
+            users = digga.lib.importers.rakeLeaves ./users;
+          };
+          suites = with profiles; rec {
+            base = [ core users.nixos users.root ];
+            pubsolaros = [ core base-user users.root ];
+            anonymous = [ pubsolaros users.nixos ];
+            b12f = [ pubsolaros users.ben ];
+            biolimo = [ b12f graphical ];
+            chocolatebar = [ b12f graphical virtualisation ];
+          };
         };
       };
 
       home = {
         modules = ./users/modules/module-list.nix;
         externalModules = [ ];
-        profiles = [ ./users/profiles ];
-        suites = { profiles, ... }: with profiles; rec {
-          base = [ direnv git ];
+        importables = rec {
+          profiles = digga.lib.importers.rakeLeaves ./users/profiles;
+          suites = with profiles; rec {
+            base = [ direnv git ];
+          };
         };
+      };
+
+      devshell.externalModules = { pkgs, ... }: {
+        packages = [ pkgs.agenix ];
       };
 
       homeConfigurations = digga.lib.mkHomeConfigurations self.nixosConfigurations;

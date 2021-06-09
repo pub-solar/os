@@ -127,7 +127,17 @@ in
 
     system.autoUpgrade.enable = true;
 
+<<<<<<< HEAD
     services.earlyoom.enable = true;
+=======
+  # For rage encryption, all hosts need a ssh key pair
+  services.openssh = {
+    enable = true;
+    openFirewall = lib.mkDefault false;
+  };
+
+  services.earlyoom.enable = true;
+>>>>>>> devos/core
 
     boot.kernelPackages = pkgs.linuxPackages_latest;
     boot.supportedFilesystems = [ "ntfs" ];
