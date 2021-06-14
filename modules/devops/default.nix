@@ -18,6 +18,7 @@ in
         restic
         shellcheck
         terraform_0_15
+        tea
       ];
     };
   };
