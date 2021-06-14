@@ -1,23 +1,91 @@
+---
 kind: pipeline
 type: docker
-name: api
+name: Upstreaming
 
 steps:
-  - name: "Sync upstream and try PR"
-    image: docker.b12f.io/pub-solar/minimal-git:latest
-    settings:
-      registry: docker.b12f.io
-      repo: docker.b12f.io/pub-solar/minimal-git
-      username:
-        from_secret: docker_username
-      password:
-        from_secret: docker_password
+  - name: "Sync upstream to local"
+    image: alpine/git
+    when:
+      event:
+        - cron
+        - promote
+      target:
+        - upstream
+      branch:
+        - core
     environment:
       GITEA_SSH_KEY:
         from_secret: gitea_ssh_key
     commands:
-      - echo $GITEA_SSH_KEY > ~/.ssh/id_rsa
-      - git clone -b core git@git.b12f.io:pub-solar/os
-      - git remote add devos https://github.com/divnix/devos.git
+      - ./.drone/setup_ssh.sh
+      - git fetch
+      - git checkout devos
+      - git remote add devos git@git.b12f.io:pub-solar/devos
+      - git remote set-url origin git@git.b12f.io:pub-solar/os
       - git fetch --all
-      - git rebase devos/core
+      - git merge -X theirs devos/core
+      - git push origin devos
+
+  - name: "Sync branch with upstream"
+    image: alpine/git
+    when:
+      status:
+        - success
+      event:
+        - cron
+        - promote
+      target:
+        - upstream
+    environment:
+      GITEA_SSH_KEY:
+        from_secret: gitea_ssh_key
+    commands:
+      - ./.drone/setup_ssh.sh
+      - git remote set-url origin git@git.b12f.io:pub-solar/os
+      - ./.drone/upstream-branch.sh
+
+  - name: "Open pull request for failed merge"
+    image: nixery.dev/shell/tea
+    when:
+      status:
+        - failure
+      event:
+        - cron
+        - promote
+      target:
+        - upstream
+      branch:
+        - core
+    environment:
+      TEA_CONFIG:
+        from_secret: tea_config
+    commands:
+      - mkdir -p ~/.config/tea
+      - echo "$$TEA_CONFIG" > ~/.config/tea/config.yml
+      - tea pulls create --base core --head devos
+
+  - name: "Notify matrix"
+    image: plugins/matrix
+    when:
+      status:
+        - success
+        - failure
+      event:
+        - cron
+        - promote
+      target:
+        - upstream
+    settings:
+      homeserver: https://matrix.pub.solar
+      roomid: dfQBqwkhIzrFjMSsxy:pub.solar
+      username:
+        from_secret: matrix_username
+      password:
+        from_secret: matrix_password
+      template: "Upstreaming {{ build.status }} [{{ build.branch }}#{{ truncate build.commit 8 }}]({{ build.link }}) by {{ build.author }}. [Pull requests](https://git.b12f.io/pub-solar/os/pulls)"
+---
+kind: signature
+hmac: b7ad6e3b722b175ffdffd610784fbaf8d675278a64c7e3c62dc5a05b8ae3e2ad
+
+...
