@@ -9,7 +9,7 @@ in
     ./session-variables.nix
   ];
 
-  home-manager = pkgs.lib.setAttrByPath [ "users" psCfg.user.name ] {
+  home-manager.users = pkgs.lib.setAttrByPath [ psCfg.user.name ] {
     # Let Home Manager install and manage itself.
     programs.home-manager.enable = true;
 

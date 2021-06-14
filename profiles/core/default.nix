@@ -127,6 +127,12 @@ in
 
     system.autoUpgrade.enable = true;
 
+    # For rage encryption, all hosts need a ssh key pair
+    services.openssh = {
+      enable = true;
+      openFirewall = lib.mkDefault false;
+    };
+
     services.earlyoom.enable = true;
 
     boot.kernelPackages = pkgs.linuxPackages_latest;
