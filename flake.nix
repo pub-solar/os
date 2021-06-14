@@ -45,7 +45,6 @@
     , home
     , nixos-hardware
     , agenix
-    , nur
     , nix-dram
     , neovim-nightly
       # , b12f-nix-fonts
@@ -61,7 +60,6 @@
           overlays = [
             ./pkgs/default.nix
             pkgs.overlay # for `srcs`
-            nur.overlay
             agenix.overlay
             nix-dram.overlay
             neovim-nightly.overlay
@@ -110,6 +108,7 @@
             anonymous = pubsolaros ++ [ users.nixos ];
             b12f = pubsolaros ++ [ users.ben ];
             biolimo = b12f ++ [ graphical ];
+            chocolatebar = b12f ++ [ graphical virtualisation ];
           };
         };
       };

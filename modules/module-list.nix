@@ -1,5 +1,5 @@
 [
-  ./compat
+  # ./compat
   ./user
   ./x-os
   ./sway
