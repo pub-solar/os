@@ -12,6 +12,7 @@ steps:
         - promote
       target:
         - upstream
+        - daily
       branch:
         - core
     environment:
@@ -37,6 +38,7 @@ steps:
         - promote
       target:
         - upstream
+        - daily
     environment:
       GITEA_SSH_KEY:
         from_secret: gitea_ssh_key
@@ -55,6 +57,7 @@ steps:
         - promote
       target:
         - upstream
+        - daily
       branch:
         - core
     environment:
@@ -76,6 +79,7 @@ steps:
         - promote
       target:
         - upstream
+        - daily
     settings:
       homeserver: https://matrix.pub.solar
       roomid: dfQBqwkhIzrFjMSsxy:pub.solar
@@ -86,6 +90,6 @@ steps:
       template: "Upstreaming {{ build.status }} [{{ build.branch }}#{{ truncate build.commit 8 }}]({{ build.link }}) by {{ build.author }}. [Pull requests](https://git.b12f.io/pub-solar/os/pulls)"
 ---
 kind: signature
-hmac: b7ad6e3b722b175ffdffd610784fbaf8d675278a64c7e3c62dc5a05b8ae3e2ad
+hmac: 3f9da0999ca494c3ea7100b286cb3de67469a7e54077d3f6a4a0ad6fa2fa690b
 
 ...
