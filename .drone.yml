@@ -4,7 +4,7 @@ type: docker
 name: Upstreaming
 
 steps:
-  - name: "Sync upstream to local"
+  - name: "Sync 'devos' branch with upstream"
     image: alpine/git
     when:
       event:
@@ -27,7 +27,7 @@ steps:
       - git merge -X theirs devos/core
       - git push origin devos
 
-  - name: "Sync branch with upstream"
+  - name: "Sync $BRANCH with upstream"
     image: alpine/git
     when:
       status:
@@ -41,6 +41,7 @@ steps:
       GITEA_SSH_KEY:
         from_secret: gitea_ssh_key
     commands:
+      - git checkout core
       - ./.drone/setup_ssh.sh
       - git remote set-url origin git@git.b12f.io:pub-solar/os
       - ./.drone/upstream-branch.sh
@@ -86,6 +87,6 @@ steps:
       template: "Upstreaming {{ build.status }} [{{ build.branch }}#{{ truncate build.commit 8 }}]({{ build.link }}) by {{ build.author }}. [Pull requests](https://git.b12f.io/pub-solar/os/pulls)"
 ---
 kind: signature
-hmac: 3a3f8dbb835b0b4cbdb4d25cc119d5032612ce05604e919b3a079e56f81bfeb4
+hmac: 7a1c018c4c2e7b5d81ebd0bdfbbe5783f99156c2e9f1499402e764f7faf8427b
 
 ...
