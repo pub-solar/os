@@ -39,6 +39,15 @@ let
       sha256 = "QPTCl6KaGcAjTS5yVDov9yxmv0fDaFoPLMsrtVIG6GQ=";
     };
   };
+  vim-mdx-js = pkgs.vimUtils.buildVimPlugin {
+    name = "vim-mdx-js";
+    src = pkgs.fetchFromGitHub {
+      owner = "jxnblk";
+      repo = "vim-mdx-js";
+      rev = "17179d7f2a73172af5f9a8d65b01a3acf12ddd50";
+      sha256 = "wfYCvw9JVGG8p8PQhRPT6CeGGf2OVz9SR2KQM0LjQhY=";
+    };
+  };
 in
 {
   enable = true;
@@ -138,5 +147,6 @@ in
     vim-ruby
     vim-toml
     vim-nix
+    vim-mdx-js
   ];
 }
