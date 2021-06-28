@@ -12,6 +12,7 @@ in
   home-manager = pkgs.lib.setAttrByPath [ "users" psCfg.user.name ] {
     home.packages = with pkgs; [
       dogecoin
+      nodejs
     ];
 
     programs.ssh = {
