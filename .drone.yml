@@ -9,11 +9,10 @@ steps:
     when:
       event:
         - cron
-        - promote
-      target:
-        - upstream*
-      branch:
-        - core
+      cron:
+        - sync-core-with-upstream
+        - sync-b12f-with-core
+        - sync-teutat3s-with-core
     environment:
       GITEA_SSH_KEY:
         from_secret: gitea_ssh_key
@@ -30,18 +29,17 @@ steps:
   - name: "Sync $BRANCH with upstream"
     image: alpine/git
     when:
-      status:
-        - success
       event:
         - cron
-        - promote
-      target:
-        - upstream*
+      cron:
+        - sync-core-with-upstream
+        - sync-b12f-with-core
+        - sync-teutat3s-with-core
     environment:
       GITEA_SSH_KEY:
         from_secret: gitea_ssh_key
     commands:
-      - git checkout core
+      - git checkout origin/core
       - ./.drone/setup_ssh.sh
       - git remote set-url origin git@git.b12f.io:pub-solar/os
       - ./.drone/upstream-branch.sh
@@ -53,11 +51,10 @@ steps:
         - failure
       event:
         - cron
-        - promote
-      target:
-        - upstream*
-      branch:
-        - core
+      cron:
+        - sync-core-with-upstream
+        - sync-b12f-with-core
+        - sync-teutat3s-with-core
     environment:
       TEA_CONFIG:
         from_secret: tea_config
@@ -74,9 +71,10 @@ steps:
         - failure
       event:
         - cron
-        - promote
-      target:
-        - upstream*
+      cron:
+        - sync-core-with-upstream
+        - sync-b12f-with-core
+        - sync-teutat3s-with-core
     settings:
       homeserver: https://matrix.pub.solar
       roomid: dfQBqwkhIzrFjMSsxy:pub.solar
@@ -87,6 +85,6 @@ steps:
       template: "Upstreaming {{ build.status }} [{{ build.branch }}#{{ truncate build.commit 8 }}]({{ build.link }}) by {{ build.author }}. [Pull requests](https://git.b12f.io/pub-solar/os/pulls)"
 ---
 kind: signature
-hmac: 7a1c018c4c2e7b5d81ebd0bdfbbe5783f99156c2e9f1499402e764f7faf8427b
+hmac: f88330a68ced90f4c242aedcbec9359fa63f00c47db6707e2646546daa4a9109
 
 ...
