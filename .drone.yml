@@ -4,16 +4,15 @@ type: docker
 name: Upstreaming
 
 steps:
-  - name: "Sync upstream to local"
+  - name: "Sync 'devos' branch with upstream"
     image: alpine/git
     when:
       event:
         - cron
-        - promote
-      target:
-        - upstream
-      branch:
-        - core
+      cron:
+        - sync-core-with-upstream
+        - sync-b12f-with-core
+        - sync-teutat3s-with-core
     environment:
       GITEA_SSH_KEY:
         from_secret: gitea_ssh_key
@@ -27,20 +26,20 @@ steps:
       - git merge -X theirs devos/core
       - git push origin devos
 
-  - name: "Sync branch with upstream"
+  - name: "Sync $BRANCH with upstream"
     image: alpine/git
     when:
-      status:
-        - success
       event:
         - cron
-        - promote
-      target:
-        - upstream
+      cron:
+        - sync-core-with-upstream
+        - sync-b12f-with-core
+        - sync-teutat3s-with-core
     environment:
       GITEA_SSH_KEY:
         from_secret: gitea_ssh_key
     commands:
+      - git checkout origin/core
       - ./.drone/setup_ssh.sh
       - git remote set-url origin git@git.b12f.io:pub-solar/os
       - ./.drone/upstream-branch.sh
@@ -52,11 +51,10 @@ steps:
         - failure
       event:
         - cron
-        - promote
-      target:
-        - upstream
-      branch:
-        - core
+      cron:
+        - sync-core-with-upstream
+        - sync-b12f-with-core
+        - sync-teutat3s-with-core
     environment:
       TEA_CONFIG:
         from_secret: tea_config
@@ -73,9 +71,10 @@ steps:
         - failure
       event:
         - cron
-        - promote
-      target:
-        - upstream
+      cron:
+        - sync-core-with-upstream
+        - sync-b12f-with-core
+        - sync-teutat3s-with-core
     settings:
       homeserver: https://matrix.pub.solar
       roomid: dfQBqwkhIzrFjMSsxy:pub.solar
@@ -86,6 +85,6 @@ steps:
       template: "Upstreaming {{ build.status }} [{{ build.branch }}#{{ truncate build.commit 8 }}]({{ build.link }}) by {{ build.author }}. [Pull requests](https://git.b12f.io/pub-solar/os/pulls)"
 ---
 kind: signature
-hmac: b7ad6e3b722b175ffdffd610784fbaf8d675278a64c7e3c62dc5a05b8ae3e2ad
+hmac: f88330a68ced90f4c242aedcbec9359fa63f00c47db6707e2646546daa4a9109
 
 ...
