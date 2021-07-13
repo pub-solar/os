@@ -2,6 +2,8 @@
 au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
+let g:gutentags_file_list_command = 'git ls-files'
+
 " Golang
 " Go test shortcut
 nmap <Leader>got :GoTest<CR>

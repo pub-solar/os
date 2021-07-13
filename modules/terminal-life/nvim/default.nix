@@ -86,7 +86,7 @@ in
     python-language-server
     solargraph
     rust-analyzer
-    ctags
+    universal-ctags
     ccls
     rnix-lsp
     terraform-ls
@@ -111,6 +111,7 @@ in
     sonokai
 
     fugitive
+    vim-rhubarb
     vim-gitgutter
     vimagit
 

@@ -53,6 +53,7 @@ in
         diffutils
         findutils
         exfat-utils
+        file
 
         # zippit
         zip
