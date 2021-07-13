@@ -27,10 +27,6 @@
       # PubSolarOS additions
 
       nix-dram.url = "github:dramforever/nix-dram";
-
-      # This is a fix so that the neovim-flake dependency of neovim-nightly doesn't shit itself
-      nixpkgs.url = "nixpkgs";
-      neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
     };
 
   outputs =
@@ -44,7 +40,6 @@
     , nur
     , agenix
     , nix-dram
-    , neovim-nightly
     , ...
     } @ inputs:
     digga.lib.mkFlake {
@@ -61,7 +56,6 @@
             nur.overlay
             agenix.overlay
             nix-dram.overlay
-            neovim-nightly.overlay
           ];
         };
         latest = { };

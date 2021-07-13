@@ -110,19 +110,6 @@ in
         fallback = true
         experimental-features = nix-command flakes
       '';
-
-      registry.default = {
-        to = {
-          type = "github";
-          owner = "NixOS";
-          repo = "nixpkgs";
-          ref = "nixos-unstable";
-        };
-        from = {
-          type = "indirect";
-          id = "default";
-        };
-      };
     };
 
     system.autoUpgrade.enable = true;

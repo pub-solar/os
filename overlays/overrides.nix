@@ -9,6 +9,7 @@ channels: final: prev: {
     element-desktop
     manix
     rage
+    neovim-unwrapped
     nixpkgs-fmt
     qutebrowser
     signal-desktop
