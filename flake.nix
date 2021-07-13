@@ -28,10 +28,6 @@
 
       nix-dram.url = "github:dramforever/nix-dram";
 
-      # This is a fix so that the neovim-flake dependency of neovim-nightly doesn't shit itself
-      nixpkgs.url = "nixpkgs";
-      neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
-
       # b12f additions
       # b12f-nix-fonts.url = "git+https://git.b12f.io/b12f/nix-fonts?ref=main";
     };
@@ -46,8 +42,7 @@
     , nixos-hardware
     , agenix
     , nix-dram
-    , neovim-nightly
-      # , b12f-nix-fonts
+    # , b12f-nix-fonts
     , ...
     }: digga.lib.mkFlake {
       inherit self inputs;
@@ -62,7 +57,6 @@
             pkgs.overlay # for `srcs`
             agenix.overlay
             nix-dram.overlay
-            neovim-nightly.overlay
             # b12f-nix-fonts.overlay
           ];
         };
