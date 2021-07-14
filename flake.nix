@@ -25,11 +25,10 @@
       pkgs.inputs.nixpkgs.follows = "nixos";
 
       # PubSolarOS additions
-
       nix-dram.url = "github:dramforever/nix-dram";
 
       # b12f additions
-      # b12f-nix-fonts.url = "git+https://git.b12f.io/b12f/nix-fonts?ref=main";
+      b12f-nix-fonts.url = "git+https://git.b12f.io/b12f/nix-fonts?ref=main";
     };
 
   outputs =
@@ -42,7 +41,7 @@
     , nixos-hardware
     , agenix
     , nix-dram
-    # , b12f-nix-fonts
+    , b12f-nix-fonts
     , ...
     }: digga.lib.mkFlake {
       inherit self inputs;
@@ -57,7 +56,7 @@
             pkgs.overlay # for `srcs`
             agenix.overlay
             nix-dram.overlay
-            # b12f-nix-fonts.overlay
+            b12f-nix-fonts.overlay
           ];
         };
         latest = { };

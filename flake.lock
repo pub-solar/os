@@ -20,6 +20,25 @@
         "type": "github"
       }
     },
+    "b12f-nix-fonts": {
+      "inputs": {
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1622501268,
+        "narHash": "sha256-wITrQEsJ5zWEl9yGUUPOUUpBN08Sva7MaB7uwYHmX7s=",
+        "ref": "main",
+        "rev": "51f94ad589c096e7fbb6a1f58f3b07037ef035bd",
+        "revCount": 4,
+        "type": "git",
+        "url": "https://git.b12f.io/b12f/nix-fonts"
+      },
+      "original": {
+        "ref": "main",
+        "type": "git",
+        "url": "https://git.b12f.io/b12f/nix-fonts"
+      }
+    },
     "ci-agent": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -72,7 +91,7 @@
       "inputs": {
         "flake-compat": "flake-compat_2",
         "naersk": "naersk",
-        "nixpkgs": "nixpkgs",
+        "nixpkgs": "nixpkgs_2",
         "utils": "utils"
       },
       "locked": {
@@ -109,7 +128,7 @@
         "deploy": "deploy",
         "devshell": "devshell",
         "nixlib": "nixlib",
-        "nixpkgs": "nixpkgs_2",
+        "nixpkgs": "nixpkgs_3",
         "utils": "utils_2"
       },
       "locked": {
@@ -211,12 +230,11 @@
     },
     "latest": {
       "locked": {
-        "lastModified": 1626192309,
-        "narHash": "sha256-uMl42Cn1Zb3qe8Iw0Rz7x62DUEG1JPCtJNU3ZK5gEFQ=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "4036bb94c78329292ef44c233bb42da40b8bd4d2",
-        "type": "github"
+        "lastModified": 1626195678,
+        "narHash": "sha256-fPjSHiZ0JqkmhWiPDPEqbs/fEjZukFCU80YMocg/MRg=",
+        "path": "/nix/store/nnzn6zsmdi6ass7yd6krvc2rdkxxp8nh-source",
+        "rev": "e223f84cd8c279b892c53f5d779d6e63eb4277eb",
+        "type": "path"
       },
       "original": {
         "id": "nixpkgs",
@@ -267,7 +285,7 @@
     "nix-dram": {
       "inputs": {
         "flake-utils": "flake-utils_2",
-        "nixpkgs": "nixpkgs_3"
+        "nixpkgs": "nixpkgs_4"
       },
       "locked": {
         "lastModified": 1620663773,
@@ -330,6 +348,21 @@
     },
     "nixpkgs": {
       "locked": {
+        "lastModified": 1622059058,
+        "narHash": "sha256-t1/ZMtyxClVSfcV4Pt5C1YpkeJ/UwFF3oitLD7Ch/UA=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "84aa23742f6c72501f9cc209f29c438766f5352d",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "ref": "nixpkgs-unstable",
+        "type": "indirect"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
         "lastModified": 1610942247,
         "narHash": "sha256-PKo1ATAlC6BmfYSRmX0TVmNoFbrec+A5OKcabGEu2yU=",
         "owner": "NixOS",
@@ -344,7 +377,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_2": {
+    "nixpkgs_3": {
       "locked": {
         "lastModified": 1620962350,
         "narHash": "sha256-9ASW4d4/Z8HmRvuJI8rxbEOTbXTBpQ8y+CmFYBwtXzE=",
@@ -359,7 +392,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_3": {
+    "nixpkgs_4": {
       "locked": {
         "lastModified": 1620340338,
         "narHash": "sha256-Op/4K0+Z9Sp5jtFH0s/zMM4H7VFZxrekcAmjQ6JpQ4w=",
@@ -373,19 +406,6 @@
         "ref": "nixos-unstable",
         "repo": "nixpkgs",
         "type": "github"
-      }
-    },
-    "nur": {
-      "locked": {
-        "lastModified": 1626188191,
-        "narHash": "sha256-63A/IjYpfKb/R+AiWZE6YHsaxkDnYIVSUgPw7QEQnA8=",
-        "path": "/nix/store/hjc7qr7xsbvx32092bpfsjyi6vk29fg4-source",
-        "rev": "5caa4740529326001714f4c49a5e9f7b2c40f737",
-        "type": "path"
-      },
-      "original": {
-        "id": "nur",
-        "type": "indirect"
       }
     },
     "pkgs": {
@@ -423,6 +443,7 @@
     "root": {
       "inputs": {
         "agenix": "agenix",
+        "b12f-nix-fonts": "b12f-nix-fonts",
         "ci-agent": "ci-agent",
         "darwin": "darwin",
         "digga": "digga",
@@ -432,7 +453,6 @@
         "nix-dram": "nix-dram",
         "nixos": "nixos",
         "nixos-hardware": "nixos-hardware",
-        "nur": "nur",
         "pkgs": "pkgs"
       }
     },
