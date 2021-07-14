@@ -14,7 +14,7 @@
     "application/x-extension-xht" = [ "firefox.desktop" ];
     "image/jpeg" = [ "viewnior.desktop" "gpicview.desktop" ];
     "image/png" = [ "viewnior.desktop" "gpicview.desktop" ];
-    "text/plain" = [ "mousepad.desktop" ];
+    "text/plain" = [ "firefox.desktop" ];
     "x-scheme-handler/mailto" = [ "userapp-Thunderbird.desktop" ];
     "message/rfc822" = [ "userapp-Thunderbird.desktop" ];
     "application/pdf" = [ "org.gnome.Evince.desktop" ];

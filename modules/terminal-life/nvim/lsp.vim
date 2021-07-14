@@ -16,74 +16,74 @@ lua <<EOF
   local nvim_lsp    = require('lspconfig')
   -- Attach `completion-nvim` to the buffer.
   local function lsp_setup()
-  	require('completion').on_attach()
+    require('completion').on_attach()
   end
-  
+
   for lsp_key, lsp_settings in pairs({
         'bashls', ------------------------------- Bash
         'ccls', --------------------------------- C / C++ / Objective-C
         'cssls', -------------------------------- CSS / SCSS / LESS
         'dockerls', ----------------------------- Docker
         ['gopls'] = { --------------------------- Go
-                ['settings'] = {
-                	['gopls'] = {
-				['analyses'] = {
-                                	['unusedparams'] = true,
-                                },
-                                ['staticcheck'] = true
-                        },
+            ['settings'] = {
+                ['gopls'] = {
+                    ['analyses'] = {
+                        ['unusedparams'] = true,
+                    },
+                    ['staticcheck'] = true
                 },
-
-        }, 
+            },
+        },
         'html', --------------------------------- HTML
-  	['jdtls'] = { --------------------------- Java
-  		['root_dir'] = nvim_lsp.util.root_pattern('.git', 'pom.xml', 'build.xml'),
-  		['init_options'] = {
-  			['jvm_args'] = {['java.format.settings.url'] = vim.fn.stdpath('config')..'/eclipse-formatter.xml'},
-  			['workspace'] = vim.fn.stdpath('cache')..'/java-workspaces'
-  		}
-  	},
+        ['jdtls'] = { --------------------------- Java
+            ['root_dir'] = nvim_lsp.util.root_pattern('.git', 'pom.xml', 'build.xml'),
+            ['init_options'] = {
+                ['jvm_args'] = {['java.format.settings.url'] = vim.fn.stdpath('config')..'/eclipse-formatter.xml'},
+                ['workspace'] = vim.fn.stdpath('cache')..'/java-workspaces'
+            }
+        },
         'jsonls', ------------------------------- JSON
+        'phpactor', ----------------------------- PHP
         'pyls', --------------------------------- Python
         'rnix', --------------------------------- Nix
         'solargraph', --------------------------- Ruby
         'rust_analyzer', ------------------------ Rust
         ['sqlls'] = {
-        	['cmd'] = {"$XDG_DATA_HOME/nvm/versions/node/v12.19.0/bin/sql-language-server", "up", "--method", "stdio"}
+            ['cmd'] = {"$XDG_DATA_HOME/nvm/versions/node/v12.19.0/bin/sql-language-server", "up", "--method", "stdio"}
         },
         ['terraformls'] = { --------------------- Terraform
-                ['filetypes'] = { "terraform", "hcl", "tf" }
+            ['filetypes'] = { "terraform", "hcl", "tf" }
         },
         'tsserver', ----------------------------- Typescript / JavaScript
         'angularls', ---------------------------- Angular
         'vuels', -------------------------------- Vue
         'svelte', ------------------------------- Svelte
         ['yamlls'] = { -------------------------- YAML
-		['settings'] = {
-			['yaml'] = {
-				['schemas'] = {
-					['https://json.schemastore.org/github-workflow'] = '.github/workflows/*.{yml,yaml}',
-        				['https://json.schemastore.org/github-action'] = '.github/action.{yml,yaml}',
-                                        ['https://json.schemastore.org/ansible-stable-2.9'] = 'roles/tasks/*.{yml,yaml}',
-                                        ['https://json.schemastore.org/drone'] = '*.drone.{yml,yaml}',
-                                }
-                        }
+            ['settings'] = {
+                ['yaml'] = {
+                    ['schemas'] = {
+                        ['https://json.schemastore.org/github-workflow'] = '.github/workflows/*.{yml,yaml}',
+                        ['https://json.schemastore.org/github-action'] = '.github/action.{yml,yaml}',
+                        ['https://json.schemastore.org/ansible-stable-2.9'] = 'roles/tasks/*.{yml,yaml}',
+                        ['https://json.schemastore.org/drone'] = '*.drone.{yml,yaml}',
+                    }
                 }
+            }
         }
   }) do -- Setup all of the language servers. †
-  	if type(lsp_key) == 'number' then -- Enable the LSP with defaults.
-  		-- The `lsp` is an index in this case.
-  		nvim_lsp[lsp_settings].setup{['on_attach'] = lsp_setup}
-  	else -- Use the LSP's configuration.
-  		local on_attach_setting = lsp_settings.on_attach
-  
-  		lsp_settings.on_attach = function()
-  			lsp_setup()
-  			if on_attach_setting then on_attach_setting() end
-  		end
-  
-  		nvim_lsp[lsp_key].setup(lsp_settings)
-  	end
+    if type(lsp_key) == 'number' then -- Enable the LSP with defaults.
+      -- The `lsp` is an index in this case.
+      nvim_lsp[lsp_settings].setup{['on_attach'] = lsp_setup}
+    else -- Use the LSP's configuration.
+      local on_attach_setting = lsp_settings.on_attach
+
+    lsp_settings.on_attach = function()
+      lsp_setup()
+      if on_attach_setting then on_attach_setting() end
+    end
+
+      nvim_lsp[lsp_key].setup(lsp_settings)
+    end
   end -- ‡
 EOF
 

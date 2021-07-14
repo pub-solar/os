@@ -98,6 +98,7 @@ in
         flameshot
         libnotify
         gnome3.adwaita-icon-theme
+        gnome.eog
         gnome3.nautilus
 
         wine
