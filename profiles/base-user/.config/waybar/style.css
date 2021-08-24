@@ -51,7 +51,7 @@ window#waybar {
 }
 
 #battery.critical {
-     color: @base07;
+  color: @base07;
 }
 #battery.charging {
     color: @base0B;

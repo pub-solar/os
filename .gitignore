@@ -1,14 +1,12 @@
 result
-up
-hosts/up-*
 .direnv
 doc/index.html
-<<<<<<< HEAD
-tags
-=======
 
 # Result of flk commands
 vm
 iso
 doi
->>>>>>> devos/core
+
+pkgs/_sources/.shake*
+
+tags

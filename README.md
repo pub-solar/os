@@ -22,14 +22,18 @@ Also, have a look at [_flake.nix_][toc]. If anything is not immediately
 discoverable via "[`digga`][digga]'s [`mkFlake`][mk-flake],
 please file a bug report.
 
-### Status: Beta
-Although this project has already matured quite a bit, especially through
-recent outfactoring of [`digga`][digga], a fair amount of api polishing is still
-expected. There are unstable versions (0._x_._x_) to help users keep track
-of changes and progress, and a [`develop`](https://github.com/divnix/devos/tree/develop) branch for the brave 😜
+## Motivation
+NixOS provides an amazing abstraction to manage our environment, but that new
+power can sometimes bring feelings of overwhelm and confusion. Having a turing
+complete system can easily lead to unlimited complexity if we do it wrong.
+Instead, we should have a community consensus on how to manage a NixOS system
+and its satellite projects, from which best practices can evolve.
 
-## In the Wild
-* The original [authors][please]
+___The future is declarative! 🎉___
+
+## Examples in the Wild
+The author maintains his own branch, so you can take inspiration, direction, or
+make critical comments about the [code][please]. 😜
 
 ## Shoulders
 This work does not reinvent the wheel. It stands on the [shoulders of the
@@ -43,6 +47,7 @@ following giants][giants]:
 ### :family: &mdash; like family
 - [`numtide/devshell`][devshell]
 - [`serokell/deploy-rs`][deploy]
+- [`berberman/nvfetcher`][nvfetcher]
 - [`NixOS/nixpkgs`][nixpkgs]
 
 :heart:
@@ -68,23 +73,23 @@ goals are sufficiently upstreamed into "the Nix", dissolved.
 # License
 DevOS is licensed under the [MIT License][mit].
 
-[mk-flake]: https://github.com/divnix/digga/tree/master/src/mkFlake
-[nixpkgs]: https://github.com/NixOS/nixpkgs
-[deploy]: https://github.com/serokell/deploy-rs
-[toc]: https://github.com/divnix/devos/blob/core/flake.nix
-[giants]: https://en.wikipedia.org/wiki/Standing_on_the_shoulders_of_giants
-[digga]: https://github.com/divnix/digga
-[fup]: https://github.com/gytis-ivaskevicius/flake-utils-plus
-[fu]: https://github.com/numtide/flake-utils
-[devshell]: https://github.com/numtide/devshell
-[nix]: https://nixos.org/manual/nix/stable
-[mit]: https://mit-license.org
-[nixos]: https://nixos.org/manual/nixos/stable
-[home-manager]: https://nix-community.github.io/home-manager
-[flakes]: https://nixos.wiki/wiki/Flakes
-[flake-doc]: https://github.com/NixOS/nix/blob/master/src/nix/flake.md
-[core]: https://github.com/divnix/devos
 [community]: https://github.com/divnix/devos/tree/community
+[core]: https://github.com/divnix/devos
+[deploy]: https://github.com/serokell/deploy-rs
+[devshell]: https://github.com/numtide/devshell
+[digga]: https://github.com/divnix/digga
 [dotfiles]: https://github.com/hlissner/dotfiles
+[flake-doc]: https://github.com/NixOS/nix/blob/master/src/nix/flake.md
+[flakes]: https://nixos.wiki/wiki/Flakes
+[fu]: https://github.com/numtide/flake-utils
+[fup]: https://github.com/gytis-ivaskevicius/flake-utils-plus
+[giants]: https://en.wikipedia.org/wiki/Standing_on_the_shoulders_of_giants
+[home-manager]: https://nix-community.github.io/home-manager
+[mit]: https://mit-license.org
+[mk-flake]: https://github.com/divnix/digga/tree/master/src/mkFlake
+[nix]: https://nixos.org/manual/nix/stable
+[nixos]: https://nixos.org/manual/nixos/stable
+[nixpkgs]: https://github.com/NixOS/nixpkgs
+[nvfetcher]: https://github.com/berberman/nvfetcher
 [please]: https://github.com/nrdxp/devos/tree/nrd
-[matrix]: https://matrix.to/#/#devos:nixos.org
+[toc]: https://github.com/divnix/devos/blob/core/flake.nix
