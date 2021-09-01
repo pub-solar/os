@@ -1,0 +1,21 @@
+# vim: filetype=muttrc
+
+set from = "Benjamin Bädorf <benjamin.baedorf@rwth-aachen.de>"
+set sendmail = "msmtp -a benjamin.baedorf@rwth-aachen.de"
+set signature = "~/.config/mutt/hello@benjaminbaedorf.eu.signature"
+
+set pgp_default_key="4332E0D02B214D31376C366E4406E80E13CD656C"
+
+set mbox_type   = Maildir
+set folder      = ~/Mail
+set spoolfile   = "+benjamin.baedorf\@rwth-aachen.de/INBOX"
+set postponed   = "+benjamin.baedorf\@rwth-aachen.de/Drafts"
+set record      = "+benjamin.baedorf\@rwth-aachen.de/Sent"
+set trash       = "+benjamin.baedorf\@rwth-aachen.de/Trash"
+mbox-hook   = "+benjamin.baedorf\@rwth-aachen.de/Journal"
+unmailboxes *
+mailboxes +benjamin.baedorf\@rwth-aachen.de/INBOX \
+          +benjamin.baedorf\@rwth-aachen.de/Drafts \
+          +benjamin.baedorf\@rwth-aachen.de/Sent \
+          +benjamin.baedorf\@rwth-aachen.de/Journal \
+          +benjamin.baedorf\@rwth-aachen.de/Trash

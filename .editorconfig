@@ -24,6 +24,14 @@ charset = unset
 indent_style = unset
 indent_size = unset
 
+[*.rom]
+end_of_line = unset
+insert_final_newline = unset
+trim_trailing_whitespace = unset
+charset = unset
+indent_style = unset
+indent_size = unset
+
 [*.py]
 indent_size = 4
 

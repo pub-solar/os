@@ -206,21 +206,6 @@
         "type": "github"
       }
     },
-    "flake-utils_2": {
-      "locked": {
-        "lastModified": 1623875721,
-        "narHash": "sha256-A8BU7bjS5GirpAUv4QA+QnJ4CceLHkcXdRp4xITDB0s=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "f7e004a55b120c02ecb6219596820fcd32ca8772",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
-      }
-    },
     "home": {
       "inputs": {
         "nixpkgs": [
@@ -261,7 +246,9 @@
     "naersk": {
       "inputs": {
         "nixpkgs": [
-          "latest"
+          "digga",
+          "deploy",
+          "nixpkgs"
         ]
       },
       "locked": {
@@ -296,25 +283,6 @@
       "original": {
         "owner": "nmattia",
         "repo": "naersk",
-        "type": "github"
-      }
-    },
-    "nix-dram": {
-      "inputs": {
-        "flake-utils": "flake-utils_2",
-        "nixpkgs": "nixpkgs"
-      },
-      "locked": {
-        "lastModified": 1628492639,
-        "narHash": "sha256-ffF/oEhLs/stAsXXobruKHyH9jnMC2rt/SM3ASrs2U8=",
-        "owner": "dramforever",
-        "repo": "nix-dram",
-        "rev": "fba426108ea6bdeb1e362bac9da06cbd33726f41",
-        "type": "github"
-      },
-      "original": {
-        "owner": "dramforever",
-        "repo": "nix-dram",
         "type": "github"
       }
     },
@@ -371,22 +339,6 @@
       "original": {
         "owner": "nixos",
         "repo": "nixos-hardware",
-        "type": "github"
-      }
-    },
-    "nixpkgs": {
-      "locked": {
-        "lastModified": 1626556499,
-        "narHash": "sha256-c2ueMT7fi/yvCNq3nGLEC2v5GklS7eHpB1240LRSW9Y=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "b59c06dc92f8d03660eb4155754d93a6c34cda83",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
         "type": "github"
       }
     },
@@ -459,7 +411,6 @@
         "home": "home",
         "latest": "latest",
         "naersk": "naersk_2",
-        "nix-dram": "nix-dram",
         "nixlib": [
           "digga",
           "nixlib"

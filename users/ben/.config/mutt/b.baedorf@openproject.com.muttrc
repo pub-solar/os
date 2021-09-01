@@ -1,0 +1,24 @@
+# vim: filetype=muttrc
+
+set from = "Benjamin Bädorf <b.baedorf@openproject.com>"
+set sendmail = "msmtp -a b.baedorf@openproject.com"
+set signature = "~/.config/mutt/b.baedorf@openproject.com.signature"
+
+set pgp_default_key="DB94333951EC9A362B33FBA5069CA2D117AB5CCF"
+
+set imap_user = b.baedorf@openproject.com
+set imap_pass = `secret-tool lookup service smtp host smtp.mailbox.org user b.baedorf@openproject.com`
+
+set folder      = imaps://imap.mailbox.org:993
+
+set spoolfile   = "+INBOX"
+set postponed   = "+Drafts"
+set record      = "+Sent"
+set trash       = "+Trash"
+mbox-hook   = "+Archive"
+unmailboxes *
+mailboxes +INBOX \
+          +Drafts \
+          +Sent \
+          +Archive \
+          +Trash
