@@ -12,7 +12,7 @@ Make an awesome template for NixOS users, with consideration for common tools li
 [devshell][devshell], and [more](./doc/integrations).
 
 ### No. Why _flakes_?
-Flakes are a part of an explicit push to improve [Nix's UI](https://github.com/NixOS/nix/blob/master/doc/manual/src/contributing/cli-guideline.md), and have become an intergral part of that effort. 
+Flakes are a part of an explicit push to improve [Nix's UX](https://github.com/NixOS/nix/blob/master/doc/manual/src/contributing/cli-guideline.md), and have become an integral part of that effort. 
 
 They also make [Nix expressions](https://nixos.org/manual/nix/unstable/expressions/expression-syntax.html) easier to distribute and reuse with convient [flake references](https://github.com/NixOS/nix/blob/master/src/nix/flake.md#flake-references) for building or using packages, modules, and whole systems.
 
@@ -22,18 +22,14 @@ Also, have a look at [_flake.nix_][toc]. If anything is not immediately
 discoverable via "[`digga`][digga]'s [`mkFlake`][mk-flake],
 please file a bug report.
 
-## Motivation
-NixOS provides an amazing abstraction to manage our environment, but that new
-power can sometimes bring feelings of overwhelm and confusion. Having a turing
-complete system can easily lead to unlimited complexity if we do it wrong.
-Instead, we should have a community consensus on how to manage a NixOS system
-and its satellite projects, from which best practices can evolve.
+### Status: Beta
+Although this project has already matured quite a bit, especially through
+recent outfactoring of [`digga`][digga], a fair amount of api polishing is still
+expected. There are unstable versions (0._x_._x_) to help users keep track
+of changes and progress, and a [`develop`](https://github.com/divnix/devos/tree/develop) branch for the brave 😜
 
-___The future is declarative! 🎉___
-
-## Examples in the Wild
-The author maintains his own branch, so you can take inspiration, direction, or
-make critical comments about the [code][please]. 😜
+## In the Wild
+* The original [authors][please]
 
 ## Shoulders
 This work does not reinvent the wheel. It stands on the [shoulders of the
@@ -92,4 +88,3 @@ DevOS is licensed under the [MIT License][mit].
 [nixpkgs]: https://github.com/NixOS/nixpkgs
 [nvfetcher]: https://github.com/berberman/nvfetcher
 [please]: https://github.com/nrdxp/devos/tree/nrd
-[toc]: https://github.com/divnix/devos/blob/core/flake.nix

@@ -7,10 +7,10 @@
 
   inputs =
     {
-      nixos.url = "nixpkgs/release-21.05";
-      latest.url = "nixpkgs";
+      nixos.url = "github:nixos/nixpkgs/release-21.05";
+      latest.url = "github:nixos/nixpkgs/nixos-unstable";
 
-      digga.url = "github:divnix/digga/develop";
+      digga.url = "github:divnix/digga";
       digga.inputs.nixpkgs.follows = "nixos";
       digga.inputs.nixlib.follows = "nixos";
       digga.inputs.home-manager.follows = "home";
@@ -33,13 +33,7 @@
       nvfetcher.url = "github:berberman/nvfetcher";
       nvfetcher.inputs.nixpkgs.follows = "latest";
       nvfetcher.inputs.flake-compat.follows = "digga/deploy/flake-compat";
-      nvfetcher.inputs.flake-utils.follows = "digga/utils/flake-utils";
-
-      ci-agent.url = "github:hercules-ci/hercules-ci-agent";
-      ci-agent.inputs.nix-darwin.follows = "darwin";
-      ci-agent.inputs.nixos-20_09.follows = "nixos";
-      ci-agent.inputs.nixos-unstable.follows = "latest";
-      ci-agent.inputs.flake-compat.follows = "digga/deploy/flake-compat";
+      nvfetcher.inputs.flake-utils.follows = "digga/flake-utils-plus/flake-utils";
 
       naersk.url = "github:nmattia/naersk";
       naersk.inputs.nixpkgs.follows = "latest";
@@ -51,7 +45,7 @@
       nixpkgs.follows = "nixos";
       nixlib.follows = "digga/nixlib";
       blank.follows = "digga/blank";
-      utils.follows = "digga/utils";
+      flake-utils-plus.follows = "digga/flake-utils-plus";
       flake-utils.follows = "digga/flake-utils";
       # end ANTI CORRUPTION LAYER
 
@@ -64,7 +58,6 @@
     , digga
     , bud
     , nixos
-    , ci-agent
     , home
     , nixos-hardware
     , nur
@@ -74,9 +67,6 @@
     , nix-dram
     , ...
     } @ inputs:
-    let
-      bud' = bud self; # rebind to access self.budModules
-    in
     digga.lib.mkFlake
       {
         inherit self inputs;
@@ -85,7 +75,7 @@
 
         channels = {
           nixos = {
-            imports = [ (digga.lib.importers.overlays ./overlays) ];
+            imports = [ (digga.lib.importOverlays ./overlays) ];
             overlays = [
               digga.overlays.patchedNix
               nur.overlay
@@ -114,25 +104,25 @@
           hostDefaults = {
             system = "x86_64-linux";
             channelName = "nixos";
-            imports = [ (digga.lib.importers.modules ./modules) ];
+            imports = [ (digga.lib.importModules ./modules) ];
             externalModules = [
               { lib.our = self.lib; }
+              digga.nixosModules.bootstrapIso
               digga.nixosModules.nixConfig
-              ci-agent.nixosModules.agent-profile
               home.nixosModules.home-manager
               agenix.nixosModules.age
-              (bud.nixosModules.bud bud')
+              bud.nixosModules.bud
             ];
           };
 
-          imports = [ (digga.lib.importers.hosts ./hosts) ];
+          imports = [ (digga.lib.importHosts ./hosts) ];
           hosts = {
             /* set host specific properties here */
             NixOS = { };
           };
           importables = rec {
-            profiles = digga.lib.importers.rakeLeaves ./profiles // {
-              users = digga.lib.importers.rakeLeaves ./users;
+            profiles = digga.lib.rakeLeaves ./profiles // {
+              users = digga.lib.rakeLeaves ./users;
             };
             suites = with profiles; rec {
               base = [ core users.nixos users.root ];
@@ -143,10 +133,10 @@
         };
 
         home = {
-          imports = [ (digga.lib.importers.modules ./users/modules) ];
+          imports = [ (digga.lib.importModules ./users/modules) ];
           externalModules = [ ];
           importables = rec {
-            profiles = digga.lib.importers.rakeLeaves ./users/profiles;
+            profiles = digga.lib.rakeLeaves ./users/profiles;
             suites = with profiles; rec {
               base = [ direnv git ];
             };
@@ -156,7 +146,7 @@
           }; # digga.lib.importers.rakeLeaves ./users/hm;
         };
 
-        devshell.modules = [ (import ./shell bud') ];
+        devshell = ./shell;
 
         homeConfigurations = digga.lib.mkHomeConfigurations self.nixosConfigurations;
 
@@ -169,7 +159,7 @@
       }
     //
     {
-      budModules = { devos = import ./pkgs/bud; };
+      budModules = { devos = import ./bud; };
     }
   ;
 }
