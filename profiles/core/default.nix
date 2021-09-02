@@ -90,7 +90,7 @@ in
     };
 
     nix = {
-      package = pkgs.nix-dram;
+      # package = pkgs.nix-dram;
 
       autoOptimiseStore = true;
 

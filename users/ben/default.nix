@@ -32,6 +32,6 @@ in
       ];
     };
 
-    fonts.fonts = lib.attrValues pkgs.b12f.fonts;
+    # fonts.fonts = lib.attrValues pkgs.b12f.fonts;
   };
 }
