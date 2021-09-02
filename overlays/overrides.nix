@@ -8,6 +8,7 @@ channels: final: prev: {
     discord
     element-desktop
     rage
+    docker-compose
     neovim-unwrapped
     nixpkgs-fmt
     qutebrowser
