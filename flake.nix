@@ -50,11 +50,11 @@
       # end ANTI CORRUPTION LAYER
 
       # PubSolarOS additions
-      # nix-dram.url = "github:dramforever/nix-dram";
+      nix-dram.url = "github:dramforever/nix-dram";
 
       # b12f additions
-      # b12f-nix-fonts.url = "git+https://git.b12f.io/b12f/nix-fonts?ref=main";
-      # b12f-nix-fonts.inputs.nixpkgs.follows = "latest";
+      b12f-nix-fonts.url = "git+https://git.b12f.io/b12f/nix-fonts?ref=main";
+      b12f-nix-fonts.inputs.nixpkgs.follows = "latest";
     };
 
   outputs =
@@ -68,8 +68,8 @@
     , agenix
     , nvfetcher
     , deploy
-      #  , nix-dram
-      #  , b12f-nix-fonts
+    , nix-dram
+    , b12f-nix-fonts
     , ...
     } @ inputs:
     digga.lib.mkFlake
@@ -87,8 +87,8 @@
               agenix.overlay
               nvfetcher.overlay
               deploy.overlay
-              #  nix-dram.overlay
-              #  b12f-nix-fonts.overlay
+              nix-dram.overlay
+              b12f-nix-fonts.overlay
               ./pkgs/default.nix
             ];
           };
