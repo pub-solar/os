@@ -12,7 +12,7 @@ Make an awesome template for NixOS users, with consideration for common tools li
 [devshell][devshell], and [more](./doc/integrations).
 
 ### No. Why _flakes_?
-Flakes are a part of an explicit push to improve [Nix's UI](https://github.com/NixOS/nix/blob/master/doc/manual/src/contributing/cli-guideline.md), and have become an intergral part of that effort. 
+Flakes are a part of an explicit push to improve [Nix's UX](https://github.com/NixOS/nix/blob/master/doc/manual/src/contributing/cli-guideline.md), and have become an integral part of that effort. 
 
 They also make [Nix expressions](https://nixos.org/manual/nix/unstable/expressions/expression-syntax.html) easier to distribute and reuse with convient [flake references](https://github.com/NixOS/nix/blob/master/src/nix/flake.md#flake-references) for building or using packages, modules, and whole systems.
 
@@ -43,6 +43,7 @@ following giants][giants]:
 ### :family: &mdash; like family
 - [`numtide/devshell`][devshell]
 - [`serokell/deploy-rs`][deploy]
+- [`berberman/nvfetcher`][nvfetcher]
 - [`NixOS/nixpkgs`][nixpkgs]
 
 :heart:
@@ -68,23 +69,22 @@ goals are sufficiently upstreamed into "the Nix", dissolved.
 # License
 DevOS is licensed under the [MIT License][mit].
 
-[mk-flake]: https://github.com/divnix/digga/tree/master/src/mkFlake
-[nixpkgs]: https://github.com/NixOS/nixpkgs
-[deploy]: https://github.com/serokell/deploy-rs
-[toc]: https://github.com/divnix/devos/blob/core/flake.nix
-[giants]: https://en.wikipedia.org/wiki/Standing_on_the_shoulders_of_giants
-[digga]: https://github.com/divnix/digga
-[fup]: https://github.com/gytis-ivaskevicius/flake-utils-plus
-[fu]: https://github.com/numtide/flake-utils
-[devshell]: https://github.com/numtide/devshell
-[nix]: https://nixos.org/manual/nix/stable
-[mit]: https://mit-license.org
-[nixos]: https://nixos.org/manual/nixos/stable
-[home-manager]: https://nix-community.github.io/home-manager
-[flakes]: https://nixos.wiki/wiki/Flakes
-[flake-doc]: https://github.com/NixOS/nix/blob/master/src/nix/flake.md
-[core]: https://github.com/divnix/devos
 [community]: https://github.com/divnix/devos/tree/community
+[core]: https://github.com/divnix/devos
+[deploy]: https://github.com/serokell/deploy-rs
+[devshell]: https://github.com/numtide/devshell
+[digga]: https://github.com/divnix/digga
 [dotfiles]: https://github.com/hlissner/dotfiles
+[flake-doc]: https://github.com/NixOS/nix/blob/master/src/nix/flake.md
+[flakes]: https://nixos.wiki/wiki/Flakes
+[fu]: https://github.com/numtide/flake-utils
+[fup]: https://github.com/gytis-ivaskevicius/flake-utils-plus
+[giants]: https://en.wikipedia.org/wiki/Standing_on_the_shoulders_of_giants
+[home-manager]: https://nix-community.github.io/home-manager
+[mit]: https://mit-license.org
+[mk-flake]: https://github.com/divnix/digga/tree/master/src/mkFlake
+[nix]: https://nixos.org/manual/nix/stable
+[nixos]: https://nixos.org/manual/nixos/stable
+[nixpkgs]: https://github.com/NixOS/nixpkgs
+[nvfetcher]: https://github.com/berberman/nvfetcher
 [please]: https://github.com/nrdxp/devos/tree/nrd
-[matrix]: https://matrix.to/#/#devos:nixos.org

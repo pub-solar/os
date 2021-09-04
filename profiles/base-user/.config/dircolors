@@ -116,7 +116,7 @@ EXEC 01;32
 #.sh  01;32
 #.csh 01;32
 
- # archives or compressed (bright red)
+# archives or compressed (bright red)
 .tar 01;31
 .tgz 01;31
 .arc 01;31

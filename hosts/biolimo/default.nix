@@ -1,6 +1,6 @@
 { suites, ... }:
 {
   imports = [
-    ./base.nix
+    ./biolimo.nix
   ] ++ suites.biolimo;
 }

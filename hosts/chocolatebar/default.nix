@@ -1,6 +1,6 @@
 { suites, ... }:
 {
   imports = [
-    ./base.nix
+    ./chocolatebar.nix
   ] ++ suites.chocolatebar;
 }

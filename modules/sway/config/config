@@ -125,7 +125,7 @@ output * bg ~/.config/wallpaper.jpg fill
     bindsym $mod+Shift+9 move container to workspace 9; workspace $ws9
     # Note: workspaces can have any name you want, not just numbers.
     # We just use 1-10 as the default.
-    
+
     #navigate workspaces next / previous
     bindsym $mod+Ctrl+Right workspace next
     bindsym $mod+Ctrl+Left workspace prev
@@ -141,13 +141,13 @@ output * bg ~/.config/wallpaper.jpg fill
     # Configure border style <normal|1pixel|pixel xx|none|pixel>
     default_border pixel 1
     default_floating_border normal
-    
+
     # Hide borders
     hide_edge_borders none
 
     # Font for window titles. Will also be used by the bar unless a different font
     # is used in the bar {} block below.
-    font xft:Hack 16 
+    font xft:Hack 16
 
     # You can "split" the current object of your focus with
     # $mod+b or $mod+v, for horizontal and vertical splits
