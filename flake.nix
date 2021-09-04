@@ -134,7 +134,7 @@
               base = [ core users.nixos users.root ];
               pubsolaros = [ core base-user users.root ];
               anonymous = pubsolaros ++ [ users.nixos ];
-              b12f = pubsolaros ++ [ users.ben ];
+              b12f = pubsolaros ++ [ users.ben gaming ];
               biolimo = b12f ++ [ graphical ];
               chocolatebar = b12f ++ [ graphical ];
             };
