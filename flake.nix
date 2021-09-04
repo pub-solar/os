@@ -136,6 +136,7 @@
               anonymous = pubsolaros ++ [ users.nixos ];
               b12f = pubsolaros ++ [ users.ben ];
               biolimo = b12f ++ [ graphical ];
+              chocolatebar = b12f ++ [ graphical ];
             };
           };
         };
