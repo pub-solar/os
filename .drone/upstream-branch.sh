@@ -4,7 +4,7 @@ set -e
 set -u
 
 LOCAL="$DRONE_BRANCH"
-[ "$LOCAL" = "core" ] && UPSTREAM=origin/devos || UPSTREAM=origin/core
+[ "$LOCAL" = "master" ] && UPSTREAM=origin/devos || UPSTREAM=origin/master
 
 git fetch --all
 git checkout "$LOCAL"
