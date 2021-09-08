@@ -6,7 +6,7 @@ channels: final: prev: {
     cachix
     dhall
     discord
-    element-desktop
+    element-desktop-wayland
     rage
     neovim-unwrapped
     nixpkgs-fmt
