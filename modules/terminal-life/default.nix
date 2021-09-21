@@ -33,7 +33,6 @@ in
         watson
         nnn
         fd
-        direnv
       ];
 
       programs.neovim = import ./nvim { inherit config; inherit pkgs; };
