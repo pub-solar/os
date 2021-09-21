@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, hmUsers, pkgs, lib, ... }:
 let
   psCfg = config.pub-solar;
 in
@@ -8,6 +8,8 @@ in
   ];
 
   config = {
+    home-manager.users = { inherit (hmUsers) ben; };
+
     pub-solar = {
       # These are your personal settings
       # The only required settings are `name` and `password`,
