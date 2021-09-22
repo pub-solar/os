@@ -11,8 +11,6 @@ steps:
         - cron
       cron:
         - sync-master-with-upstream
-        - sync-b12f-with-master
-        - sync-teutat3s-with-master
     environment:
       GITEA_SSH_KEY:
         from_secret: gitea_ssh_key
