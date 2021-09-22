@@ -93,7 +93,7 @@ in
       home.packages = [
         alacritty
         chromium
-        firefox
+        firefox-wayland
 
         flameshot
         libnotify

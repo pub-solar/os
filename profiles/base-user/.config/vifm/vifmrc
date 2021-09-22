@@ -223,7 +223,7 @@ filextype *.html,*.htm
         \ {Open with vim}
         \ nvim %f,
         \ {Open with firefox}
-        \ firefox-developer-edition %f &,
+        \ firefox %f &,
 filetype *.html,*.htm links, lynx
 
 " Object
