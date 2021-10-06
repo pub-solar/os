@@ -109,7 +109,8 @@ in
         keep-outputs = true
         keep-derivations = true
         fallback = true
-        experimental-features = nix-command flakes
+        # used by nix-dram
+        default-flake = flake:nixpkgs
       '';
     };
 
