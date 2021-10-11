@@ -35,6 +35,7 @@ steps:
         from_secret: gitea_ssh_key
     commands:
       - ./.drone/setup_ssh.sh
+      - git fetch --all
       - git checkout origin/devos
       - git merge -X theirs devos/main
       - git push origin devos
