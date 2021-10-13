@@ -86,13 +86,16 @@
               nur.overlay
               agenix.overlay
               nvfetcher.overlay
-              deploy.overlay
               nix-dram.overlay
               b12f-nix-fonts.overlay
               ./pkgs/default.nix
             ];
           };
-          latest = { };
+          latest = {
+            overlays = [
+              deploy.overlay
+            ];
+          };
         };
 
         lib = import ./lib { lib = digga.lib // nixos.lib; };
@@ -110,8 +113,8 @@
           hostDefaults = {
             system = "x86_64-linux";
             channelName = "nixos";
-            imports = [ (digga.lib.importModules ./modules) ];
-            externalModules = [
+            imports = [ (digga.lib.importExportableModules ./modules) ];
+            modules = [
               { lib.our = self.lib; }
               digga.nixosModules.bootstrapIso
               digga.nixosModules.nixConfig
@@ -142,8 +145,8 @@
         };
 
         home = {
-          imports = [ (digga.lib.importModules ./users/modules) ];
-          externalModules = [ ];
+          imports = [ (digga.lib.importExportableModules ./users/modules) ];
+          modules = [ ];
           importables = rec {
             profiles = digga.lib.rakeLeaves ./users/profiles;
             suites = with profiles; rec {

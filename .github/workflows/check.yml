@@ -2,7 +2,7 @@ name: "Check & Cachix"
 on:
   push:
     branches:
-      - main
+      - master
       - trying
       - staging
 jobs:
@@ -26,3 +26,4 @@ jobs:
     - run: nix -Lv flake check
     - run: nix -Lv build ".#nixosConfigurations.NixOS.config.system.build.toplevel"
     - run: nix -Lv develop -c echo OK
+    - run: nix -Lv develop --command bud --help

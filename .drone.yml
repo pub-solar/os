@@ -10,18 +10,17 @@ steps:
       event:
         - cron
       cron:
-        - sync-master-with-upstream
+        - sync-main-with-upstream
     environment:
       GITEA_SSH_KEY:
         from_secret: gitea_ssh_key
     commands:
       - ./.drone/setup_ssh.sh
-      - git fetch
-      - git checkout devos
       - git remote add devos git@git.b12f.io:pub-solar/devos
       - git remote set-url origin git@git.b12f.io:pub-solar/os
       - git fetch --all
-      - git merge -X theirs devos/master
+      - git checkout -b devos --track origin/devos
+      - git merge -X theirs devos/main
       - git push origin devos
 
   - name: "Sync $BRANCH with upstream"
@@ -30,14 +29,14 @@ steps:
       event:
         - cron
       cron:
-        - sync-master-with-upstream
-        - sync-b12f-with-master
-        - sync-teutat3s-with-master
+        - sync-main-with-upstream
+        - sync-b12f-with-main
+        - sync-teutat3s-with-main
     environment:
       GITEA_SSH_KEY:
         from_secret: gitea_ssh_key
     commands:
-      - git checkout origin/master
+      - git checkout origin/main
       - ./.drone/setup_ssh.sh
       - git remote set-url origin git@git.b12f.io:pub-solar/os
       - ./.drone/upstream-branch.sh
@@ -50,16 +49,16 @@ steps:
       event:
         - cron
       cron:
-        - sync-master-with-upstream
-        - sync-b12f-with-master
-        - sync-teutat3s-with-master
+        - sync-main-with-upstream
+        - sync-b12f-with-main
+        - sync-teutat3s-with-main
     environment:
       TEA_CONFIG:
         from_secret: tea_config
     commands:
       - mkdir -p ~/.config/tea
       - echo "$$TEA_CONFIG" > ~/.config/tea/config.yml
-      - tea pulls create --base master --head devos
+      - tea pulls create --base main --head devos
 
   - name: "Notify matrix"
     image: plugins/matrix
@@ -70,9 +69,9 @@ steps:
       event:
         - cron
       cron:
-        - sync-master-with-upstream
-        - sync-b12f-with-master
-        - sync-teutat3s-with-master
+        - sync-main-with-upstream
+        - sync-b12f-with-main
+        - sync-teutat3s-with-main
     settings:
       homeserver: https://matrix.pub.solar
       roomid: dfQBqwkhIzrFjMSsxy:pub.solar
