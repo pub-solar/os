@@ -36,6 +36,7 @@ steps:
       GITEA_SSH_KEY:
         from_secret: gitea_ssh_key
     commands:
+      - git fetch --all
       - git checkout origin/main
       - ./.drone/setup_ssh.sh
       - git remote set-url origin git@git.b12f.io:pub-solar/os
