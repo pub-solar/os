@@ -9,6 +9,12 @@ with lib; {
       type = types.str;
       description = "Keyfile location";
     };
+
+    pub-solar.x-os.enableBootLoader = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Whether to include the grub bootloader. Turn this off for ISO images.";
+    };
   };
 
   config = {
@@ -31,7 +37,7 @@ with lib; {
       efi.efiSysMountPoint = "/boot/efi";
 
       grub = {
-        enable = true;
+        enable = cfg.enableBootLoader;
         version = 2;
         device = "nodev";
         efiSupport = true;

@@ -129,7 +129,7 @@
             };
             suites = with profiles; rec {
               base = [ core users.nixos users.root ];
-              pubsolaros = [ core base-user users.root ];
+              pubsolaros = [ core installed base-user users.root ];
               anonymous = [ pubsolaros users.nixos ];
             };
           };
