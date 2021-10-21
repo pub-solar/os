@@ -39,6 +39,7 @@ steps:
       - git checkout origin/main
       - ./.drone/setup_ssh.sh
       - git remote set-url origin git@git.b12f.io:pub-solar/os
+      - git fetch --all
       - ./.drone/upstream-branch.sh
 
   - name: "Open pull request for failed merge"
