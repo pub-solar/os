@@ -28,4 +28,15 @@ account b.baedorf@openproject.com
   tls on
   tls_trust_file /etc/ssl/certs/ca-certificates.crt
 
+account byb@miom.space
+  host mail.hosting.de
+  port 587
+  protocol smtp
+  auth on
+  from byb@miom.space
+  user byb@miom.space
+  tls on
+  tls_trust_file /etc/ssl/certs/ca-certificates.crt
+
+
 account default : hello@benjaminbaedorf.eu

@@ -1,7 +1,7 @@
 [general]
 pythonfile = $XDG_CONFIG_HOME/offlineimap/functions.py
 metadata = $XDG_DATA_HOME/offlineimap
-accounts = BBEU, RWTH
+accounts = BBEU, RWTH, MiOM
 
 [Account BBEU]
 localrepository = LocalBBEU
@@ -46,4 +46,19 @@ type = IMAP
 remotehost = imap.gmail.com
 remoteuser = b.baedorf@openproject.com
 remotepasseval = get_secret("service", "smtp", "host", "smtp.gmail.com", "user", "b.baedorf@openproject.com")
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+
+[Account MiOM]
+localrepository = LocalMiOM
+remoterepository = RemoteMiOM
+
+[Repository LocalMiOM]
+type = Maildir
+localfolders = ~/Mail/byb@miom.space
+
+[Repository RemoteMiOM]
+type = IMAP
+remotehost = mail.hosting.de
+remoteuser = byb@miom.space
+remotepasseval = get_secret("service", "smtp", "host", "mail.hosting.de", "user", "byb@miom.space")
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
