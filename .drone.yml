@@ -36,6 +36,7 @@ steps:
       GITEA_SSH_KEY:
         from_secret: gitea_ssh_key
     commands:
+      - git fetch --all
       - git checkout origin/main
       - ./.drone/setup_ssh.sh
       - git remote set-url origin git@git.b12f.io:pub-solar/os
@@ -83,6 +84,6 @@ steps:
       template: "Upstreaming {{ build.status }} [{{ build.branch }}#{{ truncate build.commit 8 }}]({{ build.link }}) by {{ build.author }}. [Pull requests](https://git.b12f.io/pub-solar/os/pulls)"
 ---
 kind: signature
-hmac: f88330a68ced90f4c242aedcbec9359fa63f00c47db6707e2646546daa4a9109
+hmac: 145dff5d1aac21f4c68f186cc2dbd98ccb8f08f23af8df3528de6a21defee1c7
 
 ...
