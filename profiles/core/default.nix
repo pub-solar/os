@@ -13,7 +13,6 @@ in
     pub-solar.nextcloud.enable = true;
     pub-solar.office.enable = true;
     # pub-solar.printing.enable = true; # this is enabled automatically if office is enabled
-    pub-solar.server.enable = true;
     pub-solar.printing.enable = true;
 
     nix.systemFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
@@ -124,7 +123,6 @@ in
 
     services.earlyoom.enable = true;
 
-    boot.kernelPackages = pkgs.linuxPackages_latest;
     boot.supportedFilesystems = [ "ntfs" ];
   };
 }
