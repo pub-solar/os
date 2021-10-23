@@ -10,8 +10,6 @@ in
   ];
 
   config = {
-    pub-solar.x-os.keyfile = "/etc/nixos/hosts/biolimo/secrets/keyfile.bin";
-
     hardware.cpu.intel.updateMicrocode = true;
 
     networking.firewall.allowedTCPPorts = [ 5000 ];

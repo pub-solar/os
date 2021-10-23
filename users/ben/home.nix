@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, self, ... }:
 with lib;
 let
   psCfg = config.pub-solar;
@@ -50,5 +50,6 @@ in
     # xdg.configFile."wallpaper.jpg".source = ./assets/wallpaper.jpg;
   };
 
-  services.mopidy.configuration = mkIf config.pub-solar.audio.enable (builtins.readFile ./secrets/mopidy.conf);
+  age.secrets.mopidyConf.file = "${self}/secrets/mopidy.conf";
+  services.mopidy.extraConfigFiles = [ "/run/secrets/mopidy.conf" ];
 }
