@@ -4,6 +4,9 @@ channels: final: prev: {
 
   inherit (channels.latest)
     cachix
+    deploy-rs
+    docker
+    docker-compose_2
     dhall
     discord
     element-desktop-wayland
@@ -13,8 +16,9 @@ channels: final: prev: {
     nixpkgs-fmt
     qutebrowser
     signal-desktop
-    starship
-    deploy-rs
+    xdg-desktop-portal
+    xdg-desktop-portal-gtk
+    xdg-desktop-portal-wlr
     ;
 
 

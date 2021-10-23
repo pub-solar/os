@@ -17,6 +17,7 @@ in
 
     environment.systemPackages = with pkgs; [
       docker-compose
+      docker-compose_2
     ];
   };
 }
