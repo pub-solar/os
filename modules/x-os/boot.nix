@@ -23,7 +23,7 @@ with lib; {
 
     # Use Keyfile to unlock the root partition to avoid keying in twice.
     # Allow fstrim to work on it.
-    boot.initrd = {
+    boot.initrd = mkIf cfg.enableBootLoader {
       secrets = { "/keyfile.bin" = cfg.keyfile; };
       luks.devices."cryptroot" = {
         keyFile = "/keyfile.bin";
