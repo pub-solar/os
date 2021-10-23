@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, self, ... }:
 
 let
   cfg = config.pub-solar.x-os;
@@ -17,8 +17,9 @@ with lib; {
 
     # Use Keyfile to unlock the root partition to avoid keying in twice.
     # Allow fstrim to work on it.
+    age.secrets.luksKeyFile.file = "${self}/secrets/${cfg.keyfile}";
     boot.initrd = {
-      secrets = { "/keyfile.bin" = cfg.keyfile; };
+      secrets = { "/keyfile.bin" = "/run/secrets/${cfg.keyfile}"; };
       luks.devices."cryptroot" = {
         keyFile = "/keyfile.bin";
         allowDiscards = true;

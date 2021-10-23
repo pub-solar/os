@@ -11,7 +11,7 @@ in
   ];
 
   config = {
-    pub-solar.x-os.keyfile = "/etc/nixos/hosts/chocolatebar/secrets/keyfile.bin";
+    pub-solar.x-os.keyfile = "keyfile-chocolatebar.bin";
 
     pub-solar.virtualisation.isolateGPU = "rx550x";
 
