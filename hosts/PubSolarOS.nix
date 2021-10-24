@@ -1,7 +1,14 @@
-{ suites, ... }:
+{ profiles, ... }:
 {
   ### root password is empty by default ###
-  imports = suites.base;
+  imports = [
+    # profiles.networking
+    profiles.core
+    profiles.users.root # make sure to configure ssh keys
+    profiles.users.nixos
+    profiles.graphical
+    profiles.pub-solar-iso
+  ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;

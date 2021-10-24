@@ -121,16 +121,16 @@
           imports = [ (digga.lib.importHosts ./hosts) ];
           hosts = {
             /* set host specific properties here */
-            NixOS = { };
+            PubSolarOS = { };
           };
           importables = rec {
             profiles = digga.lib.rakeLeaves ./profiles // {
               users = digga.lib.rakeLeaves ./users;
             };
             suites = with profiles; rec {
-              base = [ core users.nixos users.root ];
+              base = [ core users.pub-solar users.root ];
               pubsolaros = [ core installed base-user users.root ];
-              anonymous = [ pubsolaros users.nixos ];
+              anonymous = [ pubsolaros users.pub-solar ];
             };
           };
         };
@@ -146,6 +146,7 @@
           };
           users = {
             nixos = { suites, ... }: { imports = suites.base; };
+            pub-solar = { suites, ... }: { imports = suites.base; };
           }; # digga.lib.importers.rakeLeaves ./users/hm;
         };
 
