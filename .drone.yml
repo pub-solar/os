@@ -116,7 +116,7 @@ steps:
     image: nixpkgs/nix-flakes:nixos-21.05
     volumes:
       - name: nix-store
-        path: /nix/store
+        path: /var/nix/iso-cache
     when:
       event:
         - push
@@ -129,12 +129,13 @@ steps:
       - echo "trusted-public-keys = nrdxp.cachix.org-1:Fc5PSqY2Jm1TrWfm88l6cvGWwz3s93c6IOifQWnhNW4= nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs= cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=" >> /etc/nix/nix.conf
       - nix-shell
       - bud build bootstrap bootstrapIso
+      - cp $(readlink -f result)/iso/*.iso /var/nix/iso-cache/
 
   - name: "Publish ISO"
     image: appleboy/drone-scp
     volumes:
       - name: nix-store
-        path: /nix/store
+        path: /var/nix/iso-cache
     settings:
       host:
         from_secret: ssh_host
@@ -151,10 +152,10 @@ steps:
 volumes:
   - name: nix-store
     host:
-      path: "/var/nix/build-store"
+      path: "/var/nix/iso-cache"
 
 ---
 kind: signature
-hmac: d20bd6483d36dbc68677e3fcac26da8680beeba20684a80c64bcb1be818e8765
+hmac: b5366c36f19140ef6c884cc7b5455b6e4e5cd803c5e7d1ed7414bf246bf7f7ed
 
 ...
