@@ -121,7 +121,7 @@ steps:
       event:
         - push
       branch:
-        - main
+        - feature/basic-iso
     commands:
       - echo "" >> /etc/nix/nix.conf
       - echo "system-features = nixos-test benchmark big-parallel kvm recursive-nix" >> /etc/nix/nix.conf
@@ -155,6 +155,6 @@ volumes:
 
 ---
 kind: signature
-hmac: 79df404a887f5de8b7725ecedaface562d6d67b23112af89d6cb3948af4264d2
+hmac: d20bd6483d36dbc68677e3fcac26da8680beeba20684a80c64bcb1be818e8765
 
 ...
