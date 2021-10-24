@@ -50,6 +50,10 @@ in
     # xdg.configFile."wallpaper.jpg".source = ./assets/wallpaper.jpg;
   };
 
-  age.secrets.mopidyConf.file = "${self}/secrets/mopidy.conf";
+  age.secrets = pkgs.lib.setAttrByPath [ "mopidy.conf" ] {
+    file = "${self}/secrets/mopidy.conf";
+    mode = "700";
+    owner = "mopidy";
+  };
   services.mopidy.extraConfigFiles = [ "/run/secrets/mopidy.conf" ];
 }
