@@ -9,11 +9,6 @@ in
     pub-solar.audio.enable = true;
     pub-solar.crypto.enable = true;
     pub-solar.devops.enable = true;
-    pub-solar.docker.enable = true;
-    pub-solar.nextcloud.enable = true;
-    pub-solar.office.enable = true;
-    # pub-solar.printing.enable = true; # this is enabled automatically if office is enabled
-    pub-solar.printing.enable = true;
 
     nix.systemFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
 
@@ -30,7 +25,6 @@ in
         git
         git-lfs
         git-bug
-        git-crypt
         wget
         openssl
         openssh

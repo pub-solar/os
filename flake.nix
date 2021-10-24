@@ -129,7 +129,7 @@
             };
             suites = with profiles; rec {
               base = [ core users.pub-solar users.root ];
-              pubsolaros = [ core installed base-user users.root ];
+              pubsolaros = [ core full-install base-user users.root ];
               anonymous = [ pubsolaros users.pub-solar ];
             };
           };
