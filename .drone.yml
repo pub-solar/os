@@ -127,8 +127,7 @@ steps:
       - echo "system-features = nixos-test benchmark big-parallel kvm recursive-nix" >> /etc/nix/nix.conf
       - echo "substituters = https://nrdxp.cachix.org https://nix-community.cachix.org https://cache.nixos.org" >> /etc/nix/nix.conf
       - echo "trusted-public-keys = nrdxp.cachix.org-1:Fc5PSqY2Jm1TrWfm88l6cvGWwz3s93c6IOifQWnhNW4= nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs= cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=" >> /etc/nix/nix.conf
-      - nix-shell
-      - bud build bootstrap bootstrapIso
+      - nix -Lv develop --command bud build bootstrap bootstrapIso
       - cp $(readlink -f result)/iso/*.iso /var/nix/iso-cache/
 
   - name: "Publish ISO"
@@ -156,6 +155,6 @@ volumes:
 
 ---
 kind: signature
-hmac: b5366c36f19140ef6c884cc7b5455b6e4e5cd803c5e7d1ed7414bf246bf7f7ed
+hmac: 56184121f9e3e0c8c27de1c1439f40d29544fc4c207b261e8e3a8163d439acbc
 
 ...
