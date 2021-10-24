@@ -82,8 +82,31 @@ steps:
       password:
         from_secret: matrix_password
       template: "Upstreaming {{ build.status }} [{{ build.branch }}#{{ truncate build.commit 8 }}]({{ build.link }}) by {{ build.author }}. [Pull requests](https://git.b12f.io/pub-solar/os/pulls)"
+
+---
+kind: pipeline
+type: docker
+name: Check
+
+steps:
+  - name: "Check"
+    image: nixpkgs/nix-flakes:nixos-21.05
+    when:
+      event:
+        - pull_request
+        - tag
+    commands:
+      - echo "" >> /etc/nix/nix.conf
+      - echo "system-features = nixos-test benchmark big-parallel kvm recursive-nix" >> /etc/nix/nix.conf
+      - echo "substituters = https://nrdxp.cachix.org https://nix-community.cachix.org https://cache.nixos.org" >> /etc/nix/nix.conf
+      - echo "trusted-public-keys = nrdxp.cachix.org-1:Fc5PSqY2Jm1TrWfm88l6cvGWwz3s93c6IOifQWnhNW4= nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs= cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=" >> /etc/nix/nix.conf
+      - nix -Lv flake check
+      - nix -Lv build ".#nixosConfigurations.PubSolarOS.config.system.build.toplevel"
+      - nix -Lv develop -c echo OK
+      - nix -Lv develop --command bud --help
+
 ---
 kind: signature
-hmac: 145dff5d1aac21f4c68f186cc2dbd98ccb8f08f23af8df3528de6a21defee1c7
+hmac: 36b824020f2bafbb46bc0b4087296e82db41677a3b5b85c7851b90322492343c
 
 ...
