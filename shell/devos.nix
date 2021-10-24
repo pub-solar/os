@@ -33,10 +33,6 @@ in
     unset _PATH
   '');
 
-  packages = with pkgs; [
-    git-crypt
-  ];
-
   commands = with pkgs; [
     (devos nixFlakes)
     (devos agenix)
