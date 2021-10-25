@@ -5,7 +5,8 @@
     # profiles.networking
     profiles.core
     profiles.users.root # make sure to configure ssh keys
-    profiles.users.nixos
+    profiles.users.pub-solar
+    profiles.base-user
     profiles.graphical
     profiles.pub-solar-iso
   ];
