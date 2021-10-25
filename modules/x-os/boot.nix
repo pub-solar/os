@@ -4,11 +4,6 @@ let
   cfg = config.pub-solar.x-os;
 in
 {
-  options.pub-solar.x-os.iso-options.enable = mkOption {
-    type = types.bool;
-    default = false;
-    description = "Feature flag for iso builds";
-  };
   config = {
     # Enable plymouth for better experience of booting
     boot.plymouth.enable = true;

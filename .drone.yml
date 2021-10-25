@@ -22,6 +22,7 @@ steps:
       - git checkout -b devos --track origin/devos
       - git merge -X theirs devos/main
       - git push origin devos
+      - git remote set-url origin https://git.b12f.io/pub-solar/os.git
 
   - name: "Sync $BRANCH with upstream"
     image: alpine/git
