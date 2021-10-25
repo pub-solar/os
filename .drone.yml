@@ -146,7 +146,7 @@ steps:
         from_secret: ssh_key
       target: /var/www/pub.solar
       source:
-        - result/iso/*.iso
+        - /var/nix/iso-cache/*.iso
 
 volumes:
   - name: nix-store
@@ -155,6 +155,6 @@ volumes:
 
 ---
 kind: signature
-hmac: 56184121f9e3e0c8c27de1c1439f40d29544fc4c207b261e8e3a8163d439acbc
+hmac: 43227ed11479ad86afeb77f850a713b2a09b3154df1bf2237ba00f7d5b553d57
 
 ...
