@@ -84,6 +84,10 @@ steps:
         from_secret: matrix_password
       template: "Upstreaming {{ build.status }} [{{ build.branch }}#{{ truncate build.commit 8 }}]({{ build.link }}) by {{ build.author }}. [Pull requests](https://git.b12f.io/pub-solar/os/pulls)"
 
+trigger:
+  event:
+    - cron
+
 ---
 kind: pipeline
 type: docker
@@ -158,6 +162,6 @@ volumes:
 
 ---
 kind: signature
-hmac: 64f156e8fe88b7266980aa86fd5b98fe2ec6b39336da3209fc34ff0864648408
+hmac: 539937d723b620778939dcac3819b0f6a4c396f1c477a2783ae3fb6feab0f4d7
 
 ...
