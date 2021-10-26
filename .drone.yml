@@ -118,11 +118,6 @@ steps:
     volumes:
       - name: nix-store
         path: /var/nix/iso-cache
-    when:
-      event:
-        - push
-      branch:
-        - feature/basic-iso
     commands:
       - echo "" >> /etc/nix/nix.conf
       - echo "system-features = nixos-test benchmark big-parallel kvm recursive-nix" >> /etc/nix/nix.conf
@@ -150,6 +145,12 @@ steps:
         - /var/nix/iso-cache/*.iso
       strip_components: 3
 
+trigger:
+  event:
+    - push
+  branch:
+    - feature/basic-iso
+
 volumes:
   - name: nix-store
     host:
@@ -157,6 +158,6 @@ volumes:
 
 ---
 kind: signature
-hmac: b80fc2bec44f00eb0e02943a918f45c7e652ae66e8b7a7a52ecc05c571fd5164
+hmac: 64f156e8fe88b7266980aa86fd5b98fe2ec6b39336da3209fc34ff0864648408
 
 ...
