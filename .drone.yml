@@ -148,6 +148,7 @@ steps:
       target: /var/www/pub.solar
       source:
         - /var/nix/iso-cache/*.iso
+      strip_components: 3
 
 volumes:
   - name: nix-store
@@ -156,6 +157,6 @@ volumes:
 
 ---
 kind: signature
-hmac: 493c996fab22097034fd500fe537e05d8008324aec42b96da75b5234a5a2d533
+hmac: 81a1527ce6d9af333113b6bf667a61d2e5650a96d4846fc0d1376b444253108d
 
 ...
