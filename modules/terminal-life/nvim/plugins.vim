@@ -6,7 +6,7 @@ let g:gutentags_file_list_command = 'git ls-files'
 
 " Golang
 " Go test shortcut
-nmap <Leader>got :GoTest<CR>
+nmap <Leader>got :GoTest<CR>:botright copen<CR>
 
 " Go formatting
 autocmd FileType go setlocal noexpandtab shiftwidth=4 tabstop=4 softtabstop=4 nolist

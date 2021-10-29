@@ -69,73 +69,74 @@ in
   ];
 
   extraPackages = with pkgs; [
-    nodejs
+    ccls
     code-minimap
+    gopls
+    nodejs
     nodePackages.bash-language-server
     nodePackages.dockerfile-language-server-nodejs
     nodePackages.svelte-language-server
-    nodePackages.typescript-language-server
     nodePackages.typescript
+    nodePackages.typescript-language-server
     nodePackages.vim-language-server
     nodePackages.vue-language-server
-    nodePackages.yaml-language-server
-    nodePackages.vscode-json-languageserver-bin
-    nodePackages.vscode-html-languageserver-bin
     nodePackages.vscode-css-languageserver-bin
-    python3Full
+    nodePackages.vscode-html-languageserver-bin
+    nodePackages.vscode-json-languageserver-bin
+    nodePackages.yaml-language-server
     python-language-server
+    python3Full
     solargraph
-    rust-analyzer
-    universal-ctags
-    ccls
     rnix-lsp
+    rust-analyzer
     terraform-ls
+    universal-ctags
   ];
 
   plugins = with pkgs.vimPlugins; [
-    nvim-lspconfig
-    lsp_extensions-nvim
     completion-nvim
+    lsp_extensions-nvim
+    nvim-lspconfig
 
-    suda
     ack-vim
-    syntastic
     airline
-    workspace
     editorconfig-vim
-    vim-vinegar
-    vim-gutentags
     minimap-vim
     nnn-vim
+    suda
+    syntastic
+    vim-gutentags
+    vim-vinegar
+    workspace
 
     sonokai
 
     fugitive
-    vim-rhubarb
     vim-gitgutter
+    vim-rhubarb
     vimagit
 
-    vim-highlightedyank
     fzf-vim
     fzfWrapper
+    vim-highlightedyank
 
     beautify
     vim-surround
 
-    vim-sensible
     vim-bufkill
+    vim-sensible
 
     ansible-vim
     emmet-vim
     rust-vim
     vim-go
-    vim-vue
     vim-javascript
     vim-json
     vim-markdown
-    yats-vim
+    vim-nix
     vim-ruby
     vim-toml
-    vim-nix
+    vim-vue
+    yats-vim
   ];
 }
