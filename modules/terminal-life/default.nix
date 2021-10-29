@@ -1,4 +1,4 @@
-{ lib, config, pkgs, ... }:
+{ lib, config, pkgs, self, ... }:
 with lib;
 let
   psCfg = config.pub-solar;
@@ -37,7 +37,7 @@ in
 
       programs.neovim = import ./nvim { inherit config; inherit pkgs; };
       programs.fzf = import ./fzf { inherit config; inherit pkgs; };
-      programs.zsh = import ./zsh { inherit config; inherit pkgs; };
+      programs.zsh = import ./zsh { inherit config; inherit pkgs; inherit self; };
     };
   };
 }
