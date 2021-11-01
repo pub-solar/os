@@ -20,12 +20,30 @@ in
       matchBlocks = {
         "git.b12f.io" = {
           hostname = "git.b12f.io";
-          port = 2222;
           user = "git";
+          port = 2222;
         };
 
         "aur.archlinux.org" = {
           user = "aur";
+        };
+
+        "leavieler.art" = {
+          hostname = "web5svsvy.wh.hosting.zone";
+          user = "web5svsvy_cgzqa3";
+          port = 2244;
+        };
+
+        "benjaminbaedorf.eu" = {
+          hostname = "web5svsvy.wh.hosting.zone";
+          user = "web5svsvy_cgzqa3";
+          port = 2244;
+        };
+
+        "miom.space" = {
+          hostname = "web7dgkba.wh.hosting.zone";
+          user = "web7dgkba_c9em8f";
+          port = 2244;
         };
       };
     };

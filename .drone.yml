@@ -22,6 +22,7 @@ steps:
       - git checkout -b devos --track origin/devos
       - git merge -X theirs devos/main
       - git push origin devos
+      - git remote set-url origin https://git.b12f.io/pub-solar/os.git
 
   - name: "Sync $BRANCH with upstream"
     image: alpine/git
@@ -36,7 +37,7 @@ steps:
       GITEA_SSH_KEY:
         from_secret: gitea_ssh_key
     commands:
-      - git fetch --all
+      - git fetch origin
       - git checkout origin/main
       - ./.drone/setup_ssh.sh
       - git remote set-url origin git@git.b12f.io:pub-solar/os
@@ -84,6 +85,6 @@ steps:
       template: "Upstreaming {{ build.status }} [{{ build.branch }}#{{ truncate build.commit 8 }}]({{ build.link }}) by {{ build.author }}. [Pull requests](https://git.b12f.io/pub-solar/os/pulls)"
 ---
 kind: signature
-hmac: 145dff5d1aac21f4c68f186cc2dbd98ccb8f08f23af8df3528de6a21defee1c7
+hmac: 07d9a95e8f577483d753e9eea76229ffe0c369ecd642bfc364ae183f662d2167
 
 ...
