@@ -212,7 +212,7 @@ in
           <source>
             <address domain='0x0000' bus='0x0b' slot='0x00' function='0x0'/>
           </source>
-          <rom bar='on' file='/etc/nixos/owners/b12f/devices/chocolatebar/virtualisation/${psCfg.virtualisation.isolateGPU}.rom'/>
+          <rom bar='on' file='/etc/nixos/hosts/chocolatebar/virtualisation/${psCfg.virtualisation.isolateGPU}.rom'/>
           <address type='pci' domain='0x0000' bus='0x06' slot='0x00' function='0x0' multifunction='on'/>
         </hostdev>
         <hostdev mode='subsystem' type='pci' managed='yes'>
