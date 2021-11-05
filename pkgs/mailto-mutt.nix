@@ -1,5 +1,10 @@
 self: with self; ''
-  echo "$@" >> $XDG_CACHE_HOME/log/mailto.log
+  mkdir -p $XDG_CACHE_HOME/log
 
-  exec ${alacritty}/bin/alacritty -e neomutt -- "$@"
+  LOGFILE=$XDG_CACHE_HOME/log/mailto.log
+  echo "$@" >> $LOGFILE
+
+  EDITOR=/etc/profiles/per-user/$USER/bin/nvim
+
+  ${alacritty}/bin/alacritty -e neomutt -- "$@"
 ''
