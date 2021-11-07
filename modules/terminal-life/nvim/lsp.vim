@@ -42,7 +42,9 @@ lua <<EOF
                 ['workspace'] = vim.fn.stdpath('cache')..'/java-workspaces'
             }
         },
-        'jsonls', ------------------------------- JSON
+        ['jsonls'] = { -------------------------- JSON
+            ['cmd'] = {"json-languageserver", "--stdio"}
+        },
         'phpactor', ----------------------------- PHP
         'pyls', --------------------------------- Python
         'rnix', --------------------------------- Nix
@@ -94,7 +96,7 @@ let g:diagnostic_trimmed_virtual_text = '40'
 let g:diagnostic_insert_delay = 1
 
 " Show diagnostic popup on cursor hold
-autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
+autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics({ focusable = false })
 
 " Goto previous/next diagnostic warning/error
 " nnoremap <silent> g[ <cmd>PrevDiagnosticCycle<cr>
