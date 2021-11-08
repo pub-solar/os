@@ -23,16 +23,17 @@ in
 
     home-manager = with pkgs; pkgs.lib.setAttrByPath [ "users" psCfg.user.name ] {
       home.packages = [
-        ag
         ack
+        ag
         bat
         exa
+        fd
         gh
+        glow
+        nnn
         powerline
         vifm
         watson
-        nnn
-        fd
       ];
 
       programs.neovim = import ./nvim { inherit config; inherit pkgs; };
