@@ -14,6 +14,10 @@ channels: final: prev: {
     signal-desktop
     starship
     deploy-rs
+    tdesktop
+    xdg-desktop-portal
+    xdg-desktop-portal-gtk
+    xdg-desktop-portal-wlr
     ;
 
 
