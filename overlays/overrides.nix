@@ -16,6 +16,7 @@ channels: final: prev: {
     nixpkgs-fmt
     qutebrowser
     signal-desktop
+    tdesktop
     xdg-desktop-portal
     xdg-desktop-portal-gtk
     xdg-desktop-portal-wlr
