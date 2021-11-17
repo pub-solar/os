@@ -16,6 +16,7 @@ in
       # The rest is used for programs like git
       user = {
         name = "ben";
+        description = "Benjamin Bädorf";
         password = "$6$LO2YoaHwuRQhUoSz$iHw9avM887eJg9cIty2nmG4Ibkol3YpviEhYpivVQP31VrnihFz/6LyugxD7X4VmXx9nxvcYIZnN90rlGxwjT.";
         fullName = "Benjamin Bädorf";
         email = "hello@benjaminbaedorf.eu";
