@@ -17,11 +17,11 @@ channels: final: prev: {
     qutebrowser
     signal-desktop
     tdesktop
+    obs-studio
     xdg-desktop-portal
     xdg-desktop-portal-gtk
     xdg-desktop-portal-wlr
     ;
-
 
   haskellPackages = prev.haskellPackages.override
     (old: {

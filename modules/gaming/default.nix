@@ -19,6 +19,8 @@ in
       home.packages = [
         playonlinux
         godot
+        obs-studio
+        obs-wlrobs
       ];
     };
   };
