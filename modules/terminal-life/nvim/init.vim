@@ -94,47 +94,6 @@ imap <c-x><c-l> <plug>(fzf-complete-line)
 " Clear quickfix shortcut
 nmap <Leader>c :ccl<CR>
 
-" netrw
-let g:netrw_fastbrowse=0
-
-" fzf with file preview
-command! -bang -nargs=? -complete=dir Files
-    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
-"command! -bang -nargs=? -complete=dir Files
-"    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': '--preview "' . "grep -Pzo '.*See docs/COPYRIGHT.rdoc for more details(.*\n)*' {}" . '"'}), <bang>0)
-
-" Auto-FMT rust code on save
-let g:rustfmt_autosave = 1
-
-" Indenting in html template tags
-let g:html_indent_style1 = "inc"
-
-" yank highlight duration
-let g:highlightedyank_highlight_duration = 200
-
-" Markdown options
-let g:vim_markdown_folding_disabled = 1
-
-" Haskell options
-let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
-let g:haskell_enable_recursivedo = 1      " to enable highlighting of `mdo` and `rec`
-let g:haskell_enable_arrowsyntax = 1      " to enable highlighting of `proc`
-let g:haskell_enable_pattern_synonyms = 1 " to enable highlighting of `pattern`
-let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
-let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
-let g:haskell_backpack = 1                " to enable highlighting of backpack keywords
-
-" Emmet
-let g:user_emmet_leader_key='<c-n>'
-
-" Minimap settings
-let g:minimap_auto_start = 1
-
-" Ack
-if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
-endif
-
 " Remember cursor position
 " Vim jumps to the last position when reopening a file
 if has("autocmd")

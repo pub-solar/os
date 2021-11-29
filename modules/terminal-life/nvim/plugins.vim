@@ -41,3 +41,35 @@ nnoremap <leader>gP :! git push<CR>  " git Push
 " http://vimcasts.org/episodes/fugitive-vim-resolving-merge-conflicts-with-vimdiff/
 nmap <Leader>[ :diffget //2<CR>
 nmap <Leader>] :diffget //3<CR>
+
+" netrw
+let g:netrw_fastbrowse=0
+
+" Auto-FMT rust code on save
+let g:rustfmt_autosave = 1
+
+" Indenting in html template tags
+let g:html_indent_style1 = "inc"
+
+" yank highlight duration
+let g:highlightedyank_highlight_duration = 200
+
+" Markdown options
+let g:vim_markdown_folding_disabled = 1
+
+" Haskell options
+let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
+let g:haskell_enable_recursivedo = 1      " to enable highlighting of `mdo` and `rec`
+let g:haskell_enable_arrowsyntax = 1      " to enable highlighting of `proc`
+let g:haskell_enable_pattern_synonyms = 1 " to enable highlighting of `pattern`
+let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
+let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
+let g:haskell_backpack = 1                " to enable highlighting of backpack keywords
+
+" Emmet
+let g:user_emmet_leader_key='<c-n>'
+
+" Ack
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
