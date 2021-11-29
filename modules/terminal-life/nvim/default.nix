@@ -120,7 +120,6 @@ in
     sonokai
 
     fugitive
-    diffview-nvim
     vim-gitgutter
     vim-rhubarb
     vimagit
