@@ -100,9 +100,6 @@ in
   ];
 
   plugins = with pkgs.vimPlugins; [
-    # Lua async programming library
-    plenary-nvim
-
     completion-nvim
     lsp_extensions-nvim
     nvim-lspconfig
