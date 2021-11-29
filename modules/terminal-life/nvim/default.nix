@@ -3,6 +3,8 @@ let
   psCfg = config.pub-solar;
   xdg = config.home-manager.users."${psCfg.user.name}".xdg;
 
+  preview-file = pkgs.writeShellScriptBin "preview-file" (import ./preview-file.nix pkgs);
+
   sonokai = pkgs.vimUtils.buildVimPlugin {
     name = "sonokai";
     src = pkgs.fetchFromGitHub {
@@ -75,6 +77,11 @@ in
     (builtins.readFile ./ui.vim)
     (builtins.readFile ./quickfixopenall.vim)
     (builtins.readFile ./lsp.vim)
+    ''
+      " fzf with file preview
+      command! -bang -nargs=? -complete=dir Files
+          \ call fzf#vim#files(<q-args>, { 'options': ['--keep-right', '--cycle', '--layout', 'reverse', '--preview', '${preview-file}/bin/preview-file {}'] }, <bang>0)
+    ''
   ];
 
   extraPackages = with pkgs; [
@@ -119,7 +126,6 @@ in
     sonokai
 
     fugitive
-    diffview-nvim
     vim-gitgutter
     vim-rhubarb
     vimagit

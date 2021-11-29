@@ -55,7 +55,7 @@
       style = "Italic";
     };
 
-    size = 18.0;
+    size = 16.0;
 
     offset = {
       x = 0;
