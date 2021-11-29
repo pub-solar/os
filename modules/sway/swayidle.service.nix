@@ -9,7 +9,7 @@ pkgs:
   };
   Service = {
     Type = "simple";
-    Environment = "PATH=${pkgs.bash}/bin:${pkgs.sway}/bin:${pkgs.swaylock}/bin";
+    Environment = "PATH=/run/current-system/sw/bin:${pkgs.sway}/bin:${pkgs.swaylock}/bin:${pkgs.swaylock-bg}/bin";
     ExecStart = ''${pkgs.swayidle}/bin/swayidle -w \
       timeout 600 'swaylock-bg' \
       timeout 900 'swaymsg "output * dpms off"' \
