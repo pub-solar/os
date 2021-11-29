@@ -4,7 +4,6 @@ channels: final: prev: {
 
   inherit (channels.latest)
     cachix
-    deploy-rs
     docker
     docker-compose_2
     dhall
