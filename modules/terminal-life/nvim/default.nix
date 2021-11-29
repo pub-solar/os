@@ -79,7 +79,6 @@ in
 
   extraPackages = with pkgs; [
     ccls
-    code-minimap
     gopls
     nodejs
     nodePackages.bash-language-server
@@ -110,7 +109,6 @@ in
     ack-vim
     airline
     editorconfig-vim
-    minimap-vim
     nnn-vim
     suda
     syntastic
@@ -121,6 +119,7 @@ in
     sonokai
 
     fugitive
+    diffview-nvim
     vim-gitgutter
     vim-rhubarb
     vimagit

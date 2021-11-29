@@ -18,6 +18,8 @@ channels: final: prev: {
     signal-desktop
     tdesktop
     obs-studio
+    starship
+    deploy-rs
     xdg-desktop-portal
     xdg-desktop-portal-gtk
     xdg-desktop-portal-wlr

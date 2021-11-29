@@ -15,7 +15,6 @@ in
     services.pcscd.enable = true;
 
     services.gnome.gnome-keyring.enable = true;
-    security.pam.services.greetd.enableGnomeKeyring = true;
 
     home-manager = with pkgs; pkgs.lib.setAttrByPath [ "users" psCfg.user.name ] {
       systemd.user.services.polkit-gnome-authentication-agent = import ./polkit-gnome-authentication-agent.service.nix pkgs;

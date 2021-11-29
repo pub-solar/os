@@ -18,6 +18,11 @@ in
     size = 10000;
   };
 
+  loginExtra = ''
+    [ "$(tty)" = "/dev/tty1" ] && exec sway
+  '';
+
+
   shellAliases = {
     nano = "nvim";
     vi = "nvim";
