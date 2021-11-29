@@ -15,7 +15,9 @@ in
     # Needed to get zsh completion for system packages (e.g. systemd).
     environment.pathsToLink = [ "/share/zsh" ];
 
-    services.lorri.enable = true;
+    environment.shells = with pkgs; [
+      zsh
+    ];
 
     environment.systemPackages = with pkgs; [
       screen

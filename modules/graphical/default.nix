@@ -49,15 +49,7 @@ in
       };
     };
 
-    services.greetd = {
-      enable = true;
-      restart = false;
-      settings = {
-        default_session = {
-          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd ${pkgs.sway-service}/bin/sway-service";
-        };
-      };
-    };
+    services.getty.autologinUser = "${psCfg.user.name}";
 
     qt5 = {
       enable = true;
