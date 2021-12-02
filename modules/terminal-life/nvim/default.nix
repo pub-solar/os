@@ -5,6 +5,16 @@ let
 
   preview-file = pkgs.writeShellScriptBin "preview-file" (import ./preview-file.nix pkgs);
 
+  instant-nvim = pkgs.vimUtils.buildVimPlugin {
+    name = "instant";
+    src = pkgs.fetchFromGitHub {
+      owner = "jbyuki";
+      repo = "instant.nvim";
+      rev = "c02d72267b12130609b7ad39b76cf7f4a3bc9554";
+      sha256 = "sha256-7Pr2Au/oGKp5kMXuLsQY4BK5Wny9L1EBdXtyS5EaZPI=";
+    };
+  };
+
   sonokai = pkgs.vimUtils.buildVimPlugin {
     name = "sonokai";
     src = pkgs.fetchFromGitHub {
@@ -53,28 +63,6 @@ in
   withRuby = true;
   withPython3 = true;
 
-  extraConfig = builtins.concatStringsSep "\n" [
-    ''
-      " Persistent undo
-      set undofile
-      set undodir=${xdg.cacheHome}/nvim/undo
-
-      set backupdir=${xdg.dataHome}/nvim/backup
-      set directory=${xdg.dataHome}/nvim/swap/
-    ''
-    (builtins.readFile ./init.vim)
-    (builtins.readFile ./plugins.vim)
-    (builtins.readFile ./clipboard.vim)
-    (builtins.readFile ./ui.vim)
-    (builtins.readFile ./quickfixopenall.vim)
-    (builtins.readFile ./lsp.vim)
-    ''
-      " fzf with file preview
-      command! -bang -nargs=? -complete=dir Files
-          \ call fzf#vim#files(<q-args>, { 'options': ['--keep-right', '--cycle', '--layout', 'reverse', '--preview', '${preview-file}/bin/preview-file {}'] }, <bang>0)
-    ''
-  ];
-
   extraPackages = with pkgs; [
     ccls
     gopls
@@ -103,6 +91,8 @@ in
     completion-nvim
     lsp_extensions-nvim
     nvim-lspconfig
+
+    instant-nvim
 
     ack-vim
     airline
@@ -143,5 +133,27 @@ in
     vim-toml
     vim-vue
     yats-vim
+  ];
+
+  extraConfig = builtins.concatStringsSep "\n" [
+    ''
+      " Persistent undo
+      set undofile
+      set undodir=${xdg.cacheHome}/nvim/undo
+
+      set backupdir=${xdg.dataHome}/nvim/backup
+      set directory=${xdg.dataHome}/nvim/swap/
+    ''
+    (builtins.readFile ./init.vim)
+    (builtins.readFile ./plugins.vim)
+    (builtins.readFile ./clipboard.vim)
+    (builtins.readFile ./ui.vim)
+    (builtins.readFile ./quickfixopenall.vim)
+    (builtins.readFile ./lsp.vim)
+    ''
+      " fzf with file preview
+      command! -bang -nargs=? -complete=dir Files
+          \ call fzf#vim#files(<q-args>, { 'options': ['--keep-right', '--cycle', '--layout', 'reverse', '--preview', '${preview-file}/bin/preview-file {}'] }, <bang>0)
+    ''
   ];
 }
