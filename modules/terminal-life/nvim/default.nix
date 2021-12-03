@@ -166,4 +166,26 @@ in
           \ call fzf#vim#files(<q-args>, { 'options': ['--keep-right', '--cycle', '--layout', 'reverse', '--preview', '${preview-file}/bin/preview-file {}'] }, <bang>0)
     ''
   ];
+
+  extraConfig = builtins.concatStringsSep "\n" [
+    ''
+      " Persistent undo
+      set undofile
+      set undodir=${xdg.cacheHome}/nvim/undo
+
+      set backupdir=${xdg.dataHome}/nvim/backup
+      set directory=${xdg.dataHome}/nvim/swap/
+    ''
+    (builtins.readFile ./init.vim)
+    (builtins.readFile ./plugins.vim)
+    (builtins.readFile ./clipboard.vim)
+    (builtins.readFile ./ui.vim)
+    (builtins.readFile ./quickfixopenall.vim)
+    (builtins.readFile ./lsp.vim)
+    ''
+      " fzf with file preview
+      command! -bang -nargs=? -complete=dir Files
+          \ call fzf#vim#files(<q-args>, { 'options': ['--keep-right', '--cycle', '--layout', 'reverse', '--preview', '${preview-file}/bin/preview-file {}'] }, <bang>0)
+    ''
+  ];
 }
