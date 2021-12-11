@@ -5,7 +5,7 @@ let
   home = config.home-manager.users."${psCfg.user.name}".home;
 in
 ''
-  <domain type='kvm'>
+  <domain type='kvm' xmlns:qemu='http://libvirt.org/schemas/domain/qemu/1.0'>
     <name>${vm.name}</name>
     <uuid>UUID</uuid>
     <metadata>
@@ -166,14 +166,9 @@ in
       <interface type='network'>
         <mac address='52:54:00:44:cd:ac'/>
         <source network='default'/>
-        <model type='rtl8139'/>
+        <model type='virtio'/>
         <address type='pci' domain='0x0000' bus='0x08' slot='0x01' function='0x0'/>
       </interface>
-      <serial type='pty'>
-        <target type='isa-serial' port='0'>
-          <model name='isa-serial'/>
-        </target>
-      </serial>
       <console type='pty'>
         <target type='serial' port='0'/>
       </console>
@@ -190,29 +185,31 @@ in
         <model type='cirrus' vram='16384' heads='1' primary='yes'/>
         <address type='pci' domain='0x0000' bus='0x00' slot='0x01' function='0x0'/>
       </video>
-      <hostdev mode='subsystem' type='usb' managed='yes'>
-        <source>
-          <vendor id='0x046d'/>
-          <product id='0xc328'/>
-          <address bus='1' device='2'/>
-        </source>
-        <address type='usb' bus='0' port='4'/>
-      </hostdev>
-      <hostdev mode='subsystem' type='usb' managed='yes'>
-        <source>
-          <vendor id='0x046d'/>
-          <product id='0xc52b'/>
-          <address bus='1' device='4'/>
-        </source>
-        <address type='usb' bus='0' port='5'/>
-      </hostdev>
-      ${if vm.gpu && psCfg.virtualisation.isolateGPU != null then ''
+      ${if vm.handOverUSBDevices then ''
+        <hostdev mode='subsystem' type='usb' managed='yes'>
+          <source>
+            <vendor id='0x046d'/>
+            <product id='0xc328'/>
+            <address bus='1' device='2'/>
+          </source>
+          <address type='usb' bus='0' port='4'/>
+        </hostdev>
+        <hostdev mode='subsystem' type='usb' managed='yes'>
+          <source>
+            <vendor id='0x046d'/>
+            <product id='0xc52b'/>
+            <address bus='1' device='4'/>
+          </source>
+          <address type='usb' bus='0' port='5'/>
+        </hostdev>
+      '' else ""}
+      ${if vm.gpu && vm.isolateGPU != null then ''
         <hostdev mode='subsystem' type='pci' managed='yes'>
           <driver name='vfio'/>
           <source>
             <address domain='0x0000' bus='0x0b' slot='0x00' function='0x0'/>
           </source>
-          <rom bar='on' file='/etc/nixos/hosts/chocolatebar/virtualisation/${psCfg.virtualisation.isolateGPU}.rom'/>
+          <rom bar='on' file='/etc/nixos/hosts/chocolatebar/virtualisation/${vm.isolateGPU}.rom'/>
           <address type='pci' domain='0x0000' bus='0x06' slot='0x00' function='0x0' multifunction='on'/>
         </hostdev>
         <hostdev mode='subsystem' type='pci' managed='yes'>
@@ -232,11 +229,18 @@ in
       <memballoon model='virtio'>
         <address type='pci' domain='0x0000' bus='0x05' slot='0x00' function='0x0'/>
       </memballoon>
-      <shmem name='scream-ivshmem'>
+      <shmem name='looking-glass'>
         <model type='ivshmem-plain'/>
-        <size unit='M'>2</size>
-        <address type='pci' domain='0x0000' bus='0x08' slot='0x02' function='0x0'/>
+        <size unit='M'>32</size>
       </shmem>
     </devices>
+    <qemu:commandline>
+      <qemu:arg value='-device'/>
+      <qemu:arg value='ich9-intel-hda,bus=pcie.0,addr=0x1b'/>
+      <qemu:arg value='-device'/>
+      <qemu:arg value='hda-micro,audiodev=hda'/>
+      <qemu:arg value='-audiodev'/>
+      <qemu:arg value='pa,id=hda,server=unix:/run/user/1001/pulse/native'/>
+    </qemu:commandline>
   </domain>
 ''

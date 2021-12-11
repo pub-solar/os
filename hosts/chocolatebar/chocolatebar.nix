@@ -11,8 +11,6 @@ in
   ];
 
   config = {
-    pub-solar.virtualisation.isolateGPU = "rx550x";
-
     hardware.cpu.amd.updateMicrocode = true;
 
     hardware.opengl.extraPackages = with pkgs; [

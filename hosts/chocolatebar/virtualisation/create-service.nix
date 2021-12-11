@@ -3,7 +3,7 @@ let
   psCfg = config.pub-solar;
   xdg = config.home-manager.users."${psCfg.user.name}".xdg;
   varsFile = "${xdg.dataHome}/libvirt/OVMF_VARS_${vm.name}.fd";
-  generateXML = import ./generate-xml.nix;
+  generateXML = import ./guest-xml.nix;
 in
 {
   serviceConfig = {
@@ -29,33 +29,45 @@ in
       NET_TMP_FILE="/tmp/network.xml"
 
       NETUUID="$(${pkgs.libvirt}/bin/virsh net-uuid 'default' || true)"
-      (sed "s/UUID/$NETUUID/" '${networkXML}') > $NET_TMP_FILE
+      (sed "s/UUID/$NETUUID/" '${networkXML}') > "$NET_TMP_FILE"
 
-      ${pkgs.libvirt}/bin/virsh net-define $NET_TMP_FILE
+      ${pkgs.libvirt}/bin/virsh net-define "$NET_TMP_FILE"
       ${pkgs.libvirt}/bin/virsh net-start 'default' || true
 
       VARS_FILE=${varsFile}
       if [ ! -f "$VARS_FILE" ]; then
-        cp /run/libvirt/nix-ovmf/OVMF_VARS.fd $VARS_FILE
+        cp /run/libvirt/nix-ovmf/OVMF_VARS.fd "$VARS_FILE"
       fi
 
+      # Load the template contents into a tmp file
       TMP_FILE="/tmp/${vm.name}.xml"
+      cat "${machineXML}" > "$TMP_FILE"
 
+      # Set VM UUID
       UUID="$(${pkgs.libvirt}/bin/virsh domuuid '${vm.name}' || true)"
-      (sed "s/UUID/$UUID/" '${machineXML}') > $TMP_FILE
+      sed -i "s/UUID/''${UUID}/" "$TMP_FILE"
 
-      USB_DEV=$(${pkgs.usbutils}/bin/lsusb | grep 046d:c52b | grep 'Bus 001' | cut -b 18)
-      LINE_NUMBER=$(cat $TMP_FILE | grep -n -A 1 0xc52b | tail -n 1 | cut -b 1,2,3)
-      sed -i "''${LINE_NUMBER}s/\(.\{33\}\)./\1''${USB_DEV}/" $TMP_FILE
+      ${if vm.handOverUSBDevices then ''
+        # Hand over keyboard
+        USB_DEV=$(${pkgs.usbutils}/bin/lsusb | grep 046d:c52b | grep 'Bus 001' | cut -b 18)
+        LINE_NUMBER=$(cat $TMP_FILE | grep -n -A 1 0xc52b | tail -n 1 | cut -b 1,2,3)
+        sed -i "''${LINE_NUMBER}s/\(.\{33\}\)./\1''${USB_DEV}/" "$TMP_FILE"
 
-      USB_BUS=$(${pkgs.usbutils}/bin/lsusb | grep 046d:c328 | cut -b 7)
-      USB_DEV=$(${pkgs.usbutils}/bin/lsusb | grep 046d:c328 | cut -b 18)
-      LINE_NUMBER=$(cat $TMP_FILE | grep -n -A 1 0xc328 | tail -n 1 | cut -b 1,2,3)
-      sed -i "''${LINE_NUMBER}s/.*/<address bus=\"''${USB_BUS}\" device=\"''${USB_DEV}\" \/>/" $TMP_FILE
+        # Hand over mouse
+        USB_BUS=$(${pkgs.usbutils}/bin/lsusb | grep 046d:c328 | cut -b 7)
+        USB_DEV=$(${pkgs.usbutils}/bin/lsusb | grep 046d:c328 | cut -b 18)
+        LINE_NUMBER=$(cat $TMP_FILE | grep -n -A 1 0xc328 | tail -n 1 | cut -b 1,2,3)
+        sed -i "''${LINE_NUMBER}s/.*/<address bus=\"''${USB_BUS}\" device=\"''${USB_DEV}\" \/>/" "$TMP_FILE"
+      '' else ""}
 
-      # TODO: Set correct pci address too
+      # TODO: Set correct pci address for the GPU too
 
-      ${pkgs.libvirt}/bin/virsh define $TMP_FILE
+      # Setup looking glass shm file
+      ${pkgs.coreutils-full}/bin/truncate -s 0 /dev/shm/looking-glass
+      ${pkgs.coreutils-full}/bin/dd if=/dev/zero of=/dev/shm/looking-glass bs=1M count=32
+
+      # Load and start the xml definition
+      ${pkgs.libvirt}/bin/virsh define "$TMP_FILE"
       ${pkgs.libvirt}/bin/virsh start '${vm.name}'
     '';
 
