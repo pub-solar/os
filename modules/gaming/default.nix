@@ -20,7 +20,7 @@ in
         playonlinux
         godot
         obs-studio
-        obs-wlrobs
+        obs-studio-plugins.wlrobs
       ];
     };
   };

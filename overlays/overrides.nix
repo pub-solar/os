@@ -16,12 +16,14 @@ channels: final: prev: {
     qutebrowser
     signal-desktop
     tdesktop
-    obs-studio
     starship
     deploy-rs
     xdg-desktop-portal
     xdg-desktop-portal-gtk
     xdg-desktop-portal-wlr
+    obs-studio
+    obs-studio-plugins
+    looking-glass-client
     ;
 
   haskellPackages = prev.haskellPackages.override
