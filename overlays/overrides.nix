@@ -12,12 +12,16 @@ channels: final: prev: {
     nixpkgs-fmt
     qutebrowser
     signal-desktop
+    tdesktop
     starship
     deploy-rs
     tdesktop
     xdg-desktop-portal
     xdg-desktop-portal-gtk
     xdg-desktop-portal-wlr
+    obs-studio
+    obs-studio-plugins
+    looking-glass-client
     ;
 
 
