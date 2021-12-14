@@ -6,15 +6,16 @@ channels: final: prev: {
     cachix
     dhall
     discord
-    element-desktop-wayland
+    element-desktop
     rage
-    neovim-unwrapped
     nixpkgs-fmt
     qutebrowser
     signal-desktop
-    tdesktop
     starship
     deploy-rs
+
+    element-desktop-wayland
+    neovim-unwrapped
     tdesktop
     xdg-desktop-portal
     xdg-desktop-portal-gtk
