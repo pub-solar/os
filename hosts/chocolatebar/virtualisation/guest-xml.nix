@@ -175,8 +175,8 @@ in
       <input type='tablet' bus='usb'>
         <address type='usb' bus='0' port='1'/>
       </input>
-      <input type='mouse' bus='ps2'/>
-      <input type='keyboard' bus='ps2'/>
+      <input type='mouse' bus='virtio'/>
+      <input type='keyboard' bus='virtio'/>
       <graphics type='spice' autoport='yes' listen='127.0.0.1'>
         <listen type='address' address='127.0.0.1'/>
         <image compression='off'/>
