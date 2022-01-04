@@ -29,6 +29,7 @@ in
     hardware.sane = {
       enable = true;
       brscan4.enable = true;
+      extraBackends = [ pkgs.hplipWithPlugin ];
     };
   };
 }
