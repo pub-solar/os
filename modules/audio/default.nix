@@ -15,26 +15,33 @@ in
   config = mkIf cfg.enable {
     home-manager = with pkgs; pkgs.lib.setAttrByPath [ "users" psCfg.user.name ] {
       home.packages = [
+        # easyeffects, e.g. for microphone noise filtering
+        easyeffects
         mu
         pavucontrol
         pa_applet
         playerctl
         # Needed for pactl cmd, until pw-cli is more mature (vol up/down hotkeys?)
         pulseaudio
-        # pulseeffects for microphone noise filtering
-        pulseeffects-pw
         vimpc
       ];
       xdg.configFile."vimpc/vimpcrc".source = ./.config/vimpc/vimpcrc;
-      systemd.user.services.pulseeffects = import ./pulseeffects.service.nix pkgs;
+      systemd.user.services.easyeffects = import ./easyeffects.service.nix pkgs;
     };
 
     # Enable sound using pipewire-pulse
     services.pipewire = {
+      enable = true;
       alsa.enable = true;
       alsa.support32Bit = true;
       pulse.enable = true;
 
+      config.pipewire = {
+        context.default.clock = {
+          allowed-rates = [ 44100 48000 88200 96000 ];
+          rate = 44100;
+        };
+      };
       config.pipewire-pulse = builtins.fromJSON (builtins.readFile ./pipewire-pulse.conf.json);
 
       # Bluetooth configuration for pipewire
