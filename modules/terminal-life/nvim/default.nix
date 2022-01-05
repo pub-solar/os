@@ -80,6 +80,7 @@ in
     nodePackages.vue-language-server
     nodePackages.vscode-langservers-extracted
     nodePackages.yaml-language-server
+    python39Packages.python-lsp-server
     python3Full
     python-language-server
     solargraph
@@ -91,6 +92,12 @@ in
   ];
 
   plugins = with pkgs.vimPlugins; [
+    nvim-cmp
+    cmp-nvim-lsp
+    cmp_luasnip
+    luasnip
+
+    lsp_extensions-nvim
     nvim-lspconfig
     lsp_extensions-nvim
     completion-nvim

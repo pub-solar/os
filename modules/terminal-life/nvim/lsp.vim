@@ -114,7 +114,13 @@ lua <<EOF
   }) do -- Setup all of the language servers. †
     if type(lsp_key) == 'number' then -- Enable the LSP with defaults.
       -- The `lsp` is an index in this case.
-      nvim_lsp[lsp_settings].setup{['on_attach'] = lsp_setup}
+      nvim_lsp[lsp_settings].setup{
+        on_attach = on_attach,
+        flags = {
+          debounce_text_changes = 150,
+        },
+        capabilities = capabilities,
+      }
     else -- Use the LSP's configuration.
       local on_attach_setting = on_attach
 
@@ -125,6 +131,56 @@ lua <<EOF
       nvim_lsp[lsp_key].setup(lsp_settings)
     end
   end -- ‡
+
+  -- Set completeopt to have a better completion experience
+  vim.o.completeopt = 'menuone,noselect'
+
+  -- luasnip setup
+  local luasnip = require 'luasnip'
+
+  -- nvim-cmp setup
+  local cmp = require 'cmp'
+  cmp.setup {
+    snippet = {
+      expand = function(args)
+        require('luasnip').lsp_expand(args.body)
+      end,
+    },
+    mapping = {
+      ['<C-p>'] = cmp.mapping.select_prev_item(),
+      ['<C-n>'] = cmp.mapping.select_next_item(),
+      ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+      ['<C-f>'] = cmp.mapping.scroll_docs(4),
+      ['<C-Space>'] = cmp.mapping.complete(),
+      ['<C-e>'] = cmp.mapping.close(),
+      ['<CR>'] = cmp.mapping.confirm {
+        behavior = cmp.ConfirmBehavior.Replace,
+        select = true,
+      },
+      ['<Tab>'] = function(fallback)
+        if cmp.visible() then
+          cmp.select_next_item()
+        elseif luasnip.expand_or_jumpable() then
+          luasnip.expand_or_jump()
+        else
+          fallback()
+        end
+      end,
+      ['<S-Tab>'] = function(fallback)
+        if cmp.visible() then
+          cmp.select_prev_item()
+        elseif luasnip.jumpable(-1) then
+          luasnip.jump(-1)
+        else
+          fallback()
+        end
+      end,
+    },
+    sources = {
+      { name = 'nvim_lsp' },
+      { name = 'luasnip' },
+    },
+  }
 EOF
 
 " Visualize diagnostics
@@ -143,14 +199,3 @@ autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
 " have a fixed column for the diagnostics to appear in
 " this removes the jitter when warnings/errors flow in
 set signcolumn=yes
-
-" NeoVim 0.5 Code navigation shortcuts
-nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
-nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
-nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
-nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
-nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
-nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
-nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
-nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
-nnoremap <silent> <c-]>    <cmd>lua vim.lsp.buf.declaration()<CR>
