@@ -28,10 +28,9 @@ in
         inetutils
         pciutils
         usbutils
-        git
+        gitFull
         git-lfs
         git-bug
-        git-crypt
         wget
         openssl
         openssh
@@ -68,6 +67,7 @@ in
         niv
         manix
         nix-index
+        nix-tree
         # Build broken, python2.7-PyJWT-2.0.1.drv' failed
         #nixops
         psos
