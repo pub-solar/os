@@ -78,7 +78,7 @@ in
     nodePackages.vscode-html-languageserver-bin
     nodePackages.vscode-json-languageserver-bin
     nodePackages.yaml-language-server
-    python-language-server
+    python39Packages.python-lsp-server
     python3Full
     solargraph
     rnix-lsp
@@ -88,7 +88,11 @@ in
   ];
 
   plugins = with pkgs.vimPlugins; [
-    completion-nvim
+    nvim-cmp
+    cmp-nvim-lsp
+    cmp_luasnip
+    luasnip
+
     lsp_extensions-nvim
     nvim-lspconfig
 
