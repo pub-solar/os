@@ -32,6 +32,7 @@ in
     xdg.mimeApps = import ./mimeapps.nix;
 
     xdg.configFile."git/config".text = import ./.config/git/config.nix { inherit config; inherit pkgs; };
+    xdg.configFile."git/global_gitignore".text = import ./.config/git/global_gitignore.nix { inherit config; inherit pkgs; };
     xdg.configFile."dircolors".source = ./.config/dircolors;
     xdg.configFile."xmodmap".source = ./.config/xmodmap;
     xdg.configFile."user-dirs.dirs".source = ./.config/user-dirs.dirs;

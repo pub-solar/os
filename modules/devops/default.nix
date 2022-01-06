@@ -15,6 +15,7 @@ in
         croc
         drone-cli
         nmap
+        pgcli
         python38Packages.ansible
         restic
         shellcheck

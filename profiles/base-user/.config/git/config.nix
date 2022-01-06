@@ -9,6 +9,7 @@ in
   ${if user.gpgKeyId != null then "signingkey = ${user.gpgKeyId}" else ""}
 [core]
   editor = /etc/profiles/per-user/${config.pub-solar.user.name}/bin/nvim
+  excludesFile = /home/${config.pub-solar.user.name}/.config/git/global_gitignore
 [alias]
   pol = pull
   ack = -c color.grep.linenumber=\"bold yellow\"\n    -c color.grep.filename=\"bold green\"\n    -c color.grep.match=\"reverse yellow\"\n    grep --break --heading --line-number

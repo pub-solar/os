@@ -8,16 +8,17 @@ channels: final: prev: {
     docker-compose_2
     dhall
     discord
-    element-desktop-wayland
+    element-desktop
     rage
-    docker-compose
-    neovim-unwrapped
     nixpkgs-fmt
     qutebrowser
     signal-desktop
-    tdesktop
     starship
     deploy-rs
+
+    element-desktop-wayland
+    neovim-unwrapped
+    tdesktop
     xdg-desktop-portal
     xdg-desktop-portal-gtk
     xdg-desktop-portal-wlr
@@ -25,6 +26,9 @@ channels: final: prev: {
     obs-studio-plugins
     looking-glass-client
     ;
+
+  # nix is set to 2.3 in 21.11
+  nix-direnv = prev.nix-direnv.override { nix = prev.nixUnstable; };
 
   haskellPackages = prev.haskellPackages.override
     (old: {
