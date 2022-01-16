@@ -1,0 +1,19 @@
+# vim: filetype=muttrc
+
+set from = "pub.solar Admins <admins@pub.solar>"
+set sendmail = "msmtp -a admins@pub.solar"
+set signature = "~/.config/mutt/admins@pub.solar.signature"
+
+set mbox_type   = Maildir
+set folder      = ~/Mail
+set spoolfile   = "+admins\@pub.solar/INBOX"
+set postponed   = "+admins\@pub.solar/Drafts"
+set record      = "+admins\@pub.solar/Sent"
+set trash       = "+admins\@pub.solar/Trash"
+mbox-hook   = "+admins\@pub.solar/Archive"
+unmailboxes *
+mailboxes +admins\@pub.solar/INBOX \
+          +admins\@pub.solar/Drafts \
+          +admins\@pub.solar/Sent \
+          +admins\@pub.solar/Archive \
+          +admins\@pub.solar/Trash

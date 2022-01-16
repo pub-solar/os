@@ -38,5 +38,15 @@ account byb@miom.space
   tls on
   tls_trust_file /etc/ssl/certs/ca-certificates.crt
 
+account admins@pub.solar
+  host mail.greenbaum.cloud
+  port 587
+  protocol smtp
+  auth on
+  from admins@pub.solar
+  user admins@pub.solar
+  tls on
+  tls_trust_file /etc/ssl/certs/ca-certificates.crt
+
 
 account default : hello@benjaminbaedorf.eu

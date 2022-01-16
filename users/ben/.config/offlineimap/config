@@ -1,7 +1,7 @@
 [general]
 pythonfile = $XDG_CONFIG_HOME/offlineimap/functions.py
 metadata = $XDG_DATA_HOME/offlineimap
-accounts = BBEU, RWTH, MiOM
+accounts = BBEU, RWTH, MiOM, PubSolar
 
 [Account BBEU]
 localrepository = LocalBBEU
@@ -61,4 +61,19 @@ type = IMAP
 remotehost = mail.hosting.de
 remoteuser = byb@miom.space
 remotepasseval = get_secret("service", "smtp", "host", "mail.hosting.de", "user", "byb@miom.space")
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+
+[Account PubSolar]
+localrepository = LocalPubSolar
+remoterepository = RemotePubSolar
+
+[Repository LocalPubSolar]
+type = Maildir
+localfolders = ~/Mail/byb@miom.space
+
+[Repository RemotePubSolar]
+type = IMAP
+remotehost = mail.greenbaum.cloud
+remoteuser = admins@pub.solar
+remotepasseval = get_secret("service", "smtp", "host", "mail.greenbaum.cloud", "user", "admins@pub.solar")
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
