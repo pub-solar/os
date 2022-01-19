@@ -14,10 +14,45 @@ set shortmess+=c
 " https://gitlab.com/Iron_E/dotfiles/-/blob/master/.config/nvim/lua/_config/plugin/nvim_lsp.lua
 lua <<EOF
   local nvim_lsp    = require('lspconfig')
-  -- Attach `completion-nvim` to the buffer.
-  local function lsp_setup()
-    require('completion').on_attach()
+
+  -- Use an on_attach function to only map the following keys
+  -- after the language server attaches to the current buffer
+  local on_attach = function(client, bufnr)
+    local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+    local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+
+    -- Enable completion triggered by <c-x><c-o>
+    buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+    -- Mappings.
+    local opts = { noremap=true, silent=true }
+
+    -- See `:help vim.lsp.*` for documentation on any of the below functions
+    buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+    buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+    buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+    buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+    buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+    buf_set_keymap('n', '<leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+    buf_set_keymap('n', '<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+    buf_set_keymap('n', '<leader>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+    buf_set_keymap('n', '<leader>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+    buf_set_keymap('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+    buf_set_keymap('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+    buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+    buf_set_keymap('n', '<leader>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+    buf_set_keymap('n', '<leader>dp', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
+    buf_set_keymap('n', '<leader>dn', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+    buf_set_keymap('n', '<leader>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+    buf_set_keymap('n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+
   end
+
+  -- Add additional capabilities supported by nvim-cmp
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+  -- vscode HTML lsp needs this https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#html
+  capabilities.textDocument.completion.completionItem.snippetSupport = true
 
   for lsp_key, lsp_settings in pairs({
         'bashls', ------------------------------- Bash
@@ -42,9 +77,15 @@ lua <<EOF
                 ['workspace'] = vim.fn.stdpath('cache')..'/java-workspaces'
             }
         },
-        'jsonls', ------------------------------- JSON
+        ['jsonls'] = { -------------------------- JSON
+            ['settings'] = {
+                ['json'] = {
+                    ['schemas' ] = require('schemastore').json.schemas()
+                }
+            }
+        },
         'phpactor', ----------------------------- PHP
-        'pyls', --------------------------------- Python
+        'pylsp', -------------------------------- Python
         'rnix', --------------------------------- Nix
         'solargraph', --------------------------- Ruby
         'rust_analyzer', ------------------------ Rust
@@ -55,7 +96,6 @@ lua <<EOF
             ['filetypes'] = { "terraform", "hcl", "tf" }
         },
         'tsserver', ----------------------------- Typescript / JavaScript
-        'angularls', ---------------------------- Angular
         'vuels', -------------------------------- Vue
         'svelte', ------------------------------- Svelte
         ['yamlls'] = { -------------------------- YAML
@@ -66,6 +106,7 @@ lua <<EOF
                         ['https://json.schemastore.org/github-action'] = '.github/action.{yml,yaml}',
                         ['https://json.schemastore.org/ansible-stable-2.9'] = 'roles/tasks/*.{yml,yaml}',
                         ['https://json.schemastore.org/drone'] = '*.drone.{yml,yaml}',
+                        ['https://json.schemastore.org/swagger-2.0'] = 'swagger.{yml,yaml}',
                     }
                 }
             }
@@ -75,12 +116,11 @@ lua <<EOF
       -- The `lsp` is an index in this case.
       nvim_lsp[lsp_settings].setup{['on_attach'] = lsp_setup}
     else -- Use the LSP's configuration.
-      local on_attach_setting = lsp_settings.on_attach
+      local on_attach_setting = on_attach
 
-    lsp_settings.on_attach = function()
-      lsp_setup()
-      if on_attach_setting then on_attach_setting() end
-    end
+      lsp_settings.on_attach = function()
+        if on_attach_setting then on_attach_setting() end
+      end
 
       nvim_lsp[lsp_key].setup(lsp_settings)
     end

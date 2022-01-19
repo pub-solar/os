@@ -50,7 +50,7 @@
       # end ANTI CORRUPTION LAYER
 
       # PubSolarOS additions
-      nix-dram.url = "github:dramforever/nix-dram";
+      nix-dram.url = "github:pub-solar/nix-dram";
     };
 
   outputs =

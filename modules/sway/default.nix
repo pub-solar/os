@@ -32,7 +32,17 @@ in
 
       xdg.portal = {
         enable = true;
-        extraPortals = with pkgs; [ xdg-desktop-portal-gtk xdg-desktop-portal-wlr ];
+        wlr = {
+          enable = true;
+          settings = {
+            screencast = {
+              max_fps = 30;
+              chooser_type = "simple";
+              chooser_cmd = "${pkgs.slurp}/bin/slurp -f %o -or";
+            };
+          };
+        };
+        extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
         gtkUsePortal = true;
       };
 

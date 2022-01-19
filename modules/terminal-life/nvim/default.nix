@@ -78,10 +78,8 @@ in
     nodePackages.typescript
     nodePackages.vim-language-server
     nodePackages.vue-language-server
+    nodePackages.vscode-langservers-extracted
     nodePackages.yaml-language-server
-    nodePackages.vscode-json-languageserver-bin
-    nodePackages.vscode-html-languageserver-bin
-    nodePackages.vscode-css-languageserver-bin
     python3Full
     python-language-server
     solargraph
@@ -132,6 +130,7 @@ in
     vim-vue
     vim-javascript
     vim-json
+    SchemaStore-nvim
     vim-markdown
     yats-vim
     vim-ruby

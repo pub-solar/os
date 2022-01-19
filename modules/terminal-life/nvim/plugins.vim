@@ -5,8 +5,10 @@ autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 let g:gutentags_file_list_command = 'git ls-files'
 
 " Golang
-" Go test shortcut
-nmap <Leader>got :GoTest<CR>
+" Go test, Def, Decls shortcut
+nmap <Leader>got :GoTest<CR>:botright copen<CR>
+autocmd FileType go nmap gd :GoDef<CR>
+autocmd FileType go nmap gD :GoDecls<CR>
 
 " Go formatting
 autocmd FileType go setlocal noexpandtab shiftwidth=4 tabstop=4 softtabstop=4 nolist

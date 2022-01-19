@@ -18,6 +18,10 @@ in
     size = 10000;
   };
 
+  loginExtra = ''
+    [ "$(tty)" = "/dev/tty1" ] && exec sway
+  '';
+
   shellAliases = {
     nano = "nvim";
     vi = "nvim";
@@ -66,13 +70,14 @@ in
     bindkey '^R' fzf-history-widget
 
     # ArrowUp/Down start searching history with current input
-    autoload -U history-search-end
-    zle -N history-beginning-search-backward-end history-search-end
-    zle -N history-beginning-search-forward-end history-search-end
-    bindkey "^[[A" history-beginning-search-backward-end
-    bindkey "^[[B" history-beginning-search-forward-end
-    bindkey "^P" history-beginning-search-backward-end
-    bindkey "^N" history-beginning-search-forward-end
+    autoload -U up-line-or-beginning-search
+    autoload -U down-line-or-beginning-search
+    zle -N up-line-or-beginning-search
+    zle -N down-line-or-beginning-search
+    bindkey "^[[A" up-line-or-beginning-search
+    bindkey "^[[B" down-line-or-beginning-search
+    bindkey "^P" up-line-or-beginning-search
+    bindkey "^N" down-line-or-beginning-search
 
     # MAKE CTRL+S WORK IN VIM
     stty -ixon
