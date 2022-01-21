@@ -55,7 +55,7 @@ in
       macro index <f2> '<sync-mailbox><enter-command>source $XDG_CONFIG_HOME/mutt/benjamin.baedorf@rwth-aachen.de.muttrc<enter><change-folder>!<enter>'
       macro index <f3> '<sync-mailbox><enter-command>source $XDG_CONFIG_HOME/mutt/b.baedorf@openproject.com.muttrc<enter><change-folder>!<enter>'
       macro index <f4> '<sync-mailbox><enter-command>source $XDG_CONFIG_HOME/mutt/byb@miom.space.muttrc<enter><change-folder>!<enter>'
-      macro index <f4> '<sync-mailbox><enter-command>source $XDG_CONFIG_HOME/mutt/admins@pub.solar.muttrc<enter><change-folder>!<enter>'
+      macro index <f5> '<sync-mailbox><enter-command>source $XDG_CONFIG_HOME/mutt/admins@pub.solar.muttrc<enter><change-folder>!<enter>'
     '';
     xdg.configFile."mutt/hello@benjaminbaedorf.eu.muttrc".source = ./.config/mutt + "/hello@benjaminbaedorf.eu.muttrc";
     xdg.configFile."mutt/benjamin.baedorf@rwth-aachen.de.muttrc".source = ./.config/mutt + "/benjamin.baedorf@rwth-aachen.de.muttrc";
