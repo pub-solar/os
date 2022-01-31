@@ -15,7 +15,7 @@ in
         #mySignalDesktop
         signal-desktop
         tdesktop
-        element-desktop-wayland
+        element-desktop
         irssi
       ];
     };

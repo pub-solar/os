@@ -14,7 +14,6 @@ channels: final: prev: {
     starship
     deploy-rs
 
-    element-desktop-wayland
     neovim-unwrapped
     tdesktop
     xdg-desktop-portal
