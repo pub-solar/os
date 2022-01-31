@@ -66,6 +66,7 @@ in
         # Build broken, python2.7-PyJWT-2.0.1.drv' failed
         #nixops
         psos
+        nvd
 
         # Fun
         neofetch
