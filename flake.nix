@@ -9,6 +9,7 @@
     {
       nixos.url = "github:nixos/nixpkgs/release-21.05";
       latest.url = "github:nixos/nixpkgs/nixos-unstable";
+      master.url = "github:nixos/nixpkgs/master";
 
       digga.url = "github:divnix/digga";
       digga.inputs.nixpkgs.follows = "nixos";
@@ -50,7 +51,8 @@
       # end ANTI CORRUPTION LAYER
 
       # PubSolarOS additions
-      nix-dram.url = "github:pub-solar/nix-dram";
+      nix-dram.url = "github:dramforever/nix-dram";
+      nix-dram.inputs.nixpkgs.follows = "latest";
     };
 
   outputs =
@@ -86,11 +88,7 @@
               ./pkgs/default.nix
             ];
           };
-          latest = {
-            overlays = [
-              deploy.overlay
-            ];
-          };
+          latest = { };
         };
 
         lib = import ./lib { lib = digga.lib // nixos.lib; };
@@ -148,6 +146,7 @@
           };
           users = {
             pub-solar = { suites, ... }: { imports = suites.base; };
+            teutat3s = { suites, ... }: { imports = suites.base; };
           }; # digga.lib.importers.rakeLeaves ./users/hm;
         };
 

@@ -25,8 +25,6 @@ channels: final: prev: {
     looking-glass-client
     ;
 
-  # nix is set to 2.3 in 21.11
-  nix-direnv = prev.nix-direnv.override { nix_2_4 = true; };
 
   haskellPackages = prev.haskellPackages.override
     (old: {
