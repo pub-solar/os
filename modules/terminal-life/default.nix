@@ -26,6 +26,7 @@ in
       home.packages = [
         ag
         ack
+        asciinema
         bat
         exa
         gh
