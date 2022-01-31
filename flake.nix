@@ -144,7 +144,6 @@
             };
           };
           users = {
-            nixos = { suites, ... }: { imports = suites.base; };
             pub-solar = { suites, ... }: { imports = suites.base; };
           }; # digga.lib.importers.rakeLeaves ./users/hm;
         };
