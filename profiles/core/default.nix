@@ -1,4 +1,4 @@
-{ self, config, lib, pkgs, ... }:
+{ self, config, lib, pkgs, inputs, ... }:
 let inherit (lib) fileContents;
 in
 {
