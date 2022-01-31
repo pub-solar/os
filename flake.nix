@@ -71,7 +71,6 @@
               nur.overlay
               agenix.overlay
               nvfetcher.overlay
-              nix-dram.overlay
               ./pkgs/default.nix
             ];
           };

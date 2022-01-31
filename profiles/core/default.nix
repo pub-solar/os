@@ -93,7 +93,7 @@ in
 
     nix = {
       # use nix-dram, a patched nix command, see: https://github.com/dramforever/nix-dram
-      package = pkgs.nix-dram;
+      package = inputs.nix-dram.packages.${pkgs.system}.nix-dram;
 
       # Improve nix store disk usage
       autoOptimiseStore = true;
