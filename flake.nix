@@ -73,6 +73,8 @@
 
         channelsConfig = { allowUnfree = true; };
 
+        supportedSystems = [ "x86_64-linux" "aarch64-linux" ];
+
         channels = {
           nixos = {
             imports = [ (digga.lib.importOverlays ./overlays) ];
@@ -128,6 +130,7 @@
             };
             suites = with profiles; rec {
               base = [ core users.pub-solar users.root ];
+              iso = base ++ [ base-user graphical pub-solar-iso ];
               pubsolaros = [ core full-install base-user users.root ];
               anonymous = [ pubsolaros users.pub-solar ];
             };
