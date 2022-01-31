@@ -19,6 +19,7 @@ in
       extraGroups = [ "wheel" "docker" "input" "audio" "networkmanager" "lp" "scanner" ];
       initialHashedPassword = if psCfg.user.password != null then psCfg.user.password else "";
       shell = pkgs.zsh;
+      openssh.authorizedKeys.keyFiles = if psCfg.user.publicKeys != null then psCfg.user.publicKeys else [];
     };
   };
 }
