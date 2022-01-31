@@ -109,6 +109,12 @@ in
       '';
     };
 
+    # For rage encryption, all hosts need a ssh key pair
+    services.openssh = {
+      enable = true;
+      openFirewall = lib.mkDefault false;
+    };
+
     # Service that makes Out of Memory Killer more effective
     services.earlyoom.enable = true;
 
