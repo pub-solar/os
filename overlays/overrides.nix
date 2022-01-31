@@ -14,6 +14,15 @@ channels: final: prev: {
     signal-desktop
     starship
     deploy-rs
+
+    neovim-unwrapped
+    tdesktop
+    xdg-desktop-portal
+    xdg-desktop-portal-gtk
+    xdg-desktop-portal-wlr
+    obs-studio
+    obs-studio-plugins
+    looking-glass-client
     ;
 
   # nix is set to 2.3 in 21.11
