@@ -6,9 +6,8 @@ channels: final: prev: {
     cachix
     dhall
     discord
-    element-desktop-wayland
+    element-desktop
     rage
-    neovim-unwrapped
     nixpkgs-fmt
     qutebrowser
     signal-desktop

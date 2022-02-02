@@ -12,7 +12,7 @@
       password = "$6$Kv0BCLU2Jg7GN8Oa$hc2vERKCbZdczFqyHPfgCaleGP.JuOWyd.bfcIsLDNmExGXI6Rnkze.SWzVzVS311KBznN/P4uUYAUADXkVtr.";
       fullName = "Pub Solar";
       email = "iso@pub.solar";
-      publicKeys = [ ../../secrets/teutat3s-yubikey.pub ];
+      publicKeys = [ ./public-keys/teutat3s-yubikey.pub ];
     };
   };
 }
