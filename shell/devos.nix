@@ -34,7 +34,7 @@ in
   '');
 
   commands = with pkgs; [
-    (devos nixFlakes)
+    (devos nixUnstable)
     (devos agenix)
     {
       category = "devos";
