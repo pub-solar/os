@@ -141,9 +141,7 @@ steps:
 
 trigger:
   event:
-    - push
-  branch:
-    - feature/basic-iso
+    - tag
 
 volumes:
   - name: nix-store
@@ -152,6 +150,6 @@ volumes:
 
 ---
 kind: signature
-hmac: c25dac3dfd8dd9b46394fb3cd0313c3bccc81cbee10ab9f281a15eb4ac455cd0
+hmac: 958eac73155e8944a40eae326524a497e4170038444cf03b36ba649567372001
 
 ...
