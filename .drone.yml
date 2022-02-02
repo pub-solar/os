@@ -94,7 +94,7 @@ name: Check
 
 steps:
   - name: "Check"
-    image: docker.nix-community.org/nixpkgs/nix-flakes:nixos-21.11
+    image: docker.nix-community.org/nixpkgs/nix-flakes:latest
     when:
       event:
         - pull_request
@@ -112,7 +112,7 @@ name: Publish ISO
 
 steps:
   - name: "Build ISO"
-    image: docker.nix-community.org/nixpkgs/nix-flakes:nixos-21.11
+    image: docker.nix-community.org/nixpkgs/nix-flakes:latest
     volumes:
       - name: nix-store
         path: /var/nix/iso-cache
@@ -152,6 +152,6 @@ volumes:
 
 ---
 kind: signature
-hmac: 346cb05688f3b2aee03820aff82f0b16bb04759cd3948109f6496f87a5f18319
+hmac: c25dac3dfd8dd9b46394fb3cd0313c3bccc81cbee10ab9f281a15eb4ac455cd0
 
 ...
