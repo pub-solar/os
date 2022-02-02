@@ -22,6 +22,7 @@ in
         progress
         dnsutils
         inetutils
+        mtr
         pciutils
         usbutils
         gitFull
@@ -120,6 +121,9 @@ in
 
     # Service that makes Out of Memory Killer more effective
     services.earlyoom.enable = true;
+
+    # Use latest LTS linux kernel by default
+    boot.kernelPackages = pkgs.linuxPackages_5_15;
 
     boot.supportedFilesystems = [ "ntfs" ];
   };
