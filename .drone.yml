@@ -94,16 +94,12 @@ name: Check
 
 steps:
   - name: "Check"
-    image: nixpkgs/nix-flakes:nixos-21.05
+    image: docker.nix-community.org/nixpkgs/nix-flakes:nixos-21.11
     when:
       event:
         - pull_request
         - tag
     commands:
-      - echo "" >> /etc/nix/nix.conf
-      - echo "system-features = nixos-test benchmark big-parallel kvm recursive-nix" >> /etc/nix/nix.conf
-      - echo "substituters = https://nrdxp.cachix.org https://nix-community.cachix.org https://cache.nixos.org" >> /etc/nix/nix.conf
-      - echo "trusted-public-keys = nrdxp.cachix.org-1:Fc5PSqY2Jm1TrWfm88l6cvGWwz3s93c6IOifQWnhNW4= nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs= cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=" >> /etc/nix/nix.conf
       - nix -Lv flake check
       - nix -Lv build ".#nixosConfigurations.PubSolarOS.config.system.build.toplevel"
       - nix -Lv develop -c echo OK
@@ -116,15 +112,11 @@ name: Publish ISO
 
 steps:
   - name: "Build ISO"
-    image: nixpkgs/nix-flakes:nixos-21.05
+    image: docker.nix-community.org/nixpkgs/nix-flakes:nixos-21.11
     volumes:
       - name: nix-store
         path: /var/nix/iso-cache
     commands:
-      - echo "" >> /etc/nix/nix.conf
-      - echo "system-features = nixos-test benchmark big-parallel kvm recursive-nix" >> /etc/nix/nix.conf
-      - echo "substituters = https://nrdxp.cachix.org https://nix-community.cachix.org https://cache.nixos.org" >> /etc/nix/nix.conf
-      - echo "trusted-public-keys = nrdxp.cachix.org-1:Fc5PSqY2Jm1TrWfm88l6cvGWwz3s93c6IOifQWnhNW4= nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs= cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=" >> /etc/nix/nix.conf
       - nix -Lv develop --command bud build bootstrap bootstrapIso
       - cp $(readlink -f result)/iso/*.iso /var/nix/iso-cache/
 
@@ -160,6 +152,6 @@ volumes:
 
 ---
 kind: signature
-hmac: d05f4e192ceb055bde34889d5303a0925aac9105bed6f77631abe6fccffbc3f1
+hmac: 346cb05688f3b2aee03820aff82f0b16bb04759cd3948109f6496f87a5f18319
 
 ...
