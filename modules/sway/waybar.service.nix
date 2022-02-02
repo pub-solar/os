@@ -10,6 +10,7 @@ pkgs:
 
   Service = {
     Type = "dbus";
+    Environment = "PATH=${pkgs.bash}/bin:${pkgs.pavucontrol}/bin";
     BusName = "fr.arouillard.waybar";
     ExecStart = "${pkgs.waybar}/bin/waybar";
   };

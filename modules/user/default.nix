@@ -11,6 +11,11 @@ in
         type = types.nullOr types.str;
         default = "nixos";
       };
+      description = mkOption {
+        description = "User description";
+        type = types.nullOr types.str;
+        default = "The main PubSolarOS user";
+      };
       password = mkOption {
         description = "User password";
         type = types.nullOr types.str;

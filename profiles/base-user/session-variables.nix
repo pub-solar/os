@@ -49,7 +49,7 @@ let
     CARGO_HOME = "${xdg.dataHome}/cargo";
 
     # Java
-    _JAVA_OPTIONS = "-Djava.util.prefs.userRoot = '${xdg.configHome}/java'";
+    _JAVA_OPTIONS = "-Djava.util.prefs.userRoot='${xdg.configHome}/java'";
     _JAVA_AWT_WM_NONREPARENTING = "1";
 
     # docker

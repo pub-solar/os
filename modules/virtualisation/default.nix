@@ -3,6 +3,8 @@ with lib;
 let
   psCfg = config.pub-solar;
   cfg = config.pub-solar.virtualisation;
+  doesGaming = config.pub-solar.gaming.enable;
+  extraObsPlugins = if doesGaming then [ pkgs.obs-studio-plugins.looking-glass-obs ] else [ ];
 in
 {
   options.pub-solar.virtualisation = {
@@ -32,17 +34,26 @@ in
       virt-manager
       python38Packages.libvirt
       gvfs
-      scream
       edk2
       OVMF
       win-virtio
+      looking-glass-client
+      lgcl
     ];
 
     home-manager = with pkgs; pkgs.lib.setAttrByPath [ "users" psCfg.user.name ] {
       xdg.dataFile."libvirt/.keep".text = "# this file is here to generate the directory";
+      home.packages = extraObsPlugins;
     };
 
-    systemd.tmpfiles.rules = [ "f  /dev/shm/scream-ivshmem  0660  ${psCfg.user.name}  kvm" ];
-    systemd.user.services.scream-ivshmem-pulse = import ./scream-ivshmem-pulse.service.nix pkgs;
+    systemd.tmpfiles.rules = [
+      "f  /dev/shm/looking-glass  0660  ${psCfg.user.name}  kvm"
+    ];
+    networking.bridges.virbr1.interfaces = [ ];
+    networking.interfaces.virbr1 = {
+      ipv4.addresses = [
+        { address = "192.168.123.1"; prefixLength = 24; }
+      ];
+    };
   };
 }

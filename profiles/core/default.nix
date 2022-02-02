@@ -11,6 +11,7 @@ in
     pub-solar.crypto.enable = true;
     pub-solar.devops.enable = true;
 
+    # This is just a representation of the nix default
     nix.systemFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
 
     environment = {

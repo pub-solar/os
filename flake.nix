@@ -150,7 +150,7 @@
       }
     //
     {
-      budModules = { devos = import ./bud; };
+      budModules = { devos = import ./shell/bud; };
     }
   ;
 }

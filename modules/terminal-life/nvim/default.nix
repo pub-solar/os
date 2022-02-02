@@ -3,6 +3,18 @@ let
   psCfg = config.pub-solar;
   xdg = config.home-manager.users."${psCfg.user.name}".xdg;
 
+  preview-file = pkgs.writeShellScriptBin "preview-file" (import ./preview-file.nix pkgs);
+
+  instant-nvim = pkgs.vimUtils.buildVimPlugin {
+    name = "instant";
+    src = pkgs.fetchFromGitHub {
+      owner = "jbyuki";
+      repo = "instant.nvim";
+      rev = "c02d72267b12130609b7ad39b76cf7f4a3bc9554";
+      sha256 = "sha256-7Pr2Au/oGKp5kMXuLsQY4BK5Wny9L1EBdXtyS5EaZPI=";
+    };
+  };
+
   sonokai = pkgs.vimUtils.buildVimPlugin {
     name = "sonokai";
     src = pkgs.fetchFromGitHub {
@@ -51,6 +63,81 @@ in
   withRuby = true;
   withPython3 = true;
 
+  extraPackages = with pkgs; [
+    ccls
+    gopls
+    nodejs
+    nodePackages.bash-language-server
+    nodePackages.dockerfile-language-server-nodejs
+    nodePackages.svelte-language-server
+    nodePackages.typescript
+    nodePackages.typescript-language-server
+    nodePackages.vim-language-server
+    nodePackages.vue-language-server
+    nodePackages.vscode-langservers-extracted
+    nodePackages.yaml-language-server
+    python39Packages.python-lsp-server
+    python3Full
+    solargraph
+    rnix-lsp
+    rust-analyzer
+    terraform-ls
+    universal-ctags
+  ];
+
+  plugins = with pkgs.vimPlugins; [
+    nvim-cmp
+    cmp-nvim-lsp
+    cmp_luasnip
+    luasnip
+
+    lsp_extensions-nvim
+    nvim-lspconfig
+
+    instant-nvim
+
+    ack-vim
+    airline
+    editorconfig-vim
+    nnn-vim
+    suda
+    syntastic
+    vim-gutentags
+    vim-vinegar
+    workspace
+
+    sonokai
+
+    fugitive
+    vim-gitgutter
+    vim-rhubarb
+    vimagit
+
+    fzf-vim
+    fzfWrapper
+    vim-highlightedyank
+
+    beautify
+    vim-surround
+
+    vim-bufkill
+    vim-sensible
+
+    ansible-vim
+    emmet-vim
+    rust-vim
+    vim-go
+    vim-javascript
+    vim-json
+    SchemaStore-nvim
+    vim-markdown
+    vim-nix
+    vim-ruby
+    vim-toml
+    vim-vue
+    yats-vim
+  ];
+
   extraConfig = builtins.concatStringsSep "\n" [
     ''
       " Persistent undo
@@ -66,82 +153,10 @@ in
     (builtins.readFile ./ui.vim)
     (builtins.readFile ./quickfixopenall.vim)
     (builtins.readFile ./lsp.vim)
-  ];
-
-  extraPackages = with pkgs; [
-    nodejs
-    code-minimap
-    nodePackages.bash-language-server
-    nodePackages.dockerfile-language-server-nodejs
-    nodePackages.svelte-language-server
-    nodePackages.typescript-language-server
-    nodePackages.typescript
-    nodePackages.vim-language-server
-    nodePackages.vue-language-server
-    nodePackages.vscode-langservers-extracted
-    nodePackages.yaml-language-server
-    python39Packages.python-lsp-server
-    python3Full
-    python-language-server
-    solargraph
-    rust-analyzer
-    universal-ctags
-    ccls
-    rnix-lsp
-    terraform-ls
-  ];
-
-  plugins = with pkgs.vimPlugins; [
-    nvim-cmp
-    cmp-nvim-lsp
-    cmp_luasnip
-    luasnip
-
-    lsp_extensions-nvim
-    nvim-lspconfig
-    lsp_extensions-nvim
-    completion-nvim
-
-    suda
-    ack-vim
-    syntastic
-    airline
-    workspace
-    editorconfig-vim
-    vim-vinegar
-    vim-gutentags
-    minimap-vim
-    nnn-vim
-
-    sonokai
-
-    fugitive
-    vim-rhubarb
-    vim-gitgutter
-    vimagit
-
-    vim-highlightedyank
-    fzf-vim
-    fzfWrapper
-
-    beautify
-    vim-surround
-
-    vim-sensible
-    vim-bufkill
-
-    ansible-vim
-    emmet-vim
-    rust-vim
-    vim-go
-    vim-vue
-    vim-javascript
-    vim-json
-    SchemaStore-nvim
-    vim-markdown
-    yats-vim
-    vim-ruby
-    vim-toml
-    vim-nix
+    ''
+      " fzf with file preview
+      command! -bang -nargs=? -complete=dir Files
+          \ call fzf#vim#files(<q-args>, { 'options': ['--keep-right', '--cycle', '--layout', 'reverse', '--preview', '${preview-file}/bin/preview-file {}'] }, <bang>0)
+    ''
   ];
 }

@@ -51,6 +51,7 @@ lua <<EOF
   -- Add additional capabilities supported by nvim-cmp
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+
   -- vscode HTML lsp needs this https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#html
   capabilities.textDocument.completion.completionItem.snippetSupport = true
 
@@ -190,7 +191,7 @@ let g:diagnostic_trimmed_virtual_text = '40'
 let g:diagnostic_insert_delay = 1
 
 " Show diagnostic popup on cursor hold
-autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
+autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics({ focusable = false })
 
 " Goto previous/next diagnostic warning/error
 " nnoremap <silent> g[ <cmd>PrevDiagnosticCycle<cr>

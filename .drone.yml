@@ -67,7 +67,6 @@ steps:
     image: plugins/matrix
     when:
       status:
-        - success
         - failure
       event:
         - cron

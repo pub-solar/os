@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, self, ... }:
 let
   psCfg = config.pub-solar;
   xdg = config.home-manager.users."${psCfg.user.name}".xdg;
@@ -36,7 +36,8 @@ in
     drone = "DRONE_TOKEN=$(secret-tool lookup drone token) drone";
     no = "manix \"\" | grep '^# ' | sed 's/^# \(.*\) (.*/\1/;s/ (.*//;s/^# //' | fzf --preview=\"manix '{}'\" | xargs manix";
     # fix nixos-option
-    nixos-option = "nixos-option -I nixpkgs=/etc/nixos/lib/compat";
+    nixos-option = "nixos-option -I nixpkgs=${self}/lib/compat";
+    myip = "dig +short myip.opendns.com @208.67.222.222 2>&1";
   };
   zplug = {
     enable = true;
