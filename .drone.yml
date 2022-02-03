@@ -108,7 +108,8 @@ steps:
     commands:
       - 'echo NIX_FLAGS: $NIX_FLAGS'
       - 'echo SUBCMD_FLAGS: $SUBCMD_FLAGS'
-      - nix $$NIX_FLAGS flake check $$SUBCMD_FLAGS
+      # DEBUG: try if nix build works with build store as cache
+      #- nix $$NIX_FLAGS flake check $$SUBCMD_FLAGS
       - nix $$NIX_FLAGS build $$SUBCMD_FLAGS ".#nixosConfigurations.PubSolarOS.config.system.build.toplevel"
       - nix $$NIX_FLAGS develop $$SUBCMD_FLAGS --command echo OK
       - nix $$NIX_FLAGS develop $$SUBCMD_FLAGS --command bud --help
@@ -173,6 +174,6 @@ volumes:
 
 ---
 kind: signature
-hmac: ad51a3555d52db391d510571e2e26435b8b105145d18034a453ab653fd9e7bd3
+hmac: 08d22b1fc998a8272677ef55574126b3d2fc389825b91ee36bd7d3cd9e0022a1
 
 ...
