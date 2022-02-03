@@ -103,10 +103,10 @@ steps:
         - pull_request
         - tag
     commands:
-      - nix -Lv --store /tmp/build-store flake check
-      - nix -Lv --store /tmp/build-store build ".#nixosConfigurations.PubSolarOS.config.system.build.toplevel"
-      - nix -Lv --store /tmp/build-store develop -c echo OK
-      - nix -Lv --store /tmp/build-store develop --command bud --help
+      - nix -Lv --store --eval-store local /tmp/build-store flake check
+      - nix -Lv --store --eval-store local /tmp/build-store build ".#nixosConfigurations.PubSolarOS.config.system.build.toplevel"
+      - nix -Lv --store --eval-store local /tmp/build-store develop -c echo OK
+      - nix -Lv --store --eval-store local /tmp/build-store develop --command bud --help
 
 volumes:
   - name: nix-store-cache
@@ -127,7 +127,7 @@ steps:
       - name: nix-store-cache
         path: /tmp/build-store
     commands:
-      - nix -Lv --store /tmp/build-store develop --command bud build bootstrap bootstrapIso
+      - nix -Lv --store --eval-store local /tmp/build-store develop --command bud build bootstrap bootstrapIso
       - cp $(readlink -f result)/iso/*.iso /var/nix/iso-cache/
 
   - name: "Publish ISO"
@@ -165,6 +165,6 @@ volumes:
 
 ---
 kind: signature
-hmac: 86b05ea45f65210a3bf5c7599fb959f7755bd97fa4c8e280eb34e9ead9c2b392
+hmac: 3d4da439d9dc5cd81ea31f1c137ca82d6196341278434770348f5e258256cbec
 
 ...
