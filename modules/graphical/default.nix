@@ -26,6 +26,11 @@ in
         default = { };
       };
     };
+    wayland.software-renderer.enable = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Feature flag enabling wlroots software renderer, useful in VMs";
+    };
   };
 
   config = mkIf cfg.enable {
