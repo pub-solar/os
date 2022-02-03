@@ -103,12 +103,13 @@ steps:
         - pull_request
         - tag
     environment:
-      NIX_FLAGS: "--print-build-logs --verbose --store /tmp/build-store --eval-store local"
+      NIX_FLAGS: "--store /tmp/build-store --print-build-logs --verbose"
     commands:
-      - nix $$NIX_FLAGS flake check
-      - nix $$NIX_FLAGS build ".#nixosConfigurations.PubSolarOS.config.system.build.toplevel"
-      - nix $$NIX_FLAGS develop -c echo OK
-      - nix $$NIX_FLAGS develop --command bud --help
+      - echo "NIX_FLAGS: $$NIX_FLAGS"
+      - nix $$NIX_FLAGS flake --eval-store local check
+      - nix $$NIX_FLAGS build --eval-store local ".#nixosConfigurations.PubSolarOS.config.system.build.toplevel"
+      - nix $$NIX_FLAGS develop --eval-store local --command echo OK
+      - nix $$NIX_FLAGS develop --eval-store local --command bud --help
 
 volumes:
   - name: nix-store-cache
@@ -128,10 +129,11 @@ steps:
         path: /var/nix/iso-cache
       - name: nix-store-cache
         path: /tmp/build-store
-    environment:
-      NIX_FLAGS: "--print-build-logs --verbose --store /tmp/build-store --eval-store local"
     commands:
-      - nix $$NIX_FLAGS develop --command bud build bootstrap bootstrapIso
+      - |
+        nix --store /tmp/build-store --print-build-logs --verbose \
+          develop --eval-store local --command \
+            bud build bootstrap bootstrapIso
       - cp $(readlink -f result)/iso/*.iso /var/nix/iso-cache/
 
   - name: "Publish ISO"
@@ -169,6 +171,6 @@ volumes:
 
 ---
 kind: signature
-hmac: 7816fae517d6d949f53aaafc80ba9847c788856d89749ec40418331db2b4b2b6
+hmac: 50dcb2111c8bee1aedd337028cd2f082b8a1948044e3bd7970a03c31c5fc0fdc
 
 ...
