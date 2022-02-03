@@ -105,7 +105,7 @@ steps:
     environment:
       NIX_FLAGS: "--store /tmp/build-store --print-build-logs --verbose"
     commands:
-      - echo "NIX_FLAGS: $$NIX_FLAGS"
+      - 'echo NIX_FLAGS: $$NIX_FLAGS'
       - nix $$NIX_FLAGS flake --eval-store local check
       - nix $$NIX_FLAGS build --eval-store local ".#nixosConfigurations.PubSolarOS.config.system.build.toplevel"
       - nix $$NIX_FLAGS develop --eval-store local --command echo OK
@@ -171,6 +171,6 @@ volumes:
 
 ---
 kind: signature
-hmac: 50dcb2111c8bee1aedd337028cd2f082b8a1948044e3bd7970a03c31c5fc0fdc
+hmac: a1412a5be78c44f176af32d63f2716c95c0d3992f4809b192166dfa7dd7e3c28
 
 ...
