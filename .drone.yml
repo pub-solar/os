@@ -95,15 +95,23 @@ name: Check
 steps:
   - name: "Check"
     image: docker.nix-community.org/nixpkgs/nix-flakes:latest
+    volumes:
+      - name: nix-store-cache
+        path: /tmp/build-store
     when:
       event:
         - pull_request
         - tag
     commands:
-      - nix -Lv flake check
-      - nix -Lv build ".#nixosConfigurations.PubSolarOS.config.system.build.toplevel"
-      - nix -Lv develop -c echo OK
-      - nix -Lv develop --command bud --help
+      - nix -Lv --store /tmp/build-store flake check
+      - nix -Lv --store /tmp/build-store build ".#nixosConfigurations.PubSolarOS.config.system.build.toplevel"
+      - nix -Lv --store /tmp/build-store develop -c echo OK
+      - nix -Lv --store /tmp/build-store develop --command bud --help
+
+volumes:
+  - name: nix-store-cache
+    host:
+      path: "/var/nix/build-store"
 
 ---
 kind: pipeline
@@ -114,16 +122,18 @@ steps:
   - name: "Build ISO"
     image: docker.nix-community.org/nixpkgs/nix-flakes:latest
     volumes:
-      - name: nix-store
+      - name: file-exchange
         path: /var/nix/iso-cache
+      - name: nix-store-cache
+        path: /tmp/build-store
     commands:
-      - nix -Lv develop --command bud build bootstrap bootstrapIso
+      - nix -Lv --store /tmp/build-store develop --command bud build bootstrap bootstrapIso
       - cp $(readlink -f result)/iso/*.iso /var/nix/iso-cache/
 
   - name: "Publish ISO"
     image: appleboy/drone-scp
     volumes:
-      - name: nix-store
+      - name: file-exchange
         path: /var/nix/iso-cache
     settings:
       host:
@@ -147,12 +157,14 @@ trigger:
     - tag
 
 volumes:
-  - name: nix-store
+  - name: file-exchange
+    temp: {}
+  - name: nix-store-cache
     host:
-      path: "/var/nix/iso-cache"
+      path: "/var/nix/build-store"
 
 ---
 kind: signature
-hmac: 07b8c6165ef4d12754e43839d87d6a68d98436d3c5f8fbb6fee91c628211c1e7
+hmac: e7e602f8b3b21bbc0644dbd285c6d87b3dc5644437c8c693c92ced17de094bab
 
 ...
