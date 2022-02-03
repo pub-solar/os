@@ -8,6 +8,11 @@ in
   options.pub-solar.sway = {
     enable = mkEnableOption "Life in boxes";
   };
+  options.pub-solar.sway.terminal = mkOption {
+    type = types.nullOr types.str;
+    default = "alacritty";
+    description = "Choose sway's default terminal";
+  };
   options.pub-solar.sway.v4l2loopback.enable = mkOption {
     type = types.bool;
     default = true;
@@ -86,7 +91,7 @@ in
         systemd.user.services.waybar = import ./waybar.service.nix pkgs;
         systemd.user.targets.sway-session = import ./sway-session.target.nix pkgs;
 
-        xdg.configFile."sway/config".source = ./config/config;
+        xdg.configFile."sway/config".text = import ./config/config.nix { inherit config pkgs; };
         xdg.configFile."sway/config.d/colorscheme.conf".source = ./config/config.d/colorscheme.conf;
         xdg.configFile."sway/config.d/theme.conf".source = ./config/config.d/theme.conf;
         xdg.configFile."sway/config.d/gaps.conf".source = ./config/config.d/gaps.conf;

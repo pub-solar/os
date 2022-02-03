@@ -5,5 +5,6 @@ in
   imports = [ ../cachix ];
   config = {
     pub-solar.x-os.iso-options.enable = true;
+    pub-solar.sway.terminal = "foot";
   };
 }

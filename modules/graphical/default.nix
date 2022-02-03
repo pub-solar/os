@@ -84,6 +84,7 @@ in
     home-manager = with pkgs; setAttrByPath [ "users" psCfg.user.name ] {
       home.packages = [
         alacritty
+        foot
         chromium
         firefox-wayland
 
