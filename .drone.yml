@@ -104,12 +104,14 @@ steps:
         - tag
     environment:
       NIX_FLAGS: "--store /tmp/build-store --print-build-logs --verbose"
+      SUBCMD_FLAGS: "--eval-store local"
     commands:
-      - 'echo NIX_FLAGS: $$NIX_FLAGS'
-      - nix $$NIX_FLAGS flake --eval-store local check
-      - nix $$NIX_FLAGS build --eval-store local ".#nixosConfigurations.PubSolarOS.config.system.build.toplevel"
-      - nix $$NIX_FLAGS develop --eval-store local --command echo OK
-      - nix $$NIX_FLAGS develop --eval-store local --command bud --help
+      - 'echo NIX_FLAGS: $NIX_FLAGS'
+      - 'echo SUBCMD_FLAGS: $SUBCMD_FLAGS'
+      - nix $$NIX_FLAGS flake check $$SUBCMD_FLAGS
+      - nix $$NIX_FLAGS build $$SUBCMD_FLAGS ".#nixosConfigurations.PubSolarOS.config.system.build.toplevel"
+      - nix $$NIX_FLAGS develop $$SUBCMD_FLAGS --command echo OK
+      - nix $$NIX_FLAGS develop $$SUBCMD_FLAGS --command bud --help
 
 volumes:
   - name: nix-store-cache
@@ -171,6 +173,6 @@ volumes:
 
 ---
 kind: signature
-hmac: a1412a5be78c44f176af32d63f2716c95c0d3992f4809b192166dfa7dd7e3c28
+hmac: ad51a3555d52db391d510571e2e26435b8b105145d18034a453ab653fd9e7bd3
 
 ...
