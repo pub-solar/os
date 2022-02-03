@@ -95,9 +95,6 @@ name: Check
 steps:
   - name: "Check"
     image: docker.nix-community.org/nixpkgs/nix-flakes:latest
-    volumes:
-      - name: nix-store-cache
-        path: /nix/store
     when:
       event:
         - pull_request
@@ -108,11 +105,6 @@ steps:
       - nix -Lv develop -c echo OK
       - nix -Lv develop --command bud --help
 
-volumes:
-  - name: nix-store-cache
-    host:
-      path: "/var/nix/build-store"
-
 ---
 kind: pipeline
 type: docker
@@ -122,10 +114,8 @@ steps:
   - name: "Build ISO"
     image: docker.nix-community.org/nixpkgs/nix-flakes:latest
     volumes:
-      - name: file-exchange
+      - name: nix-store
         path: /var/nix/iso-cache
-      - name: nix-store-cache
-        path: /nix/store
     commands:
       - nix -Lv develop --command bud build bootstrap bootstrapIso
       - cp $(readlink -f result)/iso/*.iso /var/nix/iso-cache/
@@ -133,7 +123,7 @@ steps:
   - name: "Publish ISO"
     image: appleboy/drone-scp
     volumes:
-      - name: file-exchange
+      - name: nix-store
         path: /var/nix/iso-cache
     settings:
       host:
@@ -157,14 +147,12 @@ trigger:
     - tag
 
 volumes:
-  - name: file-exchange
-    temp: {}
-  - name: nix-store-cache
+  - name: nix-store
     host:
-      path: "/var/nix/build-store"
+      path: "/var/nix/iso-cache"
 
 ---
 kind: signature
-hmac: e7e602f8b3b21bbc0644dbd285c6d87b3dc5644437c8c693c92ced17de094bab
+hmac: 07b8c6165ef4d12754e43839d87d6a68d98436d3c5f8fbb6fee91c628211c1e7
 
 ...
