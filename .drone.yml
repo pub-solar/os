@@ -95,6 +95,7 @@ name: Check
 steps:
   - name: "Check"
     image: docker.nix-community.org/nixpkgs/nix-flakes:latest
+    privileged: true
     volumes:
       - name: nix-store-cache
         path: /tmp/build-store
@@ -104,15 +105,12 @@ steps:
         - tag
     environment:
       NIX_FLAGS: "--store /tmp/build-store --print-build-logs --verbose"
-      SUBCMD_FLAGS: "--eval-store local"
     commands:
       - 'echo NIX_FLAGS: $NIX_FLAGS'
-      - 'echo SUBCMD_FLAGS: $SUBCMD_FLAGS'
-      # DEBUG: try if nix build works with build store as cache
-      #- nix $$NIX_FLAGS flake check $$SUBCMD_FLAGS
+      - nix $$NIX_FLAGS flake check
       - nix $$NIX_FLAGS build ".#nixosConfigurations.PubSolarOS.config.system.build.toplevel"
-      - nix $$NIX_FLAGS develop $$SUBCMD_FLAGS --command echo OK
-      - nix $$NIX_FLAGS develop $$SUBCMD_FLAGS --command bud --help
+      - nix $$NIX_FLAGS develop --command echo OK
+      - nix $$NIX_FLAGS develop --command bud --help
 
 volumes:
   - name: nix-store-cache
@@ -127,6 +125,7 @@ name: Publish ISO
 steps:
   - name: "Build ISO"
     image: docker.nix-community.org/nixpkgs/nix-flakes:latest
+    privileged: true
     volumes:
       - name: file-exchange
         path: /var/nix/iso-cache
@@ -135,7 +134,7 @@ steps:
     commands:
       - |
         nix --store /tmp/build-store --print-build-logs --verbose \
-          develop --eval-store local --command \
+          develop --command \
             bud build bootstrap bootstrapIso
       - cp $(readlink -f result)/iso/*.iso /var/nix/iso-cache/
 
@@ -174,6 +173,6 @@ volumes:
 
 ---
 kind: signature
-hmac: 74162ec46f0cc1e66132a159c4a55472268cb880c8ba43fb477dd8befc6021d9
+hmac: 82ee8582e7225b968e92dfd585d3d2e12205af1bd2946e915532d421d5ee50c6
 
 ...
