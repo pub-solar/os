@@ -105,12 +105,13 @@ steps:
         - tag
     environment:
       NIX_FLAGS: "--store /tmp/build-store --print-build-logs --verbose"
+      SUBCMD_FLAGS: "--eval-store local"
     commands:
       - 'echo NIX_FLAGS: $NIX_FLAGS'
-      - nix $$NIX_FLAGS flake check
-      - nix $$NIX_FLAGS build ".#nixosConfigurations.PubSolarOS.config.system.build.toplevel"
-      - nix $$NIX_FLAGS develop --command echo OK
-      - nix $$NIX_FLAGS develop --command bud --help
+      - nix $$NIX_FLAGS flake check $$SUBCMD_FLAGS
+      - nix $$NIX_FLAGS build $$SUBCMD_FLAGS ".#nixosConfigurations.PubSolarOS.config.system.build.toplevel"
+      - nix $$NIX_FLAGS develop $$SUBCMD_FLAGS --command echo OK
+      - nix $$NIX_FLAGS develop $$SUBCMD_FLAGS --command bud --help
 
 volumes:
   - name: nix-store-cache
@@ -134,7 +135,7 @@ steps:
     commands:
       - |
         nix --store /tmp/build-store --print-build-logs --verbose \
-          develop --command \
+          develop --eval-store local --command \
             bud build bootstrap bootstrapIso
       - cp $(readlink -f result)/iso/*.iso /var/nix/iso-cache/
 
@@ -173,6 +174,6 @@ volumes:
 
 ---
 kind: signature
-hmac: 82ee8582e7225b968e92dfd585d3d2e12205af1bd2946e915532d421d5ee50c6
+hmac: 2b930d7f9abddb31d0f514259d78d6b01693f5a17fb681da69e5a6e116cf30fb
 
 ...
