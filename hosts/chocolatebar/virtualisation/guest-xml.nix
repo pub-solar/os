@@ -198,7 +198,7 @@ in
           <source>
             <vendor id='0x046d'/>
             <product id='0xc52b'/>
-            <address bus='1' device='4'/>
+            <address bus='1' device='3'/>
           </source>
           <address type='usb' bus='0' port='5'/>
         </hostdev>

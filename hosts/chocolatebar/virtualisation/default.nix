@@ -6,7 +6,7 @@ let
   createService = import ./create-service.nix;
 
   isolateGPU = "rx550x";
-  handOverUSBDevices = false;
+  handOverUSBDevices = true;
 
   isolateAnyGPU = isolateGPU != null;
 in
