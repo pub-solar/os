@@ -42,10 +42,6 @@
 
       # PubSolarOS additions
       nix-dram.url = "github:dramforever/nix-dram";
-
-      # b12f additions
-      b12f-nix-fonts.url = "git+https://git.b12f.io/b12f/nix-fonts?ref=main";
-      b12f-nix-fonts.inputs.nixpkgs.follows = "latest";
     };
 
   outputs =
@@ -60,7 +56,6 @@
     , nvfetcher
     , deploy
     , nix-dram
-    , b12f-nix-fonts
     , ...
     } @ inputs:
     digga.lib.mkFlake
@@ -76,8 +71,6 @@
               nur.overlay
               agenix.overlay
               nvfetcher.overlay
-              nix-dram.overlay
-              b12f-nix-fonts.overlay
               ./pkgs/default.nix
             ];
           };

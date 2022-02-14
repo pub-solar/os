@@ -58,6 +58,9 @@ let
     # experimental wayland in firefox/thunderbird
     MOZ_ENABLE_WAYLAND = "1";
 
+    # chromium / electron on wayland: enable ozone (native wayland mode)
+    NIXOS_OZONE_WL = "1";
+
     # Vagrant
     VAGRANT_HOME = "${xdg.dataHome}/vagrant";
     VAGRANT_DEFAULT_PROVIDER = "libvirt";

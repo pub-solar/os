@@ -35,7 +35,5 @@ in
         "transmission.local"
       ];
     };
-
-    fonts.fonts = lib.attrValues pkgs.b12f.fonts;
   };
 }

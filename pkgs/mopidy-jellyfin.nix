@@ -1,20 +1,20 @@
 self: with self;
 let
-  websocket-client = python38.pkgs.buildPythonPackage rec {
+  websocket-client = python39.pkgs.buildPythonPackage rec {
     pname = "websocket-client";
-    version = "1.0.0";
+    version = "1.2.1";
     doCheck = false;
-    src = python38.pkgs.fetchPypi {
+    src = python39.pkgs.fetchPypi {
       inherit pname version;
-      sha256 = "sha256-UFGzii9MJ/vXygd+uyPsaWWmJt7VqVY382vhs1tsT4E=";
+      sha256 = "sha256-jftxXYqZL1cS//jIQ62ulOIrIqmbLF5rDsShqYHMTg0=";
     };
   };
 in
-python38.pkgs.buildPythonPackage rec {
+python39.pkgs.buildPythonPackage rec {
   pname = "Mopidy-Jellyfin";
   version = "1.0.2";
   doCheck = false;
-  propagatedBuildInputs = with python38.pkgs; [
+  propagatedBuildInputs = with python39.pkgs; [
     unidecode
     websocket-client
     requests
@@ -22,7 +22,7 @@ python38.pkgs.buildPythonPackage rec {
     pykka
     mopidy
   ];
-  src = python38.pkgs.fetchPypi {
+  src = python39.pkgs.fetchPypi {
     inherit pname version;
     sha256 = "sha256-5XimIIQSpvNyQbSOFtSTkA0jhA0V68BbyQEQNnov+0g=";
   };
