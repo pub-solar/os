@@ -6,7 +6,7 @@ pkgs: {
     mopidy-soundcloud
     mopidy-youtube
     mopidy-local
-    mopidy-jellyfin
+    # mopidy-jellyfin
   ];
 
   configuration = ''

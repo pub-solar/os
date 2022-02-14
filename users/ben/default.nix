@@ -23,6 +23,7 @@ in
         gpgKeyId = "4406E80E13CD656C";
       };
 
+      paperless.enable = true;
       email.enable = true;
       uhk.enable = true;
     };

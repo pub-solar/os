@@ -19,7 +19,7 @@ in
     iwdConfig = mkOption {
       type = with types; nullOr (attrsOf (attrsOf (oneOf [ bool int str ])));
       default = null;
-      description = "Configuratoin of iNet Wireless Daemon.";
+      description = "Configuration of iNet Wireless Daemon.";
     };
   };
   config = {
