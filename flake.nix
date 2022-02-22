@@ -42,6 +42,7 @@
 
       # PubSolarOS additions
       nix-dram.url = "github:dramforever/nix-dram";
+      nix-dram.inputs.nixpkgs.follows = "latest";
     };
 
   outputs =
