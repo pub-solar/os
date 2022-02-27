@@ -116,7 +116,6 @@ name: Publish ISO
 steps:
   - name: "Build ISO"
     image: docker.nix-community.org/nixpkgs/nix-flakes:latest
-    privileged: true
     volumes:
       - name: file-exchange
         path: /var/nix/iso-cache
