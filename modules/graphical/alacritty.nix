@@ -106,6 +106,23 @@
       cursor = "0xe3e1e4";
     };
 
+    # Colors used for the search bar and match highlighting.
+    search = {
+      # Allowed values are CellForeground/CellBackground, which reference the
+      # affected cell, or hexadecimal colors like #ff00ff.
+      matches = {
+        foreground = "0xe5c463";
+        background = "0x1a181a";
+      };
+      focused_match = {
+        foreground = "0xe5c463";
+        background = "0xe3e1e4";
+      };
+      #bar =
+      #  background = "#c5c8c6";
+      #  foreground = "#1d1f21";
+    };
+
     # Normal colors
     normal = {
       black = "0x1a181a";
