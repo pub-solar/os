@@ -13,6 +13,7 @@ in
     home.packages = with pkgs; [
       dogecoin
       nodejs
+      itch
     ];
 
     programs.ssh = {

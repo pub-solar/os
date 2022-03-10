@@ -6,10 +6,6 @@ let
   xdg = config.home-manager.users."${psCfg.user.name}".xdg;
 in
 {
-  imports = [
-    ./scanbd.nix
-  ];
-
   options.pub-solar.paperless = {
     enable = mkEnableOption "All you need to go paperless";
     ocrLanguage = mkOption {
@@ -27,7 +23,6 @@ in
   };
 
   config = mkIf cfg.enable {
-    services.scanbd.enable = true;
     services.paperless-ng = {
       enable = true;
       consumptionDir = cfg.consumptionDir;

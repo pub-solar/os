@@ -13,8 +13,8 @@ in
         <libosinfo:os id="${vm.id}"/>
       </libosinfo:libosinfo>
     </metadata>
-    <memory unit='KiB'>33554432</memory>
-    <currentMemory unit='KiB'>33554432</currentMemory>
+    <memory unit='KiB'>50331648</memory>
+    <currentMemory unit='KiB'>50331648</currentMemory>
     <vcpu placement='static'>12</vcpu>
     <cputune>
       <vcpupin vcpu='0' cpuset='6'/>
@@ -96,7 +96,7 @@ in
     <devices>
       <emulator>${pkgs.qemu}/bin/qemu-system-x86_64</emulator>
       <disk type='block' device='disk'>
-        <driver name='qemu' type='raw'/>
+        <driver name='qemu' type='raw' cache='none' discard='unmap' />
         <source dev='${vm.disk}'/>
         <backingStore/>
         <target dev='vdb' bus='virtio'/>

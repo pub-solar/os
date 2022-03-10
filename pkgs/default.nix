@@ -16,4 +16,6 @@ with final; {
   toggle-kbd-layout = writeShellScriptBin "toggle-kbd-layout" (import ./toggle-kbd-layout.nix final);
   uhk-agent = import ./uhk-agent.nix final;
   wcwd = writeShellScriptBin "wcwd" (import ./wcwd.nix final);
+
+  scan2paperless = writeShellScriptBin "scan2paperless" (import ./scan2paperless.nix final);
 }
