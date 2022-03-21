@@ -111,6 +111,7 @@ in
     airline
     editorconfig-vim
     nnn-vim
+    quick-scope
     suda
     syntastic
     vim-gutentags
