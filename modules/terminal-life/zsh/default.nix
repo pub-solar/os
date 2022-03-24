@@ -95,6 +95,5 @@ in
     source ${pkgs.fzf}/share/fzf/completion.zsh
     source ${pkgs.git-bug}/share/zsh/site-functions/git-bug
     eval "$(direnv hook zsh)"
-  ''
-  + builtins.readFile ./fzf.zsh;
+  '';
 }

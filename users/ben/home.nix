@@ -46,6 +46,22 @@ in
           user = "web7dgkba_c9em8f";
           port = 2244;
         };
+
+        "latenight.blue" = {
+          hostname = "latenight.blue";
+          user = "lnb";
+          extraOptions = {
+            MACs = "hmac-sha2-512-etm@openssh.com";
+          };
+        };
+
+        "blacktea.io" = {
+          hostname = "latenight.blue";
+          user = "lnb";
+          extraOptions = {
+            MACs = "hmac-sha2-512-etm@openssh.com";
+          };
+        };
       };
     };
 
@@ -78,4 +94,8 @@ in
     owner = "mopidy";
   };
   services.mopidy.extraConfigFiles = [ "/run/secrets/mopidy.conf" ];
+
+  programs.ssh.extraConfig = "
+    PubkeyAcceptedKeyTypes +ssh-rsa
+  ";
 }
