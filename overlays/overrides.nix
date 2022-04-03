@@ -22,6 +22,7 @@ channels: final: prev: {
     obs-studio
     obs-studio-plugins
     looking-glass-client
+    vimPlugins
     ;
 
 

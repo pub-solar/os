@@ -99,7 +99,7 @@ in
     instant-nvim
 
     ack-vim
-    airline
+    vim-airline
     editorconfig-vim
     nnn-vim
     quick-scope
