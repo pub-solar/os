@@ -13,8 +13,8 @@ in
         <libosinfo:os id="${vm.id}"/>
       </libosinfo:libosinfo>
     </metadata>
-    <memory unit='KiB'>50331648</memory>
-    <currentMemory unit='KiB'>50331648</currentMemory>
+    <memory unit='KiB'>33554432</memory>
+    <currentMemory unit='KiB'>33554432</currentMemory>
     <vcpu placement='static'>12</vcpu>
     <cputune>
       <vcpupin vcpu='0' cpuset='6'/>
