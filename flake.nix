@@ -140,15 +140,6 @@
         homeConfigurations = digga.lib.mkHomeConfigurations self.nixosConfigurations;
 
         deploy.nodes = digga.lib.mkDeployNodes self.nixosConfigurations { };
-
-        defaultTemplate = self.templates.bud;
-        templates.bud.path = ./.;
-        templates.bud.description = "bud template";
-
       }
-    //
-    {
-      budModules = { devos = import ./shell/bud; };
-    }
   ;
 }
