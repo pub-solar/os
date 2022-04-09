@@ -8,9 +8,10 @@ set completeopt=menuone,noinsert,noselect
 " Avoid showing extra messages when using completion
 set shortmess+=c
 
-" Configure neovim 5 experimental LSPs
+" Configure neovim 0.6+ experimental LSPs
 " https://github.com/neovim/nvim-lspconfig
-" https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
+" https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
+" https://github.com/neovim/nvim-lspconfig/wiki/UI-Customization
 " https://gitlab.com/Iron_E/dotfiles/-/blob/master/.config/nvim/lua/_config/plugin/nvim_lsp.lua
 lua <<EOF
   local nvim_lsp    = require('lspconfig')
@@ -175,21 +176,27 @@ lua <<EOF
       { name = 'luasnip' },
     },
   }
-EOF
 
-" Visualize diagnostics
-let g:diagnostic_enable_virtual_text = 1
-let g:diagnostic_trimmed_virtual_text = '40'
-" Don't show diagnostics while in insert mode
-let g:diagnostic_insert_delay = 1
+-- Configure diagnostics
+vim.diagnostic.config({
+  virtual_text = false,
+  signs = true,
+  underline = true,
+  update_in_insert = false,
+  severity_sort = false,
+})
+
+-- Change diagnostic symbols in the sign column (gutter)
+local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+for type, icon in pairs(signs) do
+  local hl = "DiagnosticSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
+EOF
 
 " Show diagnostic popup on cursor hold
 autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, { focus = false, scope = "cursor" })
 
-" Goto previous/next diagnostic warning/error
-" nnoremap <silent> g[ <cmd>PrevDiagnosticCycle<cr>
-" nnoremap <silent> g] <cmd>NextDiagnosticCycle<cr>
-
 " have a fixed column for the diagnostics to appear in
 " this removes the jitter when warnings/errors flow in
-set signcolumn=yes
+set signcolumn=yes:2
