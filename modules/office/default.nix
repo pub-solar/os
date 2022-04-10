@@ -20,6 +20,8 @@ in
         gnome3.simple-scan
         # Tools like pdfunite
         poppler_utils
+        # tool for annotating PDFs
+        xournalpp
       ];
     };
   };
