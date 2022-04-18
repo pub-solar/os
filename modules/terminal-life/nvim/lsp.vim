@@ -51,7 +51,8 @@ lua <<EOF
 
   -- Add additional capabilities supported by nvim-cmp
   local capabilities = vim.lsp.protocol.make_client_capabilities()
-  capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+  -- vscode HTML lsp needs this https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#html
+  capabilities.textDocument.completion.completionItem.snippetSupport = true
 
   for lsp_key, lsp_settings in pairs({
         'bashls', ------------------------------- Bash
@@ -77,7 +78,11 @@ lua <<EOF
             }
         },
         ['jsonls'] = { -------------------------- JSON
-            ['cmd'] = {"json-languageserver", "--stdio"}
+            ['settings'] = {
+                ['json'] = {
+                    ['schemas' ] = require('schemastore').json.schemas()
+                }
+            }
         },
         'phpactor', ----------------------------- PHP
         'pylsp', --------------------------------- Python
@@ -126,6 +131,13 @@ lua <<EOF
       nvim_lsp[lsp_key].setup(lsp_settings)
     end
   end -- ‡
+
+  -- configure floating diagnostics appearance, symbols
+  local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+  for type, icon in pairs(signs) do
+    local hl = "DiagnosticSign" .. type
+    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+  end
 
   -- Set completeopt to have a better completion experience
   vim.o.completeopt = 'menuone,noselect'
@@ -196,6 +208,11 @@ EOF
 
 " Show diagnostic popup on cursor hold
 autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, { focus = false, scope = "cursor" })
+
+" Visualize diagnostics
+let g:diagnostic_enable_virtual_text = 1
+" Don't show diagnostics while in insert mode
+let g:diagnostic_insert_delay = 1
 
 " have a fixed column for the diagnostics to appear in
 " this removes the jitter when warnings/errors flow in
