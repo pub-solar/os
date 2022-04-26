@@ -8,6 +8,14 @@ set completeopt=menuone,noinsert,noselect
 " Avoid showing extra messages when using completion
 set shortmess+=c
 
+function AddTemplate(tmpl_file)
+    exe "0read " . a:tmpl_file
+    set nomodified
+    6
+endfunction
+
+autocmd BufNewFile shell.nix call AddTemplate("$XDG_DATA_HOME/nvim/templates/shell.nix.tmpl")
+
 " Configure neovim 0.6+ experimental LSPs
 " https://github.com/neovim/nvim-lspconfig
 " https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
