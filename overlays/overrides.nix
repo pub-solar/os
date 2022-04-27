@@ -25,6 +25,8 @@ channels: final: prev: {
     obs-studio-plugins
     looking-glass-client
     itch
+    nix-direnv
+    vimPlugins
     ;
 
 
