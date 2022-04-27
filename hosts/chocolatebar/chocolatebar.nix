@@ -18,6 +18,12 @@ in
       rocm-opencl-runtime
     ];
 
+    services.openssh.openFirewall = true;
+
+    environment.systemPackages = with pkgs; [
+      wayvnc
+    ];
+
     home-manager.users."${psCfg.user.name}".xdg.configFile = mkIf psCfg.sway.enable {
       "sway/config.d/10-autostart.conf".source = ./.config/sway/config.d/autostart.conf;
       "sway/config.d/10-input-defaults.conf".source = ./.config/sway/config.d/input-defaults.conf;
