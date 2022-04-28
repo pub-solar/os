@@ -10,7 +10,7 @@ pkgs:
 
   Service = {
     Type = "simple";
-    ExecStart = "${pkgs.wayvnc}/bin/wayvnc";
+    ExecStart = "${pkgs.wayvnc}/bin/wayvnc --render-cursor";
   };
 
   Install = {
