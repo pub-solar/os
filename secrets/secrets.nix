@@ -39,5 +39,8 @@ in
   "crypto_keyfile-chocolatebar.bin".publicKeys = chocolatebarKeys;
   "hdd_keyfile-chocolatebar.bin".publicKeys = chocolatebarKeys;
 
+  "vnc-cert-chocolatebar.pem".publicKeys = chocolatebarKeys;
+  "vnc-key-chocolatebar.pem".publicKeys = chocolatebarKeys;
+
   "mopidy.conf".publicKeys = allKeys;
 }

@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, self, ... }:
 with lib;
 let
   psCfg = config.pub-solar;
@@ -23,6 +23,18 @@ in
     environment.systemPackages = with pkgs; [
       wayvnc
     ];
+
+    age.secrets."vnc-key.pem" = {
+      file = "${self}/secrets/vnc-key-chocolatebar.pem";
+      mode = "700";
+      owner = psCfg.user.name;
+    };
+    age.secrets."vnc-cert.pem" = {
+      file = "${self}/secrets/vnc-cert-chocolatebar.pem";
+      mode = "700";
+      owner = psCfg.user.name;
+    };
+    pub-solar.sway.vnc.enable = true;
 
     home-manager.users."${psCfg.user.name}".xdg.configFile = mkIf psCfg.sway.enable {
       "sway/config.d/10-autostart.conf".source = ./.config/sway/config.d/autostart.conf;

@@ -11,6 +11,7 @@ in
 
   home-manager = pkgs.lib.setAttrByPath [ "users" psCfg.user.name ] {
     home.packages = with pkgs; [
+      tigervnc
       dogecoin
       nodejs
       itch
@@ -88,7 +89,7 @@ in
     # xdg.configFile."wallpaper.jpg".source = ./assets/wallpaper.jpg;
   };
 
-  age.secrets = pkgs.lib.setAttrByPath [ "mopidy.conf" ] {
+  age.secrets."mopidy.conf" = {
     file = "${self}/secrets/mopidy.conf";
     mode = "700";
     owner = "mopidy";
