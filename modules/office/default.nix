@@ -17,7 +17,7 @@ in
     home-manager = with pkgs; pkgs.lib.setAttrByPath [ "users" psCfg.user.name ] {
       home.packages = [
         libreoffice-fresh
-        gnome3.simple-scan
+        gnome.simple-scan
         # Tools like pdfunite
         poppler_utils
         # tool for annotating PDFs
