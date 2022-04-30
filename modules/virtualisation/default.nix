@@ -20,7 +20,7 @@ in
 
     virtualisation.libvirtd = {
       enable = true;
-      qemuOvmf = true;
+      qemu.ovmf.enable = true;
     };
     users.users = pkgs.lib.setAttrByPath [ psCfg.user.name ] {
       extraGroups = [ "libvirtd" ];

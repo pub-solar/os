@@ -20,7 +20,7 @@ in
 
     home.packages = with pkgs; [ ];
 
-    fonts.fontconfig.enable = true;
+    fonts.fontconfig.enable = mkForce true;
 
     programs.dircolors.enable = true;
     programs.dircolors.enableZshIntegration = true;

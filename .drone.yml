@@ -82,8 +82,82 @@ steps:
       password:
         from_secret: matrix_password
       template: "Upstreaming {{ build.status }} [{{ build.branch }}#{{ truncate build.commit 8 }}]({{ build.link }}) by {{ build.author }}. [Pull requests](https://git.b12f.io/pub-solar/os/pulls)"
+
+trigger:
+  event:
+    - cron
+
+---
+kind: pipeline
+type: docker
+name: Check
+
+steps:
+  - name: "Check"
+    image: docker.nix-community.org/nixpkgs/nix-flakes:latest
+    when:
+      event:
+        - pull_request
+        - tag
+    environment:
+      NIX_FLAGS: "--print-build-logs --verbose"
+    commands:
+      - 'echo DEBUG: Using NIX_FLAGS: $NIX_FLAGS'
+      - nix $$NIX_FLAGS flake check
+      - nix $$NIX_FLAGS build ".#nixosConfigurations.PubSolarOS.config.system.build.toplevel"
+      - nix $$NIX_FLAGS develop --command echo OK
+      - nix $$NIX_FLAGS develop --command bud --help
+
+---
+kind: pipeline
+type: docker
+name: Publish ISO
+
+steps:
+  - name: "Build ISO"
+    image: docker.nix-community.org/nixpkgs/nix-flakes:latest
+    volumes:
+      - name: file-exchange
+        path: /var/nix/iso-cache
+    commands:
+      - |
+        nix --print-build-logs --verbose \
+          develop --command \
+            bud build bootstrap bootstrapIso
+      - cp $(readlink -f result)/iso/*.iso /var/nix/iso-cache/
+
+  - name: "Publish ISO"
+    image: appleboy/drone-scp
+    volumes:
+      - name: file-exchange
+        path: /var/nix/iso-cache
+    settings:
+      host:
+        from_secret: ssh_host
+      user:
+        from_secret: ssh_user
+      port:
+        from_secret: ssh_port
+      key:
+        from_secret: ssh_key
+      target: /var/www/pub.solar
+      source:
+        - /var/nix/iso-cache/*.iso
+      strip_components: 3
+
+depends_on:
+  - Check
+
+trigger:
+  event:
+    - tag
+
+volumes:
+  - name: file-exchange
+    temp: {}
+
 ---
 kind: signature
-hmac: 07d9a95e8f577483d753e9eea76229ffe0c369ecd642bfc364ae183f662d2167
+hmac: e806a6980afdc1bf451be231db1a61e7917822a1f78afe3f2136eadfd632d521
 
 ...

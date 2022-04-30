@@ -15,6 +15,9 @@ in
   imports = [ "${extraModulesPath}/git/hooks.nix" ];
   git = { inherit hooks; };
 
+  # override for our own welcome
+  devshell.name = pkgs.lib.mkForce "PubSolarOS";
+
   # tempfix: remove when merged https://github.com/numtide/devshell/pull/123
   devshell.startup.load_profiles = pkgs.lib.mkForce (pkgs.lib.noDepEntry ''
     # PATH is devshell's exorbitant privilige:

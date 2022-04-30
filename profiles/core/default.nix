@@ -10,12 +10,6 @@ in
     pub-solar.audio.enable = true;
     pub-solar.crypto.enable = true;
     pub-solar.devops.enable = true;
-    pub-solar.docker.enable = true;
-    pub-solar.nextcloud.enable = true;
-    pub-solar.office.enable = true;
-    # pub-solar.printing.enable = true; # this is enabled automatically if office is enabled
-    pub-solar.server.enable = true;
-    pub-solar.printing.enable = true;
 
     # This is just a representation of the nix default
     nix.systemFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
@@ -28,6 +22,7 @@ in
         progress
         dnsutils
         inetutils
+        mtr
         pciutils
         usbutils
         gitFull
@@ -74,6 +69,7 @@ in
         # Build broken, python2.7-PyJWT-2.0.1.drv' failed
         #nixops
         psos
+        nvd
 
         # Fun
         neofetch
@@ -127,7 +123,9 @@ in
     # Service that makes Out of Memory Killer more effective
     services.earlyoom.enable = true;
 
-    boot.kernelPackages = pkgs.linuxPackages_latest;
+    # Use latest LTS linux kernel by default
+    boot.kernelPackages = pkgs.linuxPackages_5_15;
+
     boot.supportedFilesystems = [ "ntfs" ];
   };
 }

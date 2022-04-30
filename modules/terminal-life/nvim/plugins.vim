@@ -9,8 +9,10 @@ let g:gutentags_file_list_command = 'git ls-files'
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
 " Golang
-" Go test shortcut
+" Go test, Def, Decls shortcut
 nmap <Leader>got :GoTest<CR>:botright copen<CR>
+autocmd FileType go nmap gd :GoDef<CR>
+autocmd FileType go nmap gD :GoDecls<CR>
 
 " Go formatting
 autocmd FileType go setlocal noexpandtab shiftwidth=4 tabstop=4 softtabstop=4 nolist

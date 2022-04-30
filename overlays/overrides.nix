@@ -14,6 +14,7 @@ channels: final: prev: {
     starship
     deploy-rs
 
+    nixUnstable
     neovim-unwrapped
     tdesktop
     xdg-desktop-portal
