@@ -85,7 +85,7 @@ in
     stty erase '^?'
 
     precmd () {
-      echo -e "\e]2;$(pwd)\e\\"
+      echo -e -n "\e]2;$(pwd)\e\\"
     }
 
     # If a command is not found, show me where it is
