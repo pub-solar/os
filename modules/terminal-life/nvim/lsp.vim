@@ -8,6 +8,14 @@ set completeopt=menuone,noinsert,noselect
 " Avoid showing extra messages when using completion
 set shortmess+=c
 
+function AddTemplate(tmpl_file)
+    exe "0read " . a:tmpl_file
+    set nomodified
+    6
+endfunction
+
+autocmd BufNewFile shell.nix call AddTemplate("$XDG_DATA_HOME/nvim/templates/shell.nix.tmpl")
+
 " Configure neovim 0.6+ experimental LSPs
 " https://github.com/neovim/nvim-lspconfig
 " https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
@@ -45,6 +53,22 @@ lua <<EOF
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+
+    -- Show diagnostic popup on cursor hold
+    vim.api.nvim_create_autocmd("CursorHold", {
+      buffer = bufnr,
+      callback = function()
+        local opts = {
+          focusable = false,
+          close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+          border = 'rounded',
+          source = 'always',
+          prefix = ' ',
+          scope = 'cursor',
+        }
+        vim.diagnostic.open_float(nil, opts)
+      end
+    })
 
   end
 
@@ -189,9 +213,6 @@ for type, icon in pairs(signs) do
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 EOF
-
-" Show diagnostic popup on cursor hold
-autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, { focus = false, scope = "cursor" })
 
 " have a fixed column for the diagnostics to appear in
 " this removes the jitter when warnings/errors flow in
