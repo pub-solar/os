@@ -22,7 +22,6 @@ in
     [ "$(tty)" = "/dev/tty1" ] && exec sway
   '';
 
-
   shellAliases = {
     nano = "nvim";
     vi = "nvim";
@@ -83,6 +82,10 @@ in
     # MAKE CTRL+S WORK IN VIM
     stty -ixon
     stty erase '^?'
+
+    precmd () {
+      echo -e "\e]2;$(pwd)\e\\"
+    }
 
     # If a command is not found, show me where it is
     source ${pkgs.nix-index}/etc/profile.d/command-not-found.sh
