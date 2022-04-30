@@ -16,7 +16,8 @@ in
         drone-cli
         nmap
         pgcli
-        python38Packages.ansible
+        ansible
+        ansible-lint
         restic
         shellcheck
         terraform_0_15

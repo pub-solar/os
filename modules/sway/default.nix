@@ -7,6 +7,13 @@ in
 {
   options.pub-solar.sway = {
     enable = mkEnableOption "Life in boxes";
+
+    terminal = mkOption {
+      type = types.nullOr types.str;
+      default = "alacritty";
+      description = "Choose sway's default terminal";
+    };
+
     vnc.enable = mkEnableOption "Enable vnc service";
 
     v4l2loopback.enable = mkOption {
@@ -34,7 +41,17 @@ in
 
       xdg.portal = {
         enable = true;
-        extraPortals = with pkgs; [ xdg-desktop-portal-gtk xdg-desktop-portal-wlr ];
+        wlr = {
+          enable = true;
+          settings = {
+            screencast = {
+              max_fps = 30;
+              chooser_type = "simple";
+              chooser_cmd = "${pkgs.slurp}/bin/slurp -f %o -or";
+            };
+          };
+        };
+        extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
         gtkUsePortal = true;
       };
 
@@ -80,7 +97,7 @@ in
 
         systemd.user.services.wayvnc = mkIf cfg.vnc.enable (import ./wayvnc.service.nix pkgs);
 
-        xdg.configFile."sway/config".source = ./config/config;
+        xdg.configFile."sway/config".text = import ./config/config.nix { inherit config pkgs; };
         xdg.configFile."sway/config.d/colorscheme.conf".source = ./config/config.d/colorscheme.conf;
         xdg.configFile."sway/config.d/theme.conf".source = ./config/config.d/theme.conf;
         xdg.configFile."sway/config.d/gaps.conf".source = ./config/config.d/gaps.conf;

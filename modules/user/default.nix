@@ -21,6 +21,11 @@ in
         type = types.nullOr types.str;
         default = null;
       };
+      publicKeys = mkOption {
+        description = "User SSH public keys";
+        type = types.listOf types.path;
+        default = [ ];
+      };
       fullName = mkOption {
         description = "User full name";
         type = types.nullOr types.str;
