@@ -8,18 +8,15 @@ in
 # No more than 50 chars. #### 50 chars is here:  #
 #
 
-#
-# Remember blank line between title and body.
-#
 
-#
+# ^ Remember ending with an extra blank line
 # Body: Explain *what* and *why* (not *how*). Include issue number.
 # Wrap at 72 chars. ################################## which is here:  #
 #
 
-#
+
+# ^ Remember ending with an extra blank line
 # At the end: Include Co-authored-by for all contributors.
-# Include at least one empty line before it. Format:
 #
 Co-authored-by: ${user.fullName} <${user.email}>
 
