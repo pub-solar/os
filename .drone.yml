@@ -145,8 +145,8 @@ steps:
         - /var/nix/iso-cache/*.iso
       strip_components: 3
 
-#depends_on:
-#  - Check
+depends_on:
+  - Check
 
 trigger:
   event:
@@ -158,6 +158,6 @@ volumes:
 
 ---
 kind: signature
-hmac: 84b008b7e96a6407fec3dd387032b30ecbb1dd7558ceb94bbb51c9ac115948a2
+hmac: e806a6980afdc1bf451be231db1a61e7917822a1f78afe3f2136eadfd632d521
 
 ...
