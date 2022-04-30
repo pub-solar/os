@@ -8,6 +8,8 @@ in
 {
   options.pub-solar.audio = {
     enable = mkEnableOption "Life in highs and lows";
+    mopidy.enable = mkEnableOption "Life with mopidy";
+    bluetooth.enable = mkEnableOption "Life with bluetooth";
   };
 
   config = mkIf cfg.enable {
@@ -43,7 +45,7 @@ in
       config.pipewire-pulse = builtins.fromJSON (builtins.readFile ./pipewire-pulse.conf.json);
 
       # Bluetooth configuration for pipewire
-      media-session.config.bluez-monitor.rules = [
+      media-session.config.bluez-monitor.rules = mkIf cfg.bluetooth.enable [
         {
           # Matches all cards
           matches = [{ "device.name" = "~bluez_card.*"; }];
@@ -70,10 +72,10 @@ in
     };
 
     # Enable bluetooth
-    hardware.bluetooth.enable = true;
-    services.blueman.enable = true;
+    hardware.bluetooth.enable = mkIf cfg.bluetooth.enable true;
+    services.blueman.enable = mkIf cfg.bluetooth.enable true;
 
     # Enable audio server & client
-    services.mopidy = import ./mopidy.nix pkgs;
+    services.mopidy = mkIf cfg.mopidy.enable ((import ./mopidy.nix) pkgs);
   };
 }

@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 let
   psCfg = config.pub-solar;
+  wlroots = psCfg.graphical.wayland;
   xdg = config.home-manager.users."${psCfg.user.name}".xdg;
   variables = {
     XDG_CONFIG_HOME = xdg.configHome;
@@ -15,6 +16,7 @@ let
     ECORE_EVAS_ENGINE = "wayland_egl";
     ELM_ENGINE = "wayland_egl";
     SDL_VIDEODRIVER = "wayland";
+    WLR_RENDERER = if wlroots.software-renderer.enable then "pixman" else "gles2";
 
     EDITOR = "/etc/profiles/per-user/${psCfg.user.name}/bin/nvim";
     VISUAL = "/etc/profiles/per-user/${psCfg.user.name}/bin/nvim";

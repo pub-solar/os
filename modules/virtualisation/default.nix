@@ -14,12 +14,13 @@ in
   config = mkIf cfg.enable {
     boot.kernelParams = [
       "amd_iommu=on"
+      "intel_iommu=on"
       "iommu=pt"
     ];
 
     virtualisation.libvirtd = {
       enable = true;
-      qemuOvmf = true;
+      qemu.ovmf.enable = true;
     };
     users.users = pkgs.lib.setAttrByPath [ psCfg.user.name ] {
       extraGroups = [ "libvirtd" ];

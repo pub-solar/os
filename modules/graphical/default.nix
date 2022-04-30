@@ -26,6 +26,11 @@ in
         default = { };
       };
     };
+    wayland.software-renderer.enable = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Feature flag enabling wlroots software renderer, useful in VMs";
+    };
   };
 
   config = mkIf cfg.enable {
@@ -49,7 +54,7 @@ in
       };
     };
 
-    services.getty.autologinUser = "${psCfg.user.name}";
+    services.getty.autologinUser = mkForce "${psCfg.user.name}";
 
     qt5 = {
       enable = true;
@@ -81,9 +86,10 @@ in
       source-sans-pro
     ];
 
-    home-manager = with pkgs; pkgs.lib.setAttrByPath [ "users" psCfg.user.name ] {
+    home-manager = with pkgs; setAttrByPath [ "users" psCfg.user.name ] {
       home.packages = [
         alacritty
+        foot
         chromium
         firefox-wayland
 

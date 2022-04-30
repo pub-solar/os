@@ -20,7 +20,7 @@ in
 
     home.packages = with pkgs; [ ];
 
-    fonts.fontconfig.enable = true;
+    fonts.fontconfig.enable = mkForce true;
 
     programs.dircolors.enable = true;
     programs.dircolors.enableZshIntegration = true;
@@ -54,6 +54,20 @@ in
     # Ensure nvim backup directory gets created
     # Workaround for E510: Can't make backup file (add ! to override)
     xdg.dataFile."nvim/backup/.keep".text = "";
+    xdg.dataFile."nvim/templates/.keep".text = "";
+    xdg.dataFile."shell.nix.tmpl" = {
+      text = ''
+        let
+          unstable = import (fetchTarball https://github.com/nixos/nixpkgs/archive/nixos-unstable.tar.gz) { };
+        in
+        { nixpkgs ? import <nixpkgs> {} }:
+        with nixpkgs; mkShell {
+          buildInputs = [
+          ];
+        }
+      '';
+      target = "nvim/templates/shell.nix.tmpl";
+    };
 
     # Allow unfree packages only on a user basis, not on a system-wide basis
     xdg.configFile."nixpkgs/config.nix".text = " { allowUnfree = true; } ";
