@@ -24,6 +24,7 @@ in
 
 [commit]
   gpgsign = true
+  template = ${xdg.configHome}/git/gitmessage
 [tag]
   gpgsign = true
 [init]
