@@ -19,6 +19,7 @@ in
     ];
 
     services.openssh.openFirewall = true;
+    networking.firewall.allowedTCPPorts = mkIf psCfg.sway.vnc.enable [ 5901 ];
 
     environment.systemPackages = with pkgs; [
       wayvnc
