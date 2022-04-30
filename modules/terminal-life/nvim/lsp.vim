@@ -54,6 +54,22 @@ lua <<EOF
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
 
+    -- Show diagnostic popup on cursor hold
+    vim.api.nvim_create_autocmd("CursorHold", {
+      buffer = bufnr,
+      callback = function()
+        local opts = {
+          focusable = false,
+          close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+          border = 'rounded',
+          source = 'always',
+          prefix = ' ',
+          scope = 'cursor',
+        }
+        vim.diagnostic.open_float(nil, opts)
+      end
+    })
+
   end
 
   -- Add additional capabilities supported by nvim-cmp
@@ -198,8 +214,7 @@ for type, icon in pairs(signs) do
 end
 EOF
 
-" Show diagnostic popup on cursor hold
-autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, { focus = false, scope = "cursor" })
+"autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focus = false, scope = "cursor" })
 
 " have a fixed column for the diagnostics to appear in
 " this removes the jitter when warnings/errors flow in
