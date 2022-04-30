@@ -12,8 +12,7 @@ in
   config = mkIf cfg.enable {
     home-manager = with pkgs; pkgs.lib.setAttrByPath [ "users" psCfg.user.name ] {
       home.packages = [
-        #mySignalDesktop
-        signal-desktop
+        ps-signal-desktop
         tdesktop
         element-desktop
         irssi
