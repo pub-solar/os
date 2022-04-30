@@ -95,10 +95,11 @@ in
 
         flameshot
         libnotify
-        gnome3.adwaita-icon-theme
+        gnome.adwaita-icon-theme
         gnome.eog
-        gnome3.nautilus
+        gnome.nautilus
         gnome.yelp
+        hicolor-icon-theme
 
         wine
 
@@ -119,7 +120,7 @@ in
         enable = true;
         font.name = "Lato";
         iconTheme = {
-          package = pkgs.papirus-maia-icon-theme;
+          package = pkgs.papirus-icon-theme;
           name = "Papirus-Adapta-Nokto-Maia";
         };
         theme = {
