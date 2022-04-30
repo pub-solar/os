@@ -2,6 +2,7 @@
 let
   cfg = config.pub-solar.x-os;
 in
+with lib;
 {
   options.pub-solar.x-os.iso-options.enable = mkOption {
     type = types.bool;
