@@ -87,26 +87,26 @@ trigger:
   event:
     - cron
 
-#---
-#kind: pipeline
-#type: docker
-#name: Check
-#
-#steps:
-#  - name: "Check"
-#    image: docker.nix-community.org/nixpkgs/nix-flakes:latest
-#    when:
-#      event:
-#        - pull_request
-#        - tag
-#    environment:
-#      NIX_FLAGS: "--print-build-logs --verbose"
-#    commands:
-#      - 'echo NIX_FLAGS: $NIX_FLAGS'
-#      - nix $$NIX_FLAGS flake check
-#      - nix $$NIX_FLAGS build ".#nixosConfigurations.PubSolarOS.config.system.build.toplevel"
-#      - nix $$NIX_FLAGS develop --command echo OK
-#      - nix $$NIX_FLAGS develop --command bud --help
+---
+kind: pipeline
+type: docker
+name: Check
+
+steps:
+  - name: "Check"
+    image: docker.nix-community.org/nixpkgs/nix-flakes:latest
+    when:
+      event:
+        - pull_request
+        - tag
+    environment:
+      NIX_FLAGS: "--print-build-logs --verbose"
+    commands:
+      - 'echo DEBUG: Using NIX_FLAGS: $NIX_FLAGS'
+      - nix $$NIX_FLAGS flake check
+      - nix $$NIX_FLAGS build ".#nixosConfigurations.PubSolarOS.config.system.build.toplevel"
+      - nix $$NIX_FLAGS develop --command echo OK
+      - nix $$NIX_FLAGS develop --command bud --help
 
 ---
 kind: pipeline
@@ -158,6 +158,6 @@ volumes:
 
 ---
 kind: signature
-hmac: e87b38b90d8b247719f395fd1f15df7ef534d036a5bc5efe140cee8e3a8643da
+hmac: 84b008b7e96a6407fec3dd387032b30ecbb1dd7558ceb94bbb51c9ac115948a2
 
 ...
