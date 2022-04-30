@@ -76,6 +76,9 @@ lua <<EOF
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
+  -- vscode HTML lsp needs this https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#html
+  capabilities.textDocument.completion.completionItem.snippetSupport = true
+
   for lsp_key, lsp_settings in pairs({
         'bashls', ------------------------------- Bash
         'ccls', --------------------------------- C / C++ / Objective-C
@@ -100,10 +103,14 @@ lua <<EOF
             }
         },
         ['jsonls'] = { -------------------------- JSON
-            ['cmd'] = {"json-languageserver", "--stdio"}
+            ['settings'] = {
+                ['json'] = {
+                    ['schemas' ] = require('schemastore').json.schemas()
+                }
+            }
         },
         'phpactor', ----------------------------- PHP
-        'pylsp', --------------------------------- Python
+        'pylsp', -------------------------------- Python
         'rnix', --------------------------------- Nix
         'solargraph', --------------------------- Ruby
         'rust_analyzer', ------------------------ Rust
@@ -114,7 +121,6 @@ lua <<EOF
             ['filetypes'] = { "terraform", "hcl", "tf" }
         },
         'tsserver', ----------------------------- Typescript / JavaScript
-        'angularls', ---------------------------- Angular
         'vuels', -------------------------------- Vue
         'svelte', ------------------------------- Svelte
         ['yamlls'] = { -------------------------- YAML
@@ -125,6 +131,7 @@ lua <<EOF
                         ['https://json.schemastore.org/github-action'] = '.github/action.{yml,yaml}',
                         ['https://json.schemastore.org/ansible-stable-2.9'] = 'roles/tasks/*.{yml,yaml}',
                         ['https://json.schemastore.org/drone'] = '*.drone.{yml,yaml}',
+                        ['https://json.schemastore.org/swagger-2.0'] = 'swagger.{yml,yaml}',
                     }
                 }
             }

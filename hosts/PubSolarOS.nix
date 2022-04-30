@@ -1,7 +1,10 @@
 { suites, ... }:
 {
   ### root password is empty by default ###
-  imports = suites.base;
+  ### default password: pub-solar, optional: add your SSH keys
+  imports =
+    suites.iso
+  ;
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;

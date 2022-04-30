@@ -4,7 +4,7 @@
 
   "height": 26, // Waybar height
   "modules-left": ["sway/workspaces", "sway/mode"],
-  "modules-center": ["mpd"],
+  //"modules-center": ["mpd"],
   "modules-right": ["sway/language", "pulseaudio", "network", "idle_inhibitor", "battery", "clock", "tray"],
   "sway/workspaces": {
     "disable-scroll": true

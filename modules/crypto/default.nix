@@ -30,7 +30,7 @@ in
       };
 
       home.packages = [
-        gnome3.seahorse
+        gnome.seahorse
         keepassxc
         libsecret
         qMasterPassword

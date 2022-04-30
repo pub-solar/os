@@ -20,7 +20,7 @@ in
 
     home.packages = with pkgs; [ ];
 
-    fonts.fontconfig.enable = true;
+    fonts.fontconfig.enable = mkForce true;
 
     programs.dircolors.enable = true;
     programs.dircolors.enableZshIntegration = true;
@@ -32,6 +32,7 @@ in
     xdg.mimeApps = import ./mimeapps.nix;
 
     xdg.configFile."git/config".text = import ./.config/git/config.nix { inherit config; inherit pkgs; };
+    xdg.configFile."git/gitmessage".text = import ./.config/git/gitmessage.nix { inherit config; inherit pkgs; };
     xdg.configFile."git/global_gitignore".text = import ./.config/git/global_gitignore.nix { inherit config; inherit pkgs; };
     xdg.configFile."dircolors".source = ./.config/dircolors;
     xdg.configFile."xmodmap".source = ./.config/xmodmap;
