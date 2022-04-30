@@ -214,8 +214,6 @@ for type, icon in pairs(signs) do
 end
 EOF
 
-"autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focus = false, scope = "cursor" })
-
 " have a fixed column for the diagnostics to appear in
 " this removes the jitter when warnings/errors flow in
 set signcolumn=yes:2
