@@ -15,33 +15,16 @@ let
     };
   };
 
-  sonokai = pkgs.vimUtils.buildVimPlugin {
-    name = "sonokai";
-    src = pkgs.fetchFromGitHub {
-      owner = "sainnhe";
-      repo = "sonokai";
-      rev = "51e7ee8b13f9c2e4eae33f8d745eaa1f320b0ae6";
-      sha256 = "0svqr6dnpk2p5qhb6j0rllns8f0f4886wxpx69wgazjx84bx728i";
-    };
-  };
-  suda = pkgs.vimUtils.buildVimPlugin {
-    name = "suda";
-    src = pkgs.fetchFromGitHub {
-      owner = "lambdalisue";
-      repo = "suda.vim";
-      rev = "fbb138f5090c3db4dabeba15326397a09df6b73b";
-      sha256 = "ztZ5UPd2y4Mkore/QLfMCwjM0Qy4eWCOw535NzDSfgY=";
-    };
-  };
   workspace = pkgs.vimUtils.buildVimPlugin {
     name = "vim-workspace";
     src = pkgs.fetchFromGitHub {
       owner = "thaerkh";
       repo = "vim-workspace";
-      rev = "faa835406990171bbbeff9254303dad49bad17cb";
-      sha256 = "w6CcFcIplwUVcvx54rbTwThBxus1k7yHot2TpdNQ61M=";
+      rev = "c26b473f9b073f24bacecd38477f44c5cd1f5a62";
+      sha256 = "sha256-XV7opLyfkHIDO0+JJaO/x0za0gsHuklrzapTGdLHJmI=";
     };
   };
+
   beautify = pkgs.vimUtils.buildVimPlugin {
     name = "vim-beautify";
     src = pkgs.fetchFromGitHub {
@@ -49,6 +32,16 @@ let
       repo = "vim-beautify";
       rev = "e0691483927dc5a0c051433602397419f9628623";
       sha256 = "QPTCl6KaGcAjTS5yVDov9yxmv0fDaFoPLMsrtVIG6GQ=";
+    };
+  };
+
+  apprentice = pkgs.vimUtils.buildVimPlugin {
+    name = "vim-apprentice";
+    src = pkgs.fetchFromGitHub {
+      owner = "romainl";
+      repo = "Apprentice";
+      rev = "ecd41698037f15a58125b349be76dbd2595bfb6d";
+      sha256 = "sha256-9s7Yzn3IEJBjcyUq9NBIQ9wb45Xr7jOkEIoWf0lAYYg=";
     };
   };
 in
@@ -97,16 +90,20 @@ in
     instant-nvim
 
     ack-vim
-    airline
+    vim-airline
     editorconfig-vim
     nnn-vim
-    suda
+    quick-scope
+    suda-vim
     syntastic
     vim-gutentags
     vim-vinegar
     workspace
 
     sonokai
+    vim-hybrid-material
+    vim-airline-themes
+    apprentice
 
     fugitive
     vim-gitgutter

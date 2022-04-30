@@ -4,6 +4,10 @@ autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 let g:gutentags_file_list_command = 'git ls-files'
 
+" quick-scope
+" https://github.com/unblevable/quick-scope
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+
 " Golang
 " Go test, Def, Decls shortcut
 nmap <Leader>got :GoTest<CR>:botright copen<CR>
