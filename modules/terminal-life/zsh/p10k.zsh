@@ -195,7 +195,16 @@
   typeset -g POWERLEVEL9K_DIR_{HOME,HOME_SUBFOLDER}_BACKGROUND=1
   typeset -g POWERLEVEL9K_DIR_NOT_WRITABLE_BACKGROUND=1
 
-  typeset -g POWERLEVEL9K_DIR_ANCHOR_BOLD=true
+  # If directory is too long, shorten some of its segments to the shortest possible unique
+  # prefix. The shortened directory can be tab-completed to the original.
+  typeset -g POWERLEVEL9K_SHORTEN_STRATEGY=truncate_to_unique
+  # Color of the shortened directory segments.
+  typeset -g POWERLEVEL9K_DIR_SHORTENED_FOREGROUND=0
+  # Color of the anchor directory segments. Anchor segments are never shortened. The first
+  # segment is always an anchor.
+  typeset -g POWERLEVEL9K_DIR_ANCHOR_FOREGROUND=0
+  # Display anchor directory segments in bold.
+  typeset -g POWERLEVEL9K_DIR_ANCHOR_BOLD=false
   # Don't shorten directories that contain any of these files. They are anchors.
   local anchor_files=(
     .bzr
@@ -228,13 +237,13 @@
   # contains a marker (.git) and other directories don't.
   typeset -g POWERLEVEL9K_DIR_TRUNCATE_BEFORE_MARKER=false
   # Don't shorten this many last directory segments. They are anchors.
-  typeset -g POWERLEVEL9K_SHORTEN_DIR_LENGTH=100
+  typeset -g POWERLEVEL9K_SHORTEN_DIR_LENGTH=1
   # Shorten directory if it's longer than this even if there is space for it. The value can
   # be either absolute (e.g., '80') or a percentage of terminal width (e.g, '50%'). If empty,
   # directory will be shortened only when prompt doesn't fit or when other parameters demand it
   # (see POWERLEVEL9K_DIR_MIN_COMMAND_COLUMNS and POWERLEVEL9K_DIR_MIN_COMMAND_COLUMNS_PCT below).
   # If set to `0`, directory will always be shortened to its minimum length.
-  typeset -g POWERLEVEL9K_DIR_MAX_LENGTH=
+  typeset -g POWERLEVEL9K_DIR_MAX_LENGTH=80
   # When `dir` segment is on the last prompt line, try to shorten it enough to leave at least this
   # many columns for typing commands.
   typeset -g POWERLEVEL9K_DIR_MIN_COMMAND_COLUMNS=40
