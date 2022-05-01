@@ -188,15 +188,15 @@
         "nixpkgs-unstable": "nixpkgs-unstable"
       },
       "locked": {
-        "lastModified": 1651210705,
-        "narHash": "sha256-2RzKrjEnWDhsBQ4Et2gm2LjV5pXyszeqV1xNe+LtNT8=",
-        "owner": "divnix",
+        "lastModified": 1651349453,
+        "narHash": "sha256-0ZAYPYWXm16reXFT0bJi/4f6GeYubnlj2YruXcmp0hs=",
+        "owner": "pub-solar",
         "repo": "digga",
-        "rev": "0ffa2dff5ede12a03ca83fbc514972f94cf18f42",
+        "rev": "531dd67b7aef37d7828fb28c2e45f09de0425c6b",
         "type": "github"
       },
       "original": {
-        "owner": "divnix",
+        "owner": "pub-solar",
         "repo": "digga",
         "type": "github"
       }
