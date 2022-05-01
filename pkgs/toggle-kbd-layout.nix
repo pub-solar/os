@@ -10,6 +10,6 @@ self: with self; ''
     next_layout=0;
   fi
 
-  notify-send "$next_layout"
+  ${libnotify}/bin/notify-send "$next_layout"
   ${sway}/bin/swaymsg input '*' xkb_switch_layout "$next_layout"
 ''
