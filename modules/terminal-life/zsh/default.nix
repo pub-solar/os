@@ -19,7 +19,7 @@ in
   };
 
   loginExtra = ''
-    [ "$(tty)" = "/dev/tty1" ] && exec sway
+    [ "$(tty)" = "/dev/tty1" ] && exec ${pkgs.sway-service}/bin/sway-service
   '';
 
   shellAliases = {
