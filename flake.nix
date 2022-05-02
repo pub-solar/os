@@ -124,7 +124,7 @@
               pubsolaros = [ core full-install base-user users.root ];
               anonymous = [ pubsolaros users.pub-solar ];
 
-              b12f = pubsolaros ++ [ users.ben gaming mobile ];
+              b12f = pubsolaros ++ [ users.ben social gaming mobile ];
               biolimo = b12f ++ [ graphical ];
               chocolatebar = b12f ++ [ graphical virtualisation ];
             };
