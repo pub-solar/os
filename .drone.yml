@@ -123,7 +123,7 @@ steps:
       - |
         nix --print-build-logs --verbose \
           develop --command \
-            bud build bootstrap isoImage
+            bud build bootstrap bootstrapIso
       - cp $(readlink -f result)/iso/*.iso /var/nix/iso-cache/
 
   - name: "Publish ISO"
@@ -158,6 +158,6 @@ volumes:
 
 ---
 kind: signature
-hmac: 7aa9b1eadc2638d7c0b6da2eea92cce650232a8c44ce9ab4a2b0e563f7432693
+hmac: bdbefb07b97dc8efc44d8eb36ee4d1bb89eec3b7255b49929e126e86a4b4a788
 
 ...
