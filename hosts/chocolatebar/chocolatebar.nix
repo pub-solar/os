@@ -23,6 +23,7 @@ in
 
     environment.systemPackages = with pkgs; [
       wayvnc
+      drone-docker-runner
     ];
 
     age.secrets."vnc-key.pem" = {
