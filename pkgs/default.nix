@@ -20,4 +20,5 @@ with final; {
   ps-signal-desktop = writeShellScriptBin "signal-desktop" (import ./ps-signal-desktop.nix final);
 
   scan2paperless = writeShellScriptBin "scan2paperless" (import ./scan2paperless.nix final);
+  drone-docker-runner = writeShellScriptBin "drone-docker-runner" (import ./drone-docker-runner.nix final);
 }
