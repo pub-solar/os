@@ -86,7 +86,7 @@ in
 
     precmd () {
       DIR_NAME=$(pwd | sed "s|^$HOME|~|g")
-      echo -e "\e]2;$DIR_NAME\e\\"
+      echo -e -n "\e]2;$DIR_NAME\e\\"
     }
 
     # If a command is not found, show me where it is
