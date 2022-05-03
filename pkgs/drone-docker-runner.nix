@@ -8,7 +8,7 @@ self: with self; ''
         --env=DRONE_RPC_SECRET=$(${self.libsecret}/bin/secret-tool lookup drone rpc-secret) \
         --env=DRONE_RUNNER_CAPACITY=4 \
         --env=DRONE_RUNNER_NAME=$(${self.inetutils}/bin/hostname) \
-        --publish=3000:3000 \
+        --publish=30010:30010 \
         --restart=always \
         --name=drone-runner \
         drone/drone-runner-docker:1
