@@ -26,6 +26,11 @@ in
         default = { };
       };
     };
+    autologin.enable = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Feature flag enabling autologin after boot.";
+    };
     wayland.software-renderer.enable = mkOption {
       type = types.bool;
       default = false;
@@ -54,7 +59,7 @@ in
       };
     };
 
-    services.getty.autologinUser = mkForce "${psCfg.user.name}";
+    services.getty.autologinUser = mkIf cfg.autologin.enable "${psCfg.user.name}";
 
     qt5 = {
       enable = true;
