@@ -20,7 +20,7 @@ account benjamin.baedorf@rwth-aachen.de
 
 account b.baedorf@openproject.com
   host smtp.mailbox.org
-  port 465
+  port 587
   protocol smtp
   auth on
   from b.baedorf@openproject.com
