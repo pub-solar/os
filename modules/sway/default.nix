@@ -90,6 +90,7 @@ in
         #programs.waybar.systemd.enable = true;
 
         systemd.user.services.mako = import ./mako.service.nix pkgs;
+        systemd.user.services.sway = import ./sway.service.nix pkgs;
         systemd.user.services.swayidle = import ./swayidle.service.nix pkgs;
         systemd.user.services.xsettingsd = import ./xsettingsd.service.nix pkgs;
         systemd.user.services.waybar = import ./waybar.service.nix pkgs;

@@ -18,15 +18,5 @@ in
 # ^ Remember ending with an extra blank line
 # At the end: Include Co-authored-by for all contributors.
 #
-Co-authored-by: ${user.fullName} <${user.email}>
-
-# Please enter the commit message for your changes. Lines starting
-# with '#' will be ignored, and an empty message aborts the commit.
-#
-# On branch master
-# Your branch is up to date with 'origin/main'.
-#
-# Changes to be committed:
-#       new file:   installation.md
-#
+# Co-authored-by: Example Name <email@example.com>
 ''

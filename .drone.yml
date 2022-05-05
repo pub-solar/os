@@ -140,7 +140,7 @@ steps:
         from_secret: ssh_port
       key:
         from_secret: ssh_key
-      target: /var/www/pub.solar
+      target: /srv/os
       source:
         - /var/nix/iso-cache/*.iso
       strip_components: 3
@@ -158,6 +158,6 @@ volumes:
 
 ---
 kind: signature
-hmac: e806a6980afdc1bf451be231db1a61e7917822a1f78afe3f2136eadfd632d521
+hmac: bdbefb07b97dc8efc44d8eb36ee4d1bb89eec3b7255b49929e126e86a4b4a788
 
 ...
