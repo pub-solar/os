@@ -16,6 +16,8 @@ with final; {
   toggle-kbd-layout = writeShellScriptBin "toggle-kbd-layout" (import ./toggle-kbd-layout.nix final);
   uhk-agent = import ./uhk-agent.nix final;
   wcwd = writeShellScriptBin "wcwd" (import ./wcwd.nix final);
+  drone-docker-runner = writeShellScriptBin "drone-docker-runner" (import ./drone-docker-runner.nix final);
+
   # ps-fixes
   ps-signal-desktop = writeShellScriptBin "signal-desktop" (import ./ps-signal-desktop.nix final);
 
